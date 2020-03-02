@@ -69,11 +69,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 
 ### TO BUILD AND DEPLOY
-##### stap 1 build -t reactbuildcontainer buildreact.Dockerfile
-##### stap 2 run -t reactbuildcontainer
-##### stap 3 kopieëer build van react en zet op ~/../...
-##### stap 4 stop en verwijder container reactbuildcontainer
-##### stap 5 run runreact.Dockerfile en kopieëer de build die op ~/../..
-##### stap 6 verander de port van 3000 naar iets wat niet gebruikt wordt.
-#### stap 7 Winst
+##### stap 1 docker-compose -f docker-compose.build.yml up
+##### stap 2 await finish build
+##### stap 3 ctrl-c ([COMMAND] docker-compose -f docker-compose.build.yml down)
+##### stap 3 docker-compose -f docker.compose.run.yml up -d
+##### stap 5 REVERSE PROXY WIZARDRY ???????
+##### stap 6 winst
 there are 2 dockerfiles included in this project the buildreact.Dockerfile and the runreactDockerfile,
