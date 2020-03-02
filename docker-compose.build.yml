@@ -3,6 +3,6 @@ services:
   buildprocess:
     build:
       context: .
-      dockerfile: buildreact
+      dockerfile: buildreact.Dockerfile
     volumes:
       - "~/builds/react/individual:./build"
