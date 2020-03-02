@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b3806e9-4aa4-414e-aea4-6b827317d967" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/docker-compose.build.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.build.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/runreact.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/runreact.Dockerfile" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -28,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/docker-compose.build.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+              <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -50,8 +51,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/runreact.Dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="33" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
+            <state relative-caret-position="34">
+              <caret line="2" column="11" lean-forward="true" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -185,7 +186,7 @@
       <updated>1582293244685</updated>
       <workItem from="1582293247309" duration="1387000" />
       <workItem from="1583150092868" duration="2672000" />
-      <workItem from="1583154987757" duration="9094000" />
+      <workItem from="1583154987757" duration="9414000" />
     </task>
     <servers />
   </component>
@@ -195,7 +196,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13153000" />
+    <option name="totallyTimeSpent" value="13473000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="943" y="31" width="974" height="1047" extended-state="0" />
@@ -276,10 +277,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docker-compose.build.yml">
+    <entry file="file://$PROJECT_DIR$/buildreact.Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+        <state relative-caret-position="51">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -290,17 +291,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/buildreact.Dockerfile">
+    <entry file="file://$PROJECT_DIR$/docker-compose.build.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+        <state relative-caret-position="119">
+          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/runreact.Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="33" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
+        <state relative-caret-position="34">
+          <caret line="2" column="11" lean-forward="true" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
         </state>
       </provider>
     </entry>

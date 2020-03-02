@@ -1,3 +1,3 @@
 FROM node:alpine
-COPY ~/builds/react/individual ./
+COPY /root/builds/react/individual ./
 RUN npm run
