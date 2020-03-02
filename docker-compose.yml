@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  buildprocess:
+      build: buildreact.Dockerfile
+      volumes:
+        - "~/builds/react/individual:/build"
+
+  run process:
+    build: runreact.Dockefile
+      depends_on:
+        - reactbuild
