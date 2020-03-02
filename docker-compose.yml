@@ -1,11 +1,13 @@
-version: '3.3'
+version: '3.7'
 services:
   buildprocess:
-      build: buildreact.Dockerfile
-      volumes:
-        - "~/builds/react/individual:/build"
+    build: buildreact.Dockerfile
+    volumes:
+      - "~/builds/react/individual:./build"
 
-  run process:
-    build: runreact.Dockefile
-      depends_on:
-        - reactbuild
+  runprocess:
+    build: runreact.Dockerfile
+    depends_on:
+      - buildprocess
+    ports:
+      - "23432:3000"
