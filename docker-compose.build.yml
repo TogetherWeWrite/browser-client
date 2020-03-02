@@ -6,3 +6,5 @@ services:
       dockerfile: buildreact.Dockerfile
     volumes:
       - "/root/builds/react/individual:/build"
+    ports:
+      - "10203:80"
