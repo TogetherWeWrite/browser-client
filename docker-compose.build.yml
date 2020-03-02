@@ -5,4 +5,4 @@ services:
       context: .
       dockerfile: buildreact.Dockerfile
     volumes:
-      - "~/builds/react/individual:./build"
+      - "~/builds/react/individual:/build"

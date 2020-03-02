@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2b3806e9-4aa4-414e-aea4-6b827317d967" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/docker-compose.build.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.build.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.run.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.run.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -13,28 +12,6 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="DockManager">
-    <window id="2">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/README.md">
-                <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-                  <state split_layout="SPLIT">
-                    <first_editor relative-caret-position="424">
-                      <caret line="76" column="18" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
-                    </first_editor>
-                    <second_editor />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -50,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docker-compose.build.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="28" lean-forward="true" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="39" />
+            <state relative-caret-position="119">
+              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -97,8 +74,8 @@
         <option value="$PROJECT_DIR$/docker-compose.yml" />
         <option value="$PROJECT_DIR$/buildreact.Dockerfile" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/docker-compose.build.yml" />
         <option value="$PROJECT_DIR$/docker-compose.run.yml" />
+        <option value="$PROJECT_DIR$/docker-compose.build.yml" />
       </list>
     </option>
   </component>
@@ -207,7 +184,7 @@
       <updated>1582293244685</updated>
       <workItem from="1582293247309" duration="1387000" />
       <workItem from="1583150092868" duration="2672000" />
-      <workItem from="1583154987757" duration="8124000" />
+      <workItem from="1583154987757" duration="8685000" />
     </task>
     <servers />
   </component>
@@ -217,7 +194,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12183000" />
+    <option name="totallyTimeSpent" value="12744000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="943" y="31" width="974" height="1047" extended-state="0" />
@@ -295,6 +272,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/buildreact.Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -302,13 +286,6 @@
             <caret line="76" column="18" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/buildreact.Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -321,8 +298,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docker-compose.build.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="28" lean-forward="true" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="39" />
+        <state relative-caret-position="119">
+          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
         </state>
       </provider>
     </entry>
