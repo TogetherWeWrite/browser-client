@@ -1,6 +1,8 @@
 version: '3.3'
 services:
   runprocess:
-    build: runreact.Dockerfile
+    build:
+      context: .
+      dockerfile: runreact
     ports:
       - "23432:3000"
