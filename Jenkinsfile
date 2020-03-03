@@ -23,13 +23,13 @@ pipeline {
         stage ("build") {
             steps {
                 sh "echo start build"
-                sh "sudo docker-compose -f docker-compose.build.yml build"
+                sh "docker-compose -f docker-compose.build.yml build"
                 sh "echo succesfull build"
             }
         }
         stage ("run") {
             steps {
-                sh "sudo docker-compose -f docker-compose.build.yml up"
+                sh "docker-compose -f docker-compose.build.yml up"
             }
         }
 
