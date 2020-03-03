@@ -8,6 +8,8 @@ pipeline {
         stage("verification") {
             steps {
                 sh "echo test verification stage"
+                sh "docker-compose --version"
+                sh "which docker-compose"
             }
         }
         stage ("where are we") {
