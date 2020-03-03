@@ -13,6 +13,7 @@ pipeline {
         stage ("where are we") {
             steps {
                 sh "ls"
+                sh "pwd"
             }
         }
         stage ("build") {
