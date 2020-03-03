@@ -10,6 +10,11 @@ pipeline {
                 sh "echo test verification stage"
             }
         }
+        stage ("where are we") {
+            steps {
+                sh "ls"
+            }
+        }
         stage ("build") {
             steps {
                 sh "echo start build"
