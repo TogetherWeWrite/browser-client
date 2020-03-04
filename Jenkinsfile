@@ -29,7 +29,7 @@ pipeline {
         }
         stage ("run") {
             steps {
-                sh "docker-compose -f docker-compose.build.yml up -d ---force-recreate --remove-orphans"
+                sh "docker-compose -f docker-compose.build.yml up -d --force-recreate --remove-orphans"
             }
         }
 
