@@ -23,13 +23,13 @@ pipeline {
         stage ("build") {
             steps {
                 sh "echo start build"
-                sh "docker-compose -f docker-compose.build.yml build"
+                sh "docker-compose -f docker-compose.build.yml build --force-recreate"
                 sh "echo succesfull build"
             }
         }
         stage ("run") {
             steps {
-                sh "docker-compose -f docker-compose.build.yml up -d"
+                sh "docker-compose -f docker-compose.build.yml up -d ---force-recreate --remove-orphans"
             }
         }
 
