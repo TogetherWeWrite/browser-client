@@ -6,3 +6,4 @@ services:
       dockerfile: buildreact.Dockerfile
     ports:
       - "10203:80"
+      - "10220:443"

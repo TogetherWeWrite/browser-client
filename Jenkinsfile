@@ -26,11 +26,11 @@ pipeline {
                 sh "which docker"
             }
         }
-        // stage ("build") {
-        //     steps {
-        //         sh "docker-compose -f docker-compose.build.yml build"
-        //     }
-        // }
+        stage ("build") {
+            steps {
+                sh "docker-compose -f docker-compose.build.yml build"
+            }
+        }
         // stage ("Push Image to Registry") {
         //     steps {
         //         sh "docker  "
@@ -44,5 +44,10 @@ pipeline {
         //         sh "kubectl apply ingress.yaml"
         //     }
         // }
+        stage ("run"){
+            steps{
+                sh "docker-compuse -f docker-compose.build.yml up" 
+            }
+        }
     }
 }
