@@ -12,7 +12,6 @@ pipeline {
     stages {
         stage ("env echos"){
             steps{
-                sh "echo ${CommitSha}"
                 sh "echo ${ImageVersion}"
                 sh "echo ${ImageName}"
                 sh "echo ${RegistryUrl}"
