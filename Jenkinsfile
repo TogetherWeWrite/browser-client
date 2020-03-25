@@ -5,7 +5,6 @@ pipeline {
         timeout(time: 30, unit: "MINUTES")
     }
     environment {
-        CommitSha = %GIT_COMMIT%
         ImageVersion = '0.1'
         ImageName = "frontend"
         RegistryUrl = "http://dockerregistry.stijnbaltessen.digital"
