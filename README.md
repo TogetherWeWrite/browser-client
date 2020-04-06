@@ -42,37 +42,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-
-### TO BUILD AND DEPLOY
-##### stap 1 docker-compose -f docker-compose.build.yml up
-##### stap 2 await finish build
-##### stap 3 ctrl-c ([COMMAND] docker-compose -f docker-compose.build.yml down)
-##### stap 3 docker-compose -f docker.compose.run.yml up -d
-##### stap 5 REVERSE PROXY WIZARDRY ???????
-##### stap 6 winst
-there are 2 dockerfiles included in this project the buildreact.Dockerfile and the runreactDockerfile,
