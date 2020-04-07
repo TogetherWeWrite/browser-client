@@ -1,0 +1,39 @@
+.RegisterWindow{
+    border: black 1px dashed;
+    box-shadow: #999999;
+    background-image: linear-gradient(to top, #FFFFFF, #EEEEEE);
+    width: 400px;
+    height: 300px;
+}
+.Center{
+    align-content: center;
+    padding-top: 25%;
+    padding-bottom: 25%;
+}
+
+.W100{
+    width: 100%;
+}
+
+input{
+    margin: auto;
+    width: auto;
+
+}
+label{
+    text-align: left;
+    color: Black;
+    font-size: 10pt;
+}
+
+.def-button{
+    background-color: #777777;
+    width: 75%;
+    border-image: linear-gradient(to top,#999999,#777777 );
+    color: white;
+    font-size: 12pt;
+}
+.def-button:hover{
+    background-color: #999999;
+}
+

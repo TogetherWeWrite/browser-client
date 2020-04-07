@@ -2,28 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b3806e9-4aa4-414e-aea4-6b827317d967" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Description.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Register/Account.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Register/Login.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/connectiostring.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Home/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Navigation/navigationbar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestComponenets/Test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/css/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/css/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serviceWorker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/svg/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +20,9 @@
       <list>
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -54,7 +41,9 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js.last.introduce.type" value="VAR" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -69,11 +58,12 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="E:\semester 6\browser-client\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\semester 6\browser-client\src\Register" />
       <recent name="E:\semester 6\browser-client" />
       <recent name="E:\semester 6\browser-client\src\Account" />
     </key>
@@ -137,7 +127,8 @@
       <workItem from="1582293247309" duration="1387000" />
       <workItem from="1583150092868" duration="2672000" />
       <workItem from="1583154987757" duration="17069000" />
-      <workItem from="1586171997321" duration="3233000" />
+      <workItem from="1586171997321" duration="9316000" />
+      <workItem from="1586192065417" duration="6044000" />
     </task>
     <servers />
   </component>
@@ -165,22 +156,39 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="668" y="218" key="#renders_learn_react_link/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586172473838" />
-    <state width="1899" height="281" key="GridCell.Tab.0.bottom" timestamp="1586173119991">
+    <state x="598" y="118" key="CommitChangelistDialog2" timestamp="1586176808966">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586173119991" />
-    <state width="1899" height="281" key="GridCell.Tab.0.center" timestamp="1586173119991">
+    <state x="598" y="118" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586176808966" />
+    <state width="1899" height="281" key="GridCell.Tab.0.bottom" timestamp="1586192906618">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="281" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586173119991" />
-    <state width="1899" height="281" key="GridCell.Tab.0.left" timestamp="1586173119991">
+    <state width="1899" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586192906618" />
+    <state width="1899" height="281" key="GridCell.Tab.0.center" timestamp="1586192906618">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="281" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586173119991" />
-    <state width="1899" height="281" key="GridCell.Tab.0.right" timestamp="1586173119991">
+    <state width="1899" height="281" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586192906618" />
+    <state width="1899" height="281" key="GridCell.Tab.0.left" timestamp="1586192906618">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="281" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586173119991" />
+    <state width="1899" height="281" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586192906618" />
+    <state width="1899" height="281" key="GridCell.Tab.0.right" timestamp="1586192906618">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="281" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586192906618" />
+    <state x="463" y="165" key="SettingsEditor" timestamp="1586176892761">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="463" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586176892761" />
+    <state x="2704" y="-17" width="1575" height="734" maximized="true" key="dock-window-1" timestamp="1586196058199">
+      <screen x="1920" y="0" width="2560" height="1040" />
+    </state>
+    <state x="2704" y="-17" width="1575" height="734" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586196058199" />
+    <state x="128" y="219" width="1575" height="734" key="dock-window-1/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1586192642156" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1586194213134">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586194213134" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1586174091575">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
