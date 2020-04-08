@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b3806e9-4aa4-414e-aea4-6b827317d967" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/reactts.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/reactts.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/reactts.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +123,7 @@
       <workItem from="1583154987757" duration="17069000" />
       <workItem from="1586171997321" duration="9316000" />
       <workItem from="1586192065417" duration="6044000" />
-      <workItem from="1586330500095" duration="161000" />
+      <workItem from="1586330500095" duration="311000" />
     </task>
     <servers />
   </component>
