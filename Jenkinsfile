@@ -45,7 +45,7 @@ pipeline {
         // }
         stage ("run"){
             steps{
-                sh "docker-compose -f docker-compose.build.yml up -d" 
+                sh "docker-compose -f docker-compose.build.yml up -d --force-recreate"
             }
         }
     }
