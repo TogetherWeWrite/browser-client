@@ -3,7 +3,7 @@ services:
   buildprocess:
     build:
       context: .
-      dockerfile: buildreact.Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "10203:80"
       - "10220:443"
