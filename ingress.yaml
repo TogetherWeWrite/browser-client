@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: frontendingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: front.stijnbaltessen.digital
+    http:
+      paths:
+        - backend:
+            serviceName: frontendservice
+            servicePort: 80
