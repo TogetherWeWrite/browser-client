@@ -8,3 +8,7 @@
     padding: 10px;
     box-shadow: 5px 10px 32px #888888;
 }
+
+.hidden{
+    visibility: hidden;
+}
