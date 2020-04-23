@@ -1,5 +1,6 @@
 {
   "SERVICES": {
-    "REGISTER": "https://localhost:5001/Register"
+    "REGISTER" : "https://localhost:5001/Register",
+    "LOGIN" : "https://localhost:5001/Login"
   }
 }

@@ -1,25 +1,28 @@
 import React from 'react';
-import Register from "./Register/Register";
+import Register from "./Account/Register";
+import Login from "./Account/Login";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navigation from "./Navigation/Navigation";
 import Home from "./Home/Home";
+import {Provider} from "react-redux";
+import store from "./store";
 
 
 function App() {
     return (
         <div>
-            <header>
+            <Provider store={store} >
                 <Router>
                     <div>
                         <Navigation />
                         <Switch>
                             <Route exact path='/' component={Home}/>
                             <Route exact path='/register' component={Register}/>
-                            <Route exact path='/registerb' component={Register}/>
+                            <Route exact path='/login' component={Login}/>
                         </Switch>
                     </div>
                 </Router>
-            </header>
+            </Provider>
         </div>
     );
 }
