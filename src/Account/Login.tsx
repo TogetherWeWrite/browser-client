@@ -38,7 +38,8 @@ const Login = (props: any) => {
             token : user.token,
             username : user.username
         };
-        props.login(newAuthenticationState);
+        // props.login(newAuthenticationState);
+        localStorage.setItem("auth",JSON.stringify(newAuthenticationState));
         props.history.push("/");
     };
 
