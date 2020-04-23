@@ -12,7 +12,6 @@ const Navigation = (props: any) => {
         showlogin = <Nav.Link href="/">true</Nav.Link>;
         register = <Nav.Link href="/logout">Logout</Nav.Link>
         login = null;
-        console.log(props.login);
     }
     else{
         showlogin = <Nav.Link href="/">false</Nav.Link>;
@@ -21,12 +20,16 @@ const Navigation = (props: any) => {
 
     }
 
-    console.log(props)
+    const home = () => {
+        props.history.push("/");
+    };
+
+    console.log(props.authentication)
     return (
         <div>
             <Navbar bg="light" expand="lg">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link onClick={home}>Home</Nav.Link>
                     {register}
                     {login}
                     {showlogin}

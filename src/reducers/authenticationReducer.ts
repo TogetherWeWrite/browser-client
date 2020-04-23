@@ -1,24 +1,34 @@
-import {ResponseUser}  from "../Types/ResponseUser"
+import {AuthenticationActionTypes, LOGIN} from "../Actions/AuthenticationActions"
 
-export interface AuthenticationAction{
-    type: any,
-    user: ResponseUser
+
+export interface authenticationState {
+    isAuthenticated: boolean,
+    username: string,
+    id : number,
+    token : string
 }
 
-const authenticationReducer = (state = {
-    token: '',
-    username: '',
-    userId: 0,
-    isAuthenticated: false
-}, action : AuthenticationAction) => {
-    switch (action.type) {
-        case 'LOGIN':
-            state = {...state, username: action.user.username, userId: action.user.id ,token: action.user.token, isAuthenticated: true};
-            break;
-        default:
-            break;
-    }
-    return state;
+const initialState: authenticationState = {
+    id : 0,
+    username : "",
+    isAuthenticated : false,
+    token: ""
 };
+
+export function authenticationReducer(
+    state: authenticationState = initialState,
+    action: AuthenticationActionTypes
+): authenticationState {
+    switch(action.type){
+        case LOGIN: {
+            return {
+                ...state, ...action.payload
+            }
+        }
+        default:
+            return state;
+    }
+}
+
 
 export default authenticationReducer;

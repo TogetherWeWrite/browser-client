@@ -7,6 +7,7 @@ import config from "../config.json";
 import {login} from "../Actions/AuthenticationActions";
 import {connect} from "react-redux";
 import {ResponseUser} from "../Types/ResponseUser";
+import {authenticationState} from "../reducers/authenticationReducer";
 
 interface RegisterUser {
     Username: string,
@@ -31,8 +32,13 @@ const Login = (props: any) => {
 
     const successfulLogin = async (body: any) => {
         let user : ResponseUser = body;
-        console.log(user);
-        props.login(user);
+        let newAuthenticationState :authenticationState ={
+            isAuthenticated : true,
+            id : user.id,
+            token : user.token,
+            username : user.username
+        };
+        props.login(newAuthenticationState);
         props.history.push("/");
     };
 
@@ -108,8 +114,8 @@ const mapStateToProps = (state : any) => {
 
 const mapDispatchToProps = (dispatch : any) => {
     return {
-        login: (user : ResponseUser) => {
-            dispatch(login(user));
+        login: (authstate : authenticationState) => {
+            dispatch(login(authstate));
         }
     }
 };

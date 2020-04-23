@@ -1,20 +1,16 @@
-import {ResponseUser} from "../Types/ResponseUser";
-import {AuthenticationAction} from "../reducers/authenticationReducer"
-export function login(ruser : ResponseUser) {
-    return (dispath: any) => {
-        let action : AuthenticationAction =  {
-            type: "LOGIN",
-            user: ruser
-        };
-        console.log("DISPATH:" + dispath);
-        dispath(action);
+import {authenticationState} from "../reducers/authenticationReducer";
+export const LOGIN = "LOGIN";
+
+interface LoginAction {
+    type: typeof LOGIN
+    payload: authenticationState
+}
+
+export function login (newlogin : authenticationState) : LoginAction{
+    return {
+        type : LOGIN,
+        payload : newlogin
     }
 }
 
-export function logout(){
-    return (dispath : any) => {
-            dispath({
-                type: "LOGOUT"
-            })
-    }
-}
+export type AuthenticationActionTypes = LoginAction
