@@ -10,10 +10,15 @@ const Navigation = (props: any) => {
     let showlogin;
     let register;
     let login;
-    let isAuthenticated : boolean = false;
-    let authstring : string  = localStorage.getItem("auth") ?? "";
-    let authobject : authenticationState = JSON.parse(authstring);
-    isAuthenticated = authobject.isAuthenticated;
+    let isAuthenticated: boolean = false;
+    let authstring: string = localStorage.getItem("auth") ?? "";
+    let authobject :authenticationState;
+    if (authstring === "") {
+        isAuthenticated = false;
+    } else {
+        authobject = JSON.parse(authstring);
+        isAuthenticated = authobject.isAuthenticated;
+    }
 
     const homepage = () => {
         props.history.push("/");
@@ -22,13 +27,10 @@ const Navigation = (props: any) => {
         props.history.push("/login");
     };
     const registerpage = () => {
-        props.history.push("/login");
+        props.history.push("/register");
     };
     const logout = () => {
-        var empty : authenticationState = {
-            id: 0, isAuthenticated: false, token: "", username: ""
-        };
-        localStorage.setItem("auth",JSON.stringify(empty));
+        localStorage.removeItem("auth");
         props.history.push("/login");
     };
 
@@ -36,17 +38,17 @@ const Navigation = (props: any) => {
         showlogin = <Nav.Link>Hello {authobject.username}</Nav.Link>;
         register = <Nav.Link onClick={logout}>Logout</Nav.Link>
         login = null;
-    }
-    else{
+    } else {
         login = <Nav.Link onClick={loginpage}>Login</Nav.Link>
         register = <Nav.Link onClick={registerpage}>Register</Nav.Link>
 
     }
-
+    let logo = <Nav><img src="logo.png" alt=""/></Nav>;
     return (
         <div>
             <Navbar bg="light" expand="lg">
                 <Nav className="mr-auto">
+                    {logo}
                     <Nav.Link onClick={homepage}>Home</Nav.Link>
                     {register}
                     {login}
@@ -58,7 +60,7 @@ const Navigation = (props: any) => {
 };
 
 
-const mapStateToProps = (state : any) => {
+const mapStateToProps = (state: any) => {
     return {
         authentication: state.authentication
     };

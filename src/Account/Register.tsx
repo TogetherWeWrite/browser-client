@@ -4,19 +4,18 @@ import {Alert, Button, Col, Container, Form, Row} from 'react-bootstrap'
 import "./Account.css";
 import config from "../config.json";
 
-
 interface RegisterUser {
     Username: string,
     Password: string
 }
 
-const Register = (props : any) => {
+const Register = (props: any) => {
     const [password, setPassword] = React.useState("");
     const [username, setUsername] = React.useState("");
     const [repeatPassword, setRepeatPassword] = React.useState("");
-    const [errormsg, setErrorMessage] = React.useState("no errors");
-    const [show, setShow] = React.useState(false);
+    const [error, setError] = React.useState(<div/>);
 
+    let errormsg = "";
 
     const onPasswordChange = (event: any) => {
         setPassword(event.target.value);
@@ -30,32 +29,33 @@ const Register = (props : any) => {
         setRepeatPassword(event.target.value);
     };
 
-    const validate = (): boolean => {
+    const validate = () : boolean => {
         if (repeatPassword !== password) {
             showError("Password and repeat password are not the same");
+            console.log(errormsg);
             return false;
         }
         if (password.length < 8) {
             showError("Password must have 8 or more characters ");
+            console.log(errormsg);
             return false;
         }
         if (username.length < 3) {
             showError("Username does not have more than 3 characters");
+            console.log(errormsg);
             return false;
         }
         return true;
     };
 
     const hideError = () => {
-        console.log(show);
-        //TODO
+        setError(<div/>);
     };
 
-    const showError = (error: any) => {
-        setErrorMessage(error);
-        setShow(true);
-        console.log(error);
-        //TODO
+    const showError = (error: string) => {
+        setError(<Alert className="alert alert-danger">
+            {error}
+        </Alert>);
     };
 
     const showRegistrationSucces = () => {
@@ -82,7 +82,7 @@ const Register = (props : any) => {
             if (response.status === 200) {
                 showRegistrationSucces();
                 return;
-            } else if (response.status === 405) {
+            } else if (response.status === 400) {
                 let body = await response.text();
                 showError(body);
             }
@@ -91,15 +91,17 @@ const Register = (props : any) => {
         }
     };
 
+
+
+
     return (
         <Container fluid={"lg"}>
             <Row className={"margin-to-mid"}>
                 <Col lg={3}></Col>
-                <Col lg={6} className={"center-box"}>
+                <Col lg={6} className={"white center-box"}>
                     <Form>
-                        <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-                            <p>{errormsg}</p>
-                        </Alert>
+                        <div id="alert"></div>
+                        {error}
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>username</Form.Label>
                             <Form.Control type="text" placeholder="Enter username" onChange={onUsernameChange}/>

@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Account.css";
-import { withRouter } from 'react-router';
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {withRouter} from 'react-router';
+import {Alert, Button, Col, Container, Form, Row} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import config from "../config.json";
 import {login} from "../Actions/AuthenticationActions";
@@ -10,13 +10,16 @@ import {ResponseUser} from "../Types/ResponseUser";
 import {authenticationState} from "../reducers/authenticationReducer";
 
 interface RegisterUser {
-    Username: string,
-    Password: string
+    Id: number,
+    Password: string,
+    Token: string,
+    Username: string
 }
 
 const Login = (props: any) => {
     const [password, setPassword] = React.useState("");
     const [username, setUsername] = React.useState("");
+    const [error, setError] = React.useState(<div/>);
 
     const onPasswordChange = (event: any) => {
         setPassword(event.target.value);
@@ -31,19 +34,22 @@ const Login = (props: any) => {
     };
 
     const successfulLogin = async (body: any) => {
-        let user : ResponseUser = body;
-        let newAuthenticationState :authenticationState ={
-            isAuthenticated : true,
-            id : user.id,
-            token : user.token,
-            username : user.username
+        let user: ResponseUser = body;
+        let newAuthenticationState: authenticationState = {
+            isAuthenticated: true,
+            id: user.id,
+            token: user.token,
+            username: user.username
         };
         // props.login(newAuthenticationState);
-        localStorage.setItem("auth",JSON.stringify(newAuthenticationState));
+        localStorage.setItem("auth", JSON.stringify(newAuthenticationState));
         props.history.push("/");
     };
 
-    const showError = (msg : any) =>{
+    const showError = (msg: string) => {
+        setError(<Alert className="alert alert-danger">
+            {msg}
+        </Alert>);
         return;//TODO
     };
 
@@ -51,11 +57,13 @@ const Login = (props: any) => {
         if (validate()) {
             let user: RegisterUser = {
                 Username: username,
-                Password: password
+                Password: password,
+                Id: 0,
+                Token: ""
             };
 
             let options: RequestInit = {
-                method: "Post",
+                method: "POST",
                 body: JSON.stringify(user),
                 headers: {
                     "Content-Type": "application/json"
@@ -64,19 +72,25 @@ const Login = (props: any) => {
                 cache: "default"
             };
 
-            let response: Response = await fetch(config.SERVICES.LOGIN, options);
-            let body = await response.json();
-            if (response.status === 200) {//OK
-                successfulLogin(body);
-                return;
-            }
-            else if (response.status === 405){
-                showError(body);
-                return
+            try {
+                console.log(options.body);
+                let response: Response = await fetch(config.SERVICES.LOGIN, options);
+                // let body = await response.json();
+                let body = await response.text();
+                console.log(body);
+                if (response.status === 200) {//OK
+                    successfulLogin(body);
+                    return;
+                } else if (response.status === 400) {//badrequest
+                    showError(JSON.stringify(body));
+                    return
+                }
+            } catch (Exception) {
+                console.log(Exception);
             }
 
-        }
-        else {
+
+        } else {
             return;
         }
     };
@@ -84,10 +98,11 @@ const Login = (props: any) => {
     return (<Container fluid={"lg"}>
         <Row className={"margin-to-mid"}>
             <Col lg={3}></Col>
-            <Col lg={6} className={"center-box"}>
+            <Col lg={6} className={"white center-box"}>
                 <Form>
+                    {error}
                     <Form.Group>
-                        <Form.Label>username</Form.Label>
+                        <Form.Label>Username</Form.Label>
                         <Form.Control type="text" placeholder="Enter username" onChange={onUsernameChange}/>
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
@@ -107,18 +122,18 @@ const Login = (props: any) => {
     </Container>)
 };
 
-const mapStateToProps = (state : any) => {
+const mapStateToProps = (state: any) => {
     return {
         authentication: state.authentication
     };
 };
 
-const mapDispatchToProps = (dispatch : any) => {
+const mapDispatchToProps = (dispatch: any) => {
     return {
-        login: (authstate : authenticationState) => {
+        login: (authstate: authenticationState) => {
             dispatch(login(authstate));
         }
     }
 };
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Login));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

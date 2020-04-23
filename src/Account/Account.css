@@ -1,5 +1,4 @@
 .margin-to-mid{
-    margin-bottom: 30%;
     margin-top: 30%;
     border: 0px
 }
@@ -15,4 +14,15 @@
 
 .CoolBackground{
     background-image: url("../background login.png");
+}
+body{
+    background-image: url("../background.png");
+}
+
+.white{
+    background-color: white;
+}
+
+#logo{
+    image: url("../Navigation/logo.png");
 }
