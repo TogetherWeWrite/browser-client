@@ -41,6 +41,7 @@ const Login = (props: any) => {
             token: user.token,
             username: user.username
         };
+        console.log(newAuthenticationState);
         // props.login(newAuthenticationState);
         localStorage.setItem("auth", JSON.stringify(newAuthenticationState));
         props.history.push("/");
@@ -79,7 +80,7 @@ const Login = (props: any) => {
                 let body = await response.text();
                 console.log(body);
                 if (response.status === 200) {//OK
-                    successfulLogin(body);
+                    successfulLogin(JSON.parse(body));
                     return;
                 } else if (response.status === 400) {//badrequest
                     showError(JSON.stringify(body));

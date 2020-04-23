@@ -12,13 +12,23 @@ const Navigation = (props: any) => {
     let login;
     let isAuthenticated: boolean = false;
     let authstring: string = localStorage.getItem("auth") ?? "";
+    console.log(authstring);
     let authobject :authenticationState;
+    try{
+        authobject= JSON.parse(authstring);
+    }
+    catch(exception){
+        authobject = {
+            id: 0, isAuthenticated: false, token: "", username: "xd"
+        }
+    }
     if (authstring === "") {
         isAuthenticated = false;
     } else {
         authobject = JSON.parse(authstring);
         isAuthenticated = authobject.isAuthenticated;
     }
+    console.log(authobject);
 
     const homepage = () => {
         props.history.push("/");
@@ -35,9 +45,9 @@ const Navigation = (props: any) => {
     };
 
     if (isAuthenticated) {
-        showlogin = <Nav.Link>Hello {authobject.username}</Nav.Link>;
-        register = <Nav.Link onClick={logout}>Logout</Nav.Link>
-        login = null;
+            showlogin = <Nav.Link>Hello {authobject.username}</Nav.Link>;
+            register = <Nav.Link onClick={logout}>Logout</Nav.Link>
+            login = null;
     } else {
         login = <Nav.Link onClick={loginpage}>Login</Nav.Link>
         register = <Nav.Link onClick={registerpage}>Register</Nav.Link>
