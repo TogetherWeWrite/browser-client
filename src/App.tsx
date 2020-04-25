@@ -1,21 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Description from './Description';
-import Header from './Header';
-import Register from "./Register/Login";
+import Register from "./Account/Register";
+import Login from "./Account/Login";
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Navigation from "./Navigation/Navigation";
+import Home from "./Home/Home";
+import {Provider} from "react-redux";
+import store from "./store";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        {/*<img src={logo} className="App-logo" alt="logo" />*/}
-        {/*<Header name="Stijn"/>*/}
-        {/*<Description countBy={3} />*/}
-        <Register />
-      </header>
-    </div>
-  );
+    return (
+        <div>
+            <Provider store={store} >
+                <Router>
+                    <div>
+                        <Navigation />
+                        <Switch>
+                            <Route exact path='/' component={Home}/>
+                            <Route exact path='/register' component={Register}/>
+                            <Route exact path='/login' component={Login}/>
+                        </Switch>
+                    </div>
+                </Router>
+            </Provider>
+        </div>
+    );
 }
 
 export default App;

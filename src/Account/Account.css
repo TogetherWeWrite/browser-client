@@ -1,0 +1,28 @@
+.margin-to-mid{
+    margin-top: 30%;
+    border: 0px
+}
+.center-box{
+    border: 1px solid lightgray;
+    padding: 10px;
+    box-shadow: 5px 10px 32px #888888;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.CoolBackground{
+    background-image: url("../background login.png");
+}
+body{
+    background-image: url("../background.png");
+}
+
+.white{
+    background-color: white;
+}
+
+#logo{
+    image: url("../Navigation/logo.png");
+}
