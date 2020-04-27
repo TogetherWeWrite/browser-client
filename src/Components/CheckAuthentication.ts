@@ -1,6 +1,5 @@
 import {authenticationState} from "../reducers/authenticationReducer";
 export function checkAuthentication() : authenticationState {
-    let isAuthenticated: boolean = false;
     let authobject :authenticationState;
     let authstring: string = localStorage.getItem("auth") ?? "";
 

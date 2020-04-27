@@ -2,7 +2,6 @@ import React from 'react'
 import "./Account.css";
 import {withRouter} from 'react-router';
 import {Alert, Button, Col, Container, Form, Row} from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import config from "../config.json";
 import {login} from "../Actions/AuthenticationActions";
 import {connect} from "react-redux";

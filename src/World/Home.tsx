@@ -1,16 +1,19 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {authenticationState} from "../reducers/authenticationReducer";
 import {checkAuthentication} from "../Components/CheckAuthentication";
-import {World, WorldWithDetails} from "../Types/World"
+import { WorldWithDetails} from "../Types/World"
 import config from "../config.json";
-import {Col, ListGroup, Row} from "react-bootstrap"
+import {Col, ListGroup} from "react-bootstrap"
+import {Link} from 'react-router-dom';
 /*
 Overview page
  */
 
-const Overview = () => {
+const Overview = (props : any) => {
     const [ul, setUl] = React.useState(<div></div>)
     const [overview, setOverview] = React.useState(<div>loading....</div>);
+
+    useEffect(() => {loadWorlds()},[]);
     /*
         authObject that contains the variables from authentication state.
      */
@@ -30,26 +33,36 @@ const Overview = () => {
     }
 
     let worlds: WorldWithDetails[] = [];
-    window.onload = async () => {
+
+    const loadWorlds = async () => {
+        if(authObject.isAuthenticated){
+
         worlds = await GetWorldsFrom(authObject);
-        await delay(1000);
+        await delay(300);
         const listItems = worlds.map((world) =>
-            <ListGroup.Item>{world.title}</ListGroup.Item>
+            <ListGroup.Item><Link to={"/world/details/"+world.worldId}>{world.title}</Link></ListGroup.Item>
         );
         let ul = <ListGroup>{listItems}</ListGroup>;
         setUl(ul);
         setOverview(<div>Overview Loaded</div>);
+        }
+        else{
+            setOverview(<div>not logged in no personal view</div>)
+        }
     };
+
+
     return (
-        <Row>
-            <Col lg={3}>
+        <div className={"container"}>
+            <Col>
                 {ul}
                 {ul}
             </Col>
-            <Col lg={1}>
+            <Col>
                 {overview}
             </Col>
-        </Row>
+        </div>
+
     );
 
     /*
@@ -65,9 +78,6 @@ const Overview = () => {
 export default Overview;
 
 const GetWorldsFrom = async (authObject: authenticationState): Promise<WorldWithDetails[]> => {
-    var userId: number = authObject.id
-    var worlds: World[];
-
     var request: string = "?userid=" + authObject.id;
     let options: RequestInit = {
         method: "Get",
