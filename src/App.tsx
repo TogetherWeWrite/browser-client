@@ -6,6 +6,7 @@ import Navigation from "./Navigation/Navigation";
 import Home from "./Home/Home";
 import {Provider} from "react-redux";
 import store from "./store";
+import Overview from "./World/Home";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
                             <Route exact path='/' component={Home}/>
                             <Route exact path='/register' component={Register}/>
                             <Route exact path='/login' component={Login}/>
+                            <Route exact path='/world' component={Overview}/>
                         </Switch>
                     </div>
                 </Router>
