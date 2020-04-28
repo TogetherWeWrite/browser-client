@@ -107,6 +107,9 @@ const Overview = (props: any) => {
     /**
      * Async method that fills the world of a user
      */
+    const deleteWorld = (worldId: string):any =>{
+          console.log("DELETEWORLD FUNCTION CALLED: WORLDID: "+worldId);
+    };
 
     function delay(ms: number) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -126,11 +129,11 @@ const Overview = (props: any) => {
                     <Col lg={3}>
                         {world.owner.name}
                     </Col>
-                    <Col lg={4}>
-
-                    </Col>
-                    <Col lg={3}>
+                    <Col lg={5}>
                         <Link to={"/world/details/" + world.worldId}>See Details</Link>
+                    </Col>
+                    <Col lg={2}>
+                        <Button variant={"danger"} type={"button"} onClick={() => deleteWorld(world.worldId)}> delete </Button>
                     </Col>
                 </Row>
             );
@@ -157,11 +160,11 @@ const Overview = (props: any) => {
                         <Col lg={3}>
                             <strong>Owner</strong>
                         </Col>
-                        <Col lg={4}>
-                            <strong></strong>
-                        </Col>
-                        <Col lg={3}>
+                        <Col lg={5}>
                             <strong>Details</strong>
+                        </Col>
+                        <Col lg={2}>
+                            <strong></strong>
                         </Col>
                     </Row>
                 </Col>
