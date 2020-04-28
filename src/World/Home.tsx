@@ -107,7 +107,7 @@ const Overview = (props: any) => {
     /**
      * Async method that fills the world of a user
      */
-    const deleteWorld = async(worldId: string, worldTitle: string): any => {
+    const deleteWorld = async(worldId: string, worldTitle: string): Promise<any> => {
         console.log("DELETEWORLD FUNCTION CALLED: WORLDID: " + worldId);
         await RequestDeleteWorld(authObject,worldTitle,worldId, showError);
         await initialize();

@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b3806e9-4aa4-414e-aea4-6b827317d967" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/World/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/World/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,9 +99,9 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Jest.renders learn react link" />
       <item itemvalue="JavaScript Debug.Debug Application" />
       <item itemvalue="JavaScript Debug.index.html" />
-      <item itemvalue="Jest.renders learn react link" />
       <item itemvalue="npm.npm start" />
     </list>
     <recent_temporary>
@@ -140,7 +138,7 @@
       <workItem from="1587627151377" duration="4257000" />
       <workItem from="1587817084249" duration="3797000" />
       <workItem from="1587974515818" duration="13815000" />
-      <workItem from="1588065801119" duration="10030000" />
+      <workItem from="1588065801119" duration="10131000" />
     </task>
     <servers />
   </component>
