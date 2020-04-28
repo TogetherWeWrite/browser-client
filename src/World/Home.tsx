@@ -90,8 +90,8 @@ const Overview = (props: any) => {
     };
 
     const clickCreateWorld = async (worldname: string) => {
-        console.log("CREATE REQUEST: titel: "+ worldname  + ", owner: " + authObject.username);
-        await RequestCreateWorld(authObject,worldname,showError);
+        console.log("CREATE REQUEST: titel: " + worldname + ", owner: " + authObject.username);
+        await RequestCreateWorld(authObject, worldname, showError);
         await initialize();
     };
     /*
@@ -107,8 +107,10 @@ const Overview = (props: any) => {
     /**
      * Async method that fills the world of a user
      */
-    const deleteWorld = (worldId: string):any =>{
-          console.log("DELETEWORLD FUNCTION CALLED: WORLDID: "+worldId);
+    const deleteWorld = async(worldId: string, worldTitle: string): any => {
+        console.log("DELETEWORLD FUNCTION CALLED: WORLDID: " + worldId);
+        await RequestDeleteWorld(authObject,worldTitle,worldId, showError);
+        await initialize();
     };
 
     function delay(ms: number) {
@@ -133,7 +135,8 @@ const Overview = (props: any) => {
                         <Link to={"/world/details/" + world.worldId}>See Details</Link>
                     </Col>
                     <Col lg={2}>
-                        <Button variant={"danger"} type={"button"} onClick={() => deleteWorld(world.worldId)}> delete </Button>
+                        <Button variant={"danger"} type={"button"}
+                                onClick={() => deleteWorld(world.worldId, world.title)}> delete </Button>
                     </Col>
                 </Row>
             );
@@ -148,7 +151,7 @@ const Overview = (props: any) => {
     return (
         <Container fluid={true} className={"transparent-background"}>
             <CreateWorldDialogue show={show}
-                                       onHide={() => setShow(false)}
+                                 onHide={() => setShow(false)}
                                  createworld={clickCreateWorld}
             />
             <Row>
@@ -209,15 +212,21 @@ const GetWorldsFrom = async (authObject: authenticationState): Promise<WorldWith
     return JSON.parse(body);
 };
 
-export interface CreateWorldRequest{
-    UserId : number,
-    Title : string
+export interface CreateWorldRequest {
+    UserId: number,
+    Title: string
 }
 
-const RequestCreateWorld = async(authObject: authenticationState, worldtitle: string, functionerror: any) : Promise<boolean> => {
+export interface DeleteWorldRequest {
+    WorldId: string,
+    Title: string,
+    UserId: number
+}
+
+const RequestCreateWorld = async (authObject: authenticationState, worldtitle: string, functionerror: any): Promise<boolean> => {
     let request: CreateWorldRequest = {
-        Title : worldtitle,
-        UserId : authObject.id
+        Title: worldtitle,
+        UserId: authObject.id
     };
 
     let options: RequestInit = {
@@ -231,14 +240,42 @@ const RequestCreateWorld = async(authObject: authenticationState, worldtitle: st
     };
     let response = await fetch(config.SERVICES.CREATEWORLD, options);
     console.log(response.status);
-    if(response.status === 200) {
+    if (response.status === 200) {
         return true;
-    }
-    else if(response.status === 400){
+    } else if (response.status === 400) {
         await functionerror(await response.text());
         return false;
+    } else {
+        await functionerror("Something went wrong");
+        return false;
     }
-    else{
+};
+
+const RequestDeleteWorld = async (authObject: authenticationState, worldTitle: string, worldId: string, functionerror: any): Promise<boolean> => {
+    let request: DeleteWorldRequest = {
+        WorldId: worldId,
+        Title: worldTitle,
+        UserId: authObject.id
+    };
+
+    let options: RequestInit = {
+        method: "DELETE",
+        body: JSON.stringify(request),
+        headers: {
+            "Content-Type": "application/json"
+        },
+        mode: "cors",
+        cache: "default"
+    };
+
+    let response = await fetch(config.SERVICES.CREATEWORLD, options);
+    console.log(response.status);
+    if (response.status === 200) {
+        return true;
+    } else if (response.status === 400) {
+        await functionerror(await response.text());
+        return false;
+    } else {
         await functionerror("Something went wrong");
         return false;
     }

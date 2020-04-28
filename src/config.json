@@ -4,6 +4,7 @@
     "LOGIN" : "https://localhost:5001/Login",
     "GETWORLDSFROMUSER" : "https://localhost:5003/world/user",
     "GETWORLDDETAILS" : "https://localhost:5003/world",
-    "CREATEWORLD" : "https://localhost:5003/world"
+    "CREATEWORLD" : "https://localhost:5003/world",
+    "DELETEWORLD" : "https://localhost:5003/world"
   }
 }
