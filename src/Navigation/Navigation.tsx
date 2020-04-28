@@ -1,71 +1,103 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
 import {Nav, Navbar} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {connect} from "react-redux";
+import {checkAuthentication} from "../Components/CheckAuthentication"
 
 import {authenticationState} from "../reducers/authenticationReducer";
 
 const Navigation = (props: any) => {
-    let showlogin;
-    let register;
-    let login;
-    let isAuthenticated: boolean = false;
-    let authstring: string = localStorage.getItem("auth") ?? "";
-    console.log(authstring);
-    let authobject :authenticationState;
-    try{
-        authobject= JSON.parse(authstring);
-    }
-    catch(exception){
-        authobject = {
-            id: 0, isAuthenticated: false, token: "", username: "xd"
-        }
-    }
-    if (authstring === "") {
-        isAuthenticated = false;
-    } else {
-        authobject = JSON.parse(authstring);
-        isAuthenticated = authobject.isAuthenticated;
-    }
-    console.log(authobject);
 
+    useEffect( () => {
+        UpdateNavigation()
+    }, [])
+    /*
+    Navigation part of register and when logged in it will show logout
+     */
+    const [register, setRegister] = React.useState(<div></div>);
+
+    /*
+    Navigation part of login
+     */
+    const [login, setLogin] = React.useState(<div></div>);
+
+    /*
+    Navigation function that will push to "/world".
+     */
+    const worldNav = () => {
+        props.history.push("/world");
+    };
+
+    /*
+        Navigation function that will push to "/".
+     */
     const homepage = () => {
         props.history.push("/");
     };
+
+    /*
+    Navigation function that will push to "/login".
+     */
     const loginpage = () => {
         props.history.push("/login");
     };
+
+    /*
+    Navigation function that will push to "/register".
+     */
     const registerpage = () => {
         props.history.push("/register");
     };
+
+    /**
+     * Navigation function that will push to "/login". and clean localstorage so you will be logged out.
+     */
     const logout = () => {
         localStorage.removeItem("auth");
         props.history.push("/login");
     };
 
-    if (isAuthenticated) {
-            showlogin = <Nav.Link>Hello {authobject.username}</Nav.Link>;
-            register = <Nav.Link onClick={logout}>Logout</Nav.Link>
-            login = null;
-    } else {
-        login = <Nav.Link onClick={loginpage}>Login</Nav.Link>
-        register = <Nav.Link onClick={registerpage}>Register</Nav.Link>
+    /*
+    Constant world Navigation part. will go to the /world tab
+     */
+    const world = <Nav.Link onClick={worldNav}>Worlds</Nav.Link>;
 
-    }
-    let logo = <Nav><img src="logo.png" alt=""/></Nav>;
+    /*
+     *  authObject that has the info of the player <TYPE: authentiticationState>
+     */
+    let authobject: authenticationState = checkAuthentication();
+
+
+    /**
+     * updatenav will check the authentication status and update the navigation accordingly.
+     * @function
+     */
+    const UpdateNavigation = async () => {
+        console.log("update nav")
+        authobject = checkAuthentication();
+        if (authobject.isAuthenticated) {
+            setRegister(<Nav.Link onClick={logout}>Logout</Nav.Link>);
+            setLogin( <Navbar.Text>
+                Signed in as: {authobject.username}
+            </Navbar.Text>);
+
+        } else {
+            setLogin(<Nav.Link onClick={loginpage}>Login</Nav.Link>);
+            setRegister(<Nav.Link onClick={registerpage}>Register</Nav.Link>);
+        }
+    };
+
+
     return (
-        <div>
-            <Navbar bg="light" expand="lg">
-                <Nav className="mr-auto">
-                    {logo}
-                    <Nav.Link onClick={homepage}>Home</Nav.Link>
-                    {register}
-                    {login}
-                    {showlogin}
-                </Nav>
-            </Navbar>
-        </div>
+        <Navbar bg="light">
+            <Nav.Link onClick={homepage}>Home</Nav.Link>
+            {world}
+            <Navbar.Collapse className="justify-content-end">
+                {register}
+                {login}
+            </Navbar.Collapse>
+        </Navbar>
     )
 };
 
@@ -75,4 +107,5 @@ const mapStateToProps = (state: any) => {
         authentication: state.authentication
     };
 };
+
 export default withRouter(connect(mapStateToProps)(Navigation));
