@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
 import {Nav, Navbar} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,15 +8,19 @@ import {checkAuthentication} from "../Components/CheckAuthentication"
 import {authenticationState} from "../reducers/authenticationReducer";
 
 const Navigation = (props: any) => {
+
+    useEffect( () => {
+        UpdateNavigation()
+    }, [])
     /*
     Navigation part of register and when logged in it will show logout
      */
-    let register;
+    const [register, setRegister] = React.useState(<div></div>);
 
     /*
     Navigation part of login
      */
-    let login;
+    const [login, setLogin] = React.useState(<div></div>);
 
     /*
     Navigation function that will push to "/world".
@@ -45,9 +49,9 @@ const Navigation = (props: any) => {
     const registerpage = () => {
         props.history.push("/register");
     };
-    /*
-    Navigation function that will push to "/login".
-    and clean localstorage so you will be logged out.
+
+    /**
+     * Navigation function that will push to "/login". and clean localstorage so you will be logged out.
      */
     const logout = () => {
         localStorage.removeItem("auth");
@@ -67,22 +71,24 @@ const Navigation = (props: any) => {
 
     /**
      * updatenav will check the authentication status and update the navigation accordingly.
+     * @function
      */
-    const UpdateNavigation = () => {
+    const UpdateNavigation = async () => {
+        console.log("update nav")
         authobject = checkAuthentication();
         if (authobject.isAuthenticated) {
-            register = <Nav.Link onClick={logout}>Logout</Nav.Link>
-            login = <Navbar.Text>
+            setRegister(<Nav.Link onClick={logout}>Logout</Nav.Link>);
+            setLogin( <Navbar.Text>
                 Signed in as: {authobject.username}
-            </Navbar.Text>;
+            </Navbar.Text>);
 
         } else {
-            login = <Nav.Link onClick={loginpage}>Login</Nav.Link>
-            register = <Nav.Link onClick={registerpage}>Register</Nav.Link>
+            setLogin(<Nav.Link onClick={loginpage}>Login</Nav.Link>);
+            setRegister(<Nav.Link onClick={registerpage}>Register</Nav.Link>);
         }
     };
 
-    UpdateNavigation();
+
     return (
         <Navbar bg="light">
             <Nav.Link onClick={homepage}>Home</Nav.Link>
