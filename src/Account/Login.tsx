@@ -43,7 +43,7 @@ const Login = (props: any) => {
         console.log(newAuthenticationState);
         // props.login(newAuthenticationState);
         localStorage.setItem("auth", JSON.stringify(newAuthenticationState));
-        props.history.push("/");
+        props.history.push("/world");
     };
 
     const showError = (msg: string) => {
