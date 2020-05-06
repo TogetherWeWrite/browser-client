@@ -29,7 +29,7 @@ const Login = (props: any) => {
     };
 
     const validate = (): boolean => {
-        return true; //TODO.
+        return true;
     };
 
     const successfulLogin = async (body: any) => {
@@ -50,7 +50,7 @@ const Login = (props: any) => {
         setError(<Alert className="alert alert-danger">
             {msg}
         </Alert>);
-        return;//TODO
+        return;
     };
 
     const submitLogin = async (event: any) => {

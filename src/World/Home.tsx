@@ -6,22 +6,28 @@ import config from "../config.json";
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap"
 import "./world.css";
 import {WorldRow} from "./WorldRow";
+import {Link} from "react-router-dom";
 /*
 Overview page
  */
 
 const CreateWorldDialogue = (props: any) => {
-    const [worldName, setWorldName] = React.useState("worldName");
 
+
+
+    const [worldName, setWorldName] = React.useState("worldName");
+    const [classname,setClassName] = React.useState("");
     const onWorldNameChange = (event: any) => {
         setWorldName(event.target.value)
     };
 
     const createWorld = async () => {
+        setClassName("disabled");
         console.log("create world with name: " + worldName);
         await props.createworld(worldName);
         props.onHide();
     };
+
     return (
         <Modal
             {...props}
@@ -45,7 +51,7 @@ const CreateWorldDialogue = (props: any) => {
                             </Col>
                             <Col>
                                 <Form.Group>
-                                    <Button variant="secondary" onClick={createWorld}>Create World</Button>
+                                    <Button variant="secondary" className={classname} onClick={createWorld}>create World</Button>
                                 </Form.Group>
                             </Col>
 
@@ -129,7 +135,7 @@ const Overview = (props: any) => {
 
     //Method used for showing errors with msg.
     const showError = async (msg: string) => {
-        console.log(msg);
+        console.log(msg);//TODO implement correct error function.
     };
 
     //Method used when submitting a new world, will load the overview again.
@@ -172,7 +178,21 @@ const Overview = (props: any) => {
             await delay(2000);
             worlds = await GetWorldsFrom(authObject);
             const listItems = worlds.map((world) =>
-                <WorldRow owner={world.owner} title={world.title} worldId={world.worldId} writers={world.writers}/>
+                <Row className={"world-info-row"}>
+                    <Col lg={2}>
+                        {world.title}
+                    </Col>
+                    <Col lg={3}>
+                        {world.owner.name}
+                    </Col>
+                    <Col lg={5}>
+                        <Link to={"/world/details/" + world.worldId}>See Details</Link>
+                    </Col>
+                    <Col lg={2}>
+                        <Button variant={"danger"} type={"button"}
+                                onClick={() => deleteWorld(world.worldId, world.title)}> delete </Button>
+                    </Col>
+                </Row>
             );
             setUl(<Container fluid={true}>{listItems}</Container>);
             setOverview(<div></div>);
