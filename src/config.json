@@ -5,6 +5,8 @@
     "GETWORLDSFROMUSER" : "https://localhost:5003/world/user",
     "GETWORLDDETAILS" : "https://localhost:5003/world",
     "CREATEWORLD" : "https://localhost:5003/world",
-    "DELETEWORLD" : "https://localhost:5003/world"
+    "DELETEWORLD" : "https://localhost:5003/world",
+    "GETACCOUNTIDFROMUSERNAME" : "https://localhost:5001/Account/id",
+    "ADDWRITERTOWORLD": "https://localhost:5003/world/writer"
   }
 }
