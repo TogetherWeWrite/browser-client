@@ -153,22 +153,24 @@ const Overview = (props: any) => {
                                  onHide={() => setShow(false)}
                                  createworld={clickCreateWorld}
             />
-            <Row className={"row-header"}>
-                <Col lg={12}>
-                    <Row>
-                        <Col lg={2}>
-                            <strong>Title</strong>
-                        </Col>
-                        <Col lg={3}>
-                            <strong>Owner</strong>
-                        </Col>
-                        <Col lg={5}>
-                            <strong>Details</strong>
-                        </Col>
-                        <Col lg={2}>
-                            <strong></strong>
-                        </Col>
-                    </Row>
+            <Row>
+                <Col lg={12} className={"world-list"}>
+                    <Container fluid={true}>
+                        <Row className={"world-info-row"}>
+                            <Col lg={2}>
+                                <strong>Title</strong>
+                            </Col>
+                            <Col lg={3}>
+                                <strong>Owner</strong>
+                            </Col>
+                            <Col lg={5}>
+                                <strong>Details</strong>
+                            </Col>
+                            <Col lg={2}>
+                                <strong></strong>
+                            </Col>
+                        </Row>
+                    </Container>
                 </Col>
             </Row>
             <Row>
