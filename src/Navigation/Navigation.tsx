@@ -61,7 +61,7 @@ const Navigation = (props: any) => {
     /*
     Constant world Navigation part. will go to the /world tab
      */
-    const world = <Nav.Link onClick={worldNav}>Worlds</Nav.Link>;
+    const world = <Nav.Link onClick={worldNav}>Browse Worlds</Nav.Link>;
 
     /*
      *  authObject that has the info of the player <TYPE: authentiticationState>
@@ -91,7 +91,7 @@ const Navigation = (props: any) => {
 
     return (
         <Navbar bg="light">
-            <Nav.Link onClick={homepage}>Home</Nav.Link>
+            <Nav.Link onClick={homepage}>My Worlds</Nav.Link>
             {world}
             <Navbar.Collapse className="justify-content-end">
                 {register}

@@ -4,8 +4,8 @@ import {checkAuthentication} from "../Components/CheckAuthentication";
 import {WorldWithDetails} from "../Types/World"
 import config from "../config.json";
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap"
-import {Link} from 'react-router-dom';
 import "./world.css";
+import {WorldRow} from "./WorldRow";
 /*
 Overview page
  */
@@ -41,7 +41,6 @@ const CreateWorldDialogue = (props: any) => {
                             <Col xs={9}>
                                 <Form.Group>
                                     <Form.Control type="text" placeholder="world titel" onChange={onWorldNameChange}/>
-
                                 </Form.Group>
                             </Col>
                             <Col>
@@ -55,19 +54,28 @@ const CreateWorldDialogue = (props: any) => {
                 </Form>
             </Modal.Body>
         </Modal>
-    )
-        ;
+    );
 };
 
 const Overview = (props: any) => {
     const [ul, setUl] = React.useState(<div/>);
-    const [overview, setOverview] = React.useState(<Row>
-        <Col>
+
+    //Html Block of World Overview block Only if loggedin
+    const [overview, setOverview] = React.useState(
+        <Row>
             <div className={"lds-dual-ring"}/>
-        </Col>
+        </Row>);
+    //Html Block of Create World Button only if loggedin
+    const [createWorld, setCreateWorld] = React.useState(<Row>
+        <div className={"lds-dual-ring"}/>
     </Row>);
-    const [createWorld, setCreateWorld] = React.useState(<div/>);
+    //Show of Modal of create world Standard false.
     const [show, setShow] = useState(false);
+
+    //Html Block of OverviewHeader only if loggedin.
+    const [worldOverviewHeader, setWorldOverviewHeader] = useState(<Row>
+        <div className={"lds-dual-ring"}/>
+    </Row>);
 
     useEffect(() => {
         initialize()
@@ -75,24 +83,62 @@ const Overview = (props: any) => {
 
     const initialize = async () => {
         await loadWorlds();
-        setCreateWorld(
-            <Container fluid={true}>
+        initializeWorldOverviewHeader();
+        initiliazeCreateWorldBlock();
+    };
+
+    const initiliazeCreateWorldBlock = () => {
+        if (authObject.isAuthenticated) {
+            setCreateWorld(<Container fluid={true}>
                 <Row className={"world-create-row"} onClick={() => setShow(true)}>
                     + create new world
                 </Row>
-            </Container>
-        );
-
+            </Container>);
+        } else {
+            setCreateWorld(<div/>);
+        }
     };
+
+    //Initializer for the header of the overview if not logged in it will show nothing.
+    const initializeWorldOverviewHeader = () => {
+        if (authObject.isAuthenticated) {
+            setWorldOverviewHeader(<Row>
+                <Col lg={12} className={"world-list"}>
+                    <Container fluid={true}>
+                        <Row className={"world-info-row"}>
+                            <Col lg={2}>
+                                <strong>Title</strong>
+                            </Col>
+                            <Col lg={3}>
+                                <strong>Owner</strong>
+                            </Col>
+                            <Col lg={5}>
+                                <strong>Details</strong>
+                            </Col>
+                            <Col lg={2}>
+                                <strong></strong>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Col>
+            </Row>);
+        } else {
+            setWorldOverviewHeader(<div/>)
+        }
+    };
+
+    //Method used for showing errors with msg.
     const showError = async (msg: string) => {
         console.log(msg);
     };
 
+    //Method used when submitting a new world, will load the overview again.
     const clickCreateWorld = async (worldname: string) => {
         console.log("CREATE REQUEST: titel: " + worldname + ", owner: " + authObject.username);
         await RequestCreateWorld(authObject, worldname, showError);
         await initialize();
     };
+
     /*
         authObject that contains the variables from authentication state.
      */
@@ -118,26 +164,15 @@ const Overview = (props: any) => {
 
     let worlds: WorldWithDetails[] = [];
 
+    /**
+     * Method used for loading the worlds in and filling the Overview Block and the UL.
+     */
     const loadWorlds = async () => {
         if (authObject.isAuthenticated) {
             await delay(2000);
             worlds = await GetWorldsFrom(authObject);
             const listItems = worlds.map((world) =>
-                <Row className={"world-info-row"}>
-                    <Col lg={2}>
-                        {world.title}
-                    </Col>
-                    <Col lg={3}>
-                        {world.owner.name}
-                    </Col>
-                    <Col lg={5}>
-                        <Link to={"/world/details/" + world.worldId}>See Details</Link>
-                    </Col>
-                    <Col lg={2}>
-                        {/*<Button variant={"danger"} type={"button"}*/}
-                        {/*        onClick={() => deleteWorld(world.worldId, world.title)}> delete </Button>*/}
-                    </Col>
-                </Row>
+                <WorldRow owner={world.owner} title={world.title} worldId={world.worldId} writers={world.writers}/>
             );
             setUl(<Container fluid={true}>{listItems}</Container>);
             setOverview(<div></div>);
@@ -146,33 +181,14 @@ const Overview = (props: any) => {
         }
     };
 
-
+    //Return statement of the home page.
     return (
         <Container fluid={true} className={"transparent-background"}>
             <CreateWorldDialogue show={show}
                                  onHide={() => setShow(false)}
                                  createworld={clickCreateWorld}
             />
-            <Row>
-                <Col lg={12} className={"world-list"}>
-                    <Container fluid={true}>
-                        <Row className={"world-info-row"}>
-                            <Col lg={2}>
-                                <strong>Title</strong>
-                            </Col>
-                            <Col lg={3}>
-                                <strong>Owner</strong>
-                            </Col>
-                            <Col lg={5}>
-                                <strong>Details</strong>
-                            </Col>
-                            <Col lg={2}>
-                                <strong></strong>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Col>
-            </Row>
+            {worldOverviewHeader}
             <Row>
                 <Col lg={12} className={"world-list"}>
                     {overview}
@@ -183,18 +199,11 @@ const Overview = (props: any) => {
         </Container>
     );
 
-    /*
-    Returns the world home page.
-     */
-    // return (
-    //     <div>
-    //     {overview}
-    // </div>);
-
 };
 
 export default Overview;
 
+//Method used for getting the worlds from a user of which he is the owner or a writer.
 const GetWorldsFrom = async (authObject: authenticationState): Promise<WorldWithDetails[]> => {
     var request: string = "?userid=" + authObject.id;
     let options: RequestInit = {
@@ -222,6 +231,7 @@ export interface DeleteWorldRequest {
     UserId: number
 }
 
+//Method used for creating a world.
 const RequestCreateWorld = async (authObject: authenticationState, worldtitle: string, functionerror: any): Promise<boolean> => {
     let request: CreateWorldRequest = {
         Title: worldtitle,
@@ -250,6 +260,7 @@ const RequestCreateWorld = async (authObject: authenticationState, worldtitle: s
     }
 };
 
+//Method used for deleting a world.
 const RequestDeleteWorld = async (authObject: authenticationState, worldTitle: string, worldId: string, functionerror: any): Promise<boolean> => {
     let request: DeleteWorldRequest = {
         WorldId: worldId,
