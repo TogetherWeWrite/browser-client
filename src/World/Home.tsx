@@ -6,7 +6,6 @@ import config from "../config.json";
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap"
 import {Link} from 'react-router-dom';
 import "./world.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
 /*
 Overview page
  */
@@ -107,9 +106,9 @@ const Overview = (props: any) => {
     /**
      * Async method that fills the world of a user
      */
-    const deleteWorld = async(worldId: string, worldTitle: string): Promise<any> => {
+    const deleteWorld = async (worldId: string, worldTitle: string): Promise<any> => {
         console.log("DELETEWORLD FUNCTION CALLED: WORLDID: " + worldId);
-        await RequestDeleteWorld(authObject,worldTitle,worldId, showError);
+        await RequestDeleteWorld(authObject, worldTitle, worldId, showError);
         await initialize();
     };
 
@@ -121,7 +120,7 @@ const Overview = (props: any) => {
 
     const loadWorlds = async () => {
         if (authObject.isAuthenticated) {
-            await delay(100);
+            await delay(2000);
             worlds = await GetWorldsFrom(authObject);
             const listItems = worlds.map((world) =>
                 <Row className={"world-info-row"}>
@@ -135,8 +134,8 @@ const Overview = (props: any) => {
                         <Link to={"/world/details/" + world.worldId}>See Details</Link>
                     </Col>
                     <Col lg={2}>
-                        <Button variant={"danger"} type={"button"}
-                                onClick={() => deleteWorld(world.worldId, world.title)}> delete </Button>
+                        {/*<Button variant={"danger"} type={"button"}*/}
+                        {/*        onClick={() => deleteWorld(world.worldId, world.title)}> delete </Button>*/}
                     </Col>
                 </Row>
             );
@@ -154,7 +153,7 @@ const Overview = (props: any) => {
                                  onHide={() => setShow(false)}
                                  createworld={clickCreateWorld}
             />
-            <Row>
+            <Row className={"row-header"}>
                 <Col lg={12}>
                     <Row>
                         <Col lg={2}>
@@ -179,8 +178,6 @@ const Overview = (props: any) => {
                     {createWorld}
                 </Col>
             </Row>
-
-
         </Container>
     );
 

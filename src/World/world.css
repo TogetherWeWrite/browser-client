@@ -1,41 +1,41 @@
-.create-world{
+.create-world {
 
 }
 
-.world-list{
-    padding-left:0px;
+.world-list {
+    padding-left: 0px;
 }
-.transparent-background{
+
+.transparent-background {
     height: 1000px;
-    background-image: linear-gradient(to bottom, rgba(222,222,222,0.7), rgba(255,255,255,0))
+    /*background-image: linear-gradient(to bottom, rgba(222,222,222,0.7), rgba(255,255,255,0));*/
+    margin-top: 20px;
 }
 
-.world-info-row{
-     border: 0px solid lightgray;
-     border-radius: 25px;
-
-    margin-bottom: 7px;
-     margin-top: 7px;
-     box-shadow: 5px 10px 12px #888888;
- }
-
-.world-create-row{
-    border-radius: 25px;
-    margin-bottom: 7px;
-    margin-top: 7px;
+.world-info-row {
+    border: 0px solid lightgray;
+    color: #333333;
+    border-radius: 0px;
+    margin: 7px 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     box-shadow: 5px 10px 12px #888888;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(190, 190, 190, 0));
+}
+
+.world-create-row {
+    border-radius: 0px;
+    margin: 7px 10px;
+    box-shadow: 5px 4px 8px #888888;
     color: #888888;
-    background-image: linear-gradient(to top, rgba(190, 190, 190,0.7), rgba(255,255,255,0));
+    background-image: linear-gradient(to top, rgba(200, 200, 200, 0.65), rgba(255, 255, 255, 0));
     padding-left: 3%;
 }
 
-.world-create-row:hover{
-    border-radius: 25px;
-    margin-bottom: 7px;
-    margin-top: 7px;
+.world-create-row:hover {
     box-shadow: 5px 10px 12px #666666;
     color: #666666;
-    background-image: linear-gradient(to top, rgba(158, 158, 158,0.7), rgba(230,230,230,0));
+    background-image: linear-gradient(to top, rgba(158, 158, 158, 0.7), rgba(230, 230, 230, 0));
     padding-left: 3%;
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
@@ -48,6 +48,7 @@
     width: 80px;
     height: 80px;
 }
+
 .lds-dual-ring:after {
     content: " ";
     display: block;
@@ -59,6 +60,7 @@
     border-color: #fff transparent #fff transparent;
     animation: lds-dual-ring 2s linear infinite;
 }
+
 @keyframes lds-dual-ring {
     0% {
         transform: rotate(0deg);
@@ -68,16 +70,28 @@
     }
 }
 
-.world-create-dialogue{
+.world-create-dialogue {
     box-shadow: 5px 10px 12px #888888;
 }
 
-.modal-content{
-    background-image: linear-gradient(to top, rgba(255, 255, 255,0.5), rgba(230,230,230,1));
-    background-color: rgba(0,0,0,0);
+.modal-content {
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(230, 230, 230, 1));
+    background-color: rgba(0, 0, 0, 0);
     background-clip: unset;
     box-shadow: 5px 10px 42px #444444;
 }
-.modal-header{
+
+.modal-header {
     border-bottom: 0px;
+}
+
+.world-info-row>div{
+    padding-top:6px;
+    padding-bottom:6px;
+}
+
+.row-header{
+    margin: 20px 10px;
+    box-shadow: 2px 3px 3px #cccccc;
+
 }

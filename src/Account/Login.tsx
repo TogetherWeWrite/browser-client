@@ -75,7 +75,6 @@ const Login = (props: any) => {
             try {
                 console.log(options.body);
                 let response: Response = await fetch(config.SERVICES.LOGIN, options);
-                // let body = await response.json();
                 let body = await response.text();
                 console.log(body);
                 if (response.status === 200) {//OK
