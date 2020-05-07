@@ -34,7 +34,7 @@
     box-shadow: 5px 6px 8px #888888;
     color: #888888;
     background-image: linear-gradient(to top, rgba(200, 200, 200, 0.65), rgba(255, 255, 255, 0));
-    padding: 4px 0 4px 3%;
+    padding: 10px 0 4px 3%;
 }
 
 .world-create-row:hover {
@@ -100,4 +100,10 @@
     margin: 20px 10px;
     box-shadow: 2px 3px 3px #cccccc;
 
+}
+
+.writer-in-detailpage {
+    border-bottom: solid 3px rgba(0,0,0,0.1);
+    margin-bottom: 5px;
+    padding: 3px 3px;
 }

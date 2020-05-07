@@ -14,18 +14,18 @@ Overview page
 const CreateWorldDialogue = (props: any) => {
 
 
-
+    const [disabled,setDisabled] = React.useState(false);
     const [worldName, setWorldName] = React.useState("worldName");
-    const [classname,setClassName] = React.useState("");
     const onWorldNameChange = (event: any) => {
         setWorldName(event.target.value)
     };
 
     const createWorld = async () => {
-        setClassName("disabled");
+        setDisabled(true);
         console.log("create world with name: " + worldName);
         await props.createworld(worldName);
         props.onHide();
+        setDisabled(false);
     };
 
     return (
@@ -51,7 +51,7 @@ const CreateWorldDialogue = (props: any) => {
                             </Col>
                             <Col>
                                 <Form.Group>
-                                    <Button variant="secondary" className={classname} onClick={createWorld}>create World</Button>
+                                    <Button variant="secondary" disabled={disabled} onClick={createWorld}>create World</Button>
                                 </Form.Group>
                             </Col>
 

@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2b3806e9-4aa4-414e-aea4-6b827317d967" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Account/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Account/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Account/Account.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Account/Account.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/World/DetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/World/DetailPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/World/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/World/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/World/WorldRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/World/WorldRow.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/connectiostring.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/World/world.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/World/world.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +148,8 @@
       <workItem from="1588095332385" duration="3149000" />
       <workItem from="1588583951898" duration="4716000" />
       <workItem from="1588748894457" duration="13805000" />
-      <workItem from="1588768276156" duration="545000" />
+      <workItem from="1588768276156" duration="4251000" />
+      <workItem from="1588840480214" duration="392000" />
     </task>
     <servers />
   </component>
@@ -185,35 +186,35 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="668" y="218" key="#renders_learn_react_link/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586172473838" />
-    <state x="598" y="118" key="CommitChangelistDialog2" timestamp="1588767988209">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2717" y="118" key="CommitChangelistDialog2" timestamp="1588770486497">
+      <screen x="1920" y="0" width="2560" height="1040" />
     </state>
     <state x="598" y="118" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588767988209" />
-    <state x="2717" y="118" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1586341836432" />
+    <state x="2717" y="118" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588770486497" />
     <state x="740" y="278" key="FileChooserDialogImpl" timestamp="1587540660720">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="278" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1587540660720" />
-    <state width="1899" height="239" key="GridCell.Tab.0.bottom" timestamp="1588768754555">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1899" height="239" key="GridCell.Tab.0.bottom" timestamp="1588772530115">
+      <screen x="1920" y="0" width="2560" height="1040" />
     </state>
     <state width="1899" height="239" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588768754555" />
-    <state width="2539" height="239" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588112711142" />
-    <state width="1899" height="239" key="GridCell.Tab.0.center" timestamp="1588768754555">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1899" height="239" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588772530115" />
+    <state width="1899" height="239" key="GridCell.Tab.0.center" timestamp="1588772530115">
+      <screen x="1920" y="0" width="2560" height="1040" />
     </state>
     <state width="1899" height="239" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588768754555" />
-    <state width="2539" height="239" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588112711142" />
-    <state width="1899" height="239" key="GridCell.Tab.0.left" timestamp="1588768754555">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1899" height="239" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588772530115" />
+    <state width="1899" height="239" key="GridCell.Tab.0.left" timestamp="1588772530115">
+      <screen x="1920" y="0" width="2560" height="1040" />
     </state>
     <state width="1899" height="239" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588768754555" />
-    <state width="2539" height="239" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588112711142" />
-    <state width="1899" height="239" key="GridCell.Tab.0.right" timestamp="1588768754555">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1899" height="239" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588772530115" />
+    <state width="1899" height="239" key="GridCell.Tab.0.right" timestamp="1588772530115">
+      <screen x="1920" y="0" width="2560" height="1040" />
     </state>
     <state width="1899" height="239" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588768754555" />
-    <state width="2539" height="239" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588112711142" />
+    <state width="1899" height="239" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588772530115" />
     <state width="949" height="348" key="GridCell.Tab.1.bottom" timestamp="1587568235571">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -279,10 +280,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-7" y="0" width="1063" height="1047" key="dock-window-2/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1587651445778" />
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1587997203442">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2741" y="240" width="896" height="677" key="run.anything.popup" timestamp="1588771228852">
+      <screen x="1920" y="0" width="2560" height="1040" />
     </state>
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1587997203442" />
+    <state x="2741" y="240" width="896" height="677" key="run.anything.popup/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588771228852" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1588750813779">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

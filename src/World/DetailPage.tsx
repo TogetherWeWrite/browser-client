@@ -2,9 +2,10 @@ import React, {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {WorldWithDetails} from "../Types/World";
 import config from "../config.json";
-import {Button, Col, Container, Form, Modal, Row, Alert} from "react-bootstrap"
+import {Alert, Button, Col, Container, Form, Modal, Row} from "react-bootstrap"
 import {authenticationState} from "../reducers/authenticationReducer";
 import {checkAuthentication} from "../Components/CheckAuthentication";
+import "./world.css";
 
 /**
  * Dialogue of Adding A writer by name.
@@ -14,21 +15,22 @@ import {checkAuthentication} from "../Components/CheckAuthentication";
  * Method: [onHide(boolean)] which will be used when hiding the object.
  */
 const AddWriterDialogue = (props: any) => {
-
+    const [disabled, setDisabled] = React.useState(false);
     let writerName: string = "";
-    const [error,setError] = React.useState(<div/>);
+    const [error, setError] = React.useState(<div/>);
 
     const changeWriterName = (event: any) => {
         writerName = event.target.value;
     };
 
-    const showError = async (message: any) =>{
+    const showError = async (message: any) => {
         setError(<Row><Alert variant={"danger"}>{message}</Alert></Row>)
     };
 
     const addWriter = async () => {
         try {
-            let userId :number = await GetUserIdFromUsername(writerName);
+            setDisabled(true);
+            let userId: number = await GetUserIdFromUsername(writerName);
             console.log(userId);
             let success = await props.addWriter(userId);
             if (success) {
@@ -36,10 +38,10 @@ const AddWriterDialogue = (props: any) => {
             } else {
                 showError("Failed to add writer");
             }
-        }
-        catch(ex){
+        } catch (ex) {
             showError(ex);
         }
+        setDisabled(false);
     };
 
     return (<Modal
@@ -50,7 +52,7 @@ const AddWriterDialogue = (props: any) => {
     >
         <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-                Create World
+                Add Writer
             </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -65,10 +67,9 @@ const AddWriterDialogue = (props: any) => {
                         </Col>
                         <Col>
                             <Form.Group>
-                                <Button variant="secondary" onClick={addWriter}>Add Writer</Button>
+                                <Button variant="secondary" disabled={disabled} onClick={addWriter}>Add Writer</Button>
                             </Form.Group>
                         </Col>
-
                     </Row>
                 </Container>
             </Form>
@@ -76,7 +77,7 @@ const AddWriterDialogue = (props: any) => {
     </Modal>);
 };
 
-const DetailPage = () => {
+const DetailPage = (props: any) => {
         let world: WorldWithDetails;
         const [page, setPage] = React.useState(<div>loading...</div>)
         let {worldid} = useParams();
@@ -85,11 +86,11 @@ const DetailPage = () => {
         let isOwner: boolean = false;
         let authObject: authenticationState;
 
-        const [show,setShow] = React.useState(false);
+        const [show, setShow] = React.useState(false);
 
 
         useEffect(() => {
-            loadDetailsOfWorld().then(() => loadWriters());
+            loadDetailsOfWorld();
         }, []);
 
 
@@ -126,51 +127,80 @@ const DetailPage = () => {
                     authObject = checkAuthentication();
                     checkOwner();
                     setAddWriterButtonBlock();
+                    loadWriters();
                 } catch (exception) {
                     console.log(exception);
                 }
             }
         };
 
-        const clickAddWriter = async (writerId: number) : Promise<boolean> =>{
-            console.log("adding writer"+writerId)
-            if(worldid){
-                var result : boolean = await AddWriterToWorld(worldid,writerId);
-                if(result){
-                    loadDetailsOfWorld();
+        const clickAddWriter = async (writerId: number): Promise<boolean> => {
+            console.log("adding writer" + writerId)
+            if (worldid) {
+                var result: boolean = await AddWriterToWorld(worldid, writerId);
+                if (result) {
+                    refresh();
                     return true;
-                }
-                else{
+                } else {
                     return false;
                 }
-                return result;
             }
+            refresh();
             return false;
+
+        };
+
+        const deleteWriter = async (writerid: number) => {
+            if (worldid) {
+                var result: boolean = await deleteWriterFromWorld(worldid, writerid);
+                if(result){
+                    refresh();
+                }
+            }
+        };
+
+        const refresh = async () => {
+            if (worldid) {
+                console.log("refreshing");
+                await loadDetailsOfWorld();
+            }
 
         };
 
         const loadWriters = async () => {
             if (world) {
                 const writers = world.writers.map((writer) =>
-                    <Form>
-                        <Form.Group>
-                            <Form.Label>Writer: {writer.name}</Form.Label>
-                        </Form.Group>
-                    </Form>
+                    <Row>
+                        <Col lg={5}>
+                            <Row className="writer-in-detailpage">
+                                <Col lg={"8"}>
+                                    <Form.Label>Writer: {writer.name}</Form.Label>
+                                </Col>
+                                <Col lg={"auto"}>
+
+                                </Col>
+                                <Col lg={"1"}>
+                                    <Button variant={"danger"} onClick={() => deleteWriter(writer.id)}>Delete</Button>
+                                </Col>
+                            </Row>
+
+                        </Col>
+
+                    </Row>
                 );
                 setWritersBlock(<div className={"writer-list"}>{writers}</div>);
                 console.log(writers)
             }
         };
 
-        return (<div>
+        return (<Container fluid={true}>
             <AddWriterDialogue show={show}
                                onHide={() => setShow(false)}
                                addWriter={clickAddWriter}/>
             {page}
             {writersBlock}
             {addWriterBlock}
-        </div>)
+        </Container>)
     }
 ;
 
@@ -192,10 +222,10 @@ export const GetDetailsOfWorld = async (worldId: string): Promise<WorldWithDetai
     return JSON.parse(body);
 };
 
-export const GetUserIdFromUsername = async(username: string) : Promise<number> =>{
-    var request: string = "?username=" +username;
+export const GetUserIdFromUsername = async (username: string): Promise<number> => {
+    var request: string = "?username=" + username;
     let options: RequestInit = {
-        method : "GET",
+        method: "GET",
         headers: {
             "Content-Type": "application/json"
         },
@@ -203,30 +233,28 @@ export const GetUserIdFromUsername = async(username: string) : Promise<number> =
         cache: "default"
     };
     let response: Response = await fetch(config.SERVICES.GETACCOUNTIDFROMUSERNAME + request, options);
-    if(response.status ===200) {
+    if (response.status === 200) {
         let body = parseInt(await response.text());
         return body;
-    }
-    else if(response.status === 500){
+    } else if (response.status === 500) {
         throw await response.text();
-    }
-    else{
+    } else {
         throw 'User with username: ' + username + ', does not exist.';
     }
 
 };
 
-export interface AddWriterRequest{
+export interface AddWriterRequest {
     WriterId: number
     WorldId: string
 }
 
-export const AddWriterToWorld = async(worldId: string, writerId:number) =>{
-    var requestobj : AddWriterRequest ={
+export const AddWriterToWorld = async (worldId: string, writerId: number) => {
+    var requestobj: AddWriterRequest = {
         WorldId: worldId,
         WriterId: writerId
     };
-    let options: RequestInit ={
+    let options: RequestInit = {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -235,15 +263,37 @@ export const AddWriterToWorld = async(worldId: string, writerId:number) =>{
         mode: "cors",
         cache: "default"
     };
-    let response: Response = await fetch(config.SERVICES.ADDWRITERTOWORLD,options);
-    if(response.status ===200){
+    let response: Response = await fetch(config.SERVICES.ADDWRITERTOWORLD, options);
+    if (response.status === 200) {
         return true;
-    }
-    else if(response.status === 500){
+    } else if (response.status === 500) {
         throw await response.text();
-    }
-    else{
+    } else {
         return false;
     }
 };
 
+export const deleteWriterFromWorld = async (worldId: string, writerId: number): Promise<boolean> => {
+    var requestobj: AddWriterRequest = {
+        WorldId: worldId,
+        WriterId: writerId
+    };
+    let options: RequestInit = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(requestobj),
+        mode: "cors",
+        cache: "default"
+    };
+
+    let response: Response = await fetch(config.SERVICES.ADDWRITERTOWORLD, options);
+    if (response.status === 200) {
+        return true;
+    } else if (response.status === 500) {
+        throw await response.text();
+    } else {
+        return false;
+    }
+};
