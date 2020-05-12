@@ -278,6 +278,7 @@ export const deleteWriterFromWorld = async (worldId: string, writerId: number): 
         WorldId: worldId,
         WriterId: writerId
     };
+
     let options: RequestInit = {
         method: "DELETE",
         headers: {

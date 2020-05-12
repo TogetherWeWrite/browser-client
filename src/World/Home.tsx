@@ -177,7 +177,7 @@ const Overview = (props: any) => {
         if (authObject.isAuthenticated) {
             await delay(2000);
             worlds = await GetWorldsFrom(authObject);
-            const listItems = worlds.map((world) =>
+            const listItems = worlds.map((world) =>//TODO if world.writer does not contain you and you are not the writer make it different because then you are a follower.
                 <Row className={"world-info-row"}>
                     <Col lg={2}>
                         {world.title}
