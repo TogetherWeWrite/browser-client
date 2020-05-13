@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b3806e9-4aa4-414e-aea4-6b827317d967" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/WorldOverview/FollowWorldModel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/WorldOverview/WorldWithFollowers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/WorldOverview/browseworlds.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Navigation/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Navigation/Navigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/World/DetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/DetailPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/World/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/World/WorldRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/WorldRow.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/World/world.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/world.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -82,11 +72,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="56" column="33" lean-forward="true" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+            <state relative-caret-position="697">
+              <caret line="61" column="50" selection-start-line="61" selection-start-column="50" selection-end-line="61" selection-end-column="50" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
-                <element signature="e#1067#1149#0" />
                 <element signature="e#1751#2207#0" />
               </folding>
             </state>
@@ -185,6 +174,7 @@
         <option value="$PROJECT_DIR$/src/World/FollowWorld.ts" />
         <option value="$PROJECT_DIR$/src/config.json" />
         <option value="$PROJECT_DIR$/src/World/BrowseWorlds.tsx" />
+        <option value="$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx" />
       </list>
     </option>
   </component>
@@ -335,9 +325,9 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Jest.renders learn react link" />
       <item itemvalue="JavaScript Debug.Debug Application" />
       <item itemvalue="JavaScript Debug.index.html" />
-      <item itemvalue="Jest.renders learn react link" />
       <item itemvalue="npm.npm start" />
     </list>
     <recent_temporary>
@@ -384,12 +374,12 @@
       <workItem from="1588927571541" duration="868000" />
       <workItem from="1589292138089" duration="1226000" />
       <workItem from="1589308630300" duration="134000" />
-      <workItem from="1589354466400" duration="8641000" />
+      <workItem from="1589354466400" duration="9350000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10869000" />
+    <option name="totallyTimeSpent" value="11578000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -574,16 +564,6 @@
     <entry file="file://$PROJECT_DIR$/src/Types/World.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/authenticationReducer.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#81#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/CheckAuthentication.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -659,13 +639,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/authenticationReducer.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="56" column="33" lean-forward="true" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+        <state relative-caret-position="697">
+          <caret line="61" column="50" selection-start-line="61" selection-start-column="50" selection-end-line="61" selection-end-column="50" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
-            <element signature="e#1067#1149#0" />
             <element signature="e#1751#2207#0" />
           </folding>
         </state>

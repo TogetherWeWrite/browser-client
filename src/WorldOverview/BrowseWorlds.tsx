@@ -44,7 +44,9 @@ const BrowseWorlds = (props: any) => {
                     return (
                         <Button onClick={async () => {
                             try {
-                                await FollowWorld(id, auth)
+                                await FollowWorld(id, auth);
+                                worlds = await GetWorldsSortedByPopularity(page);
+                                loadDynamicHtml();
                             } catch (Exception) {
                                 setError(<Alert variant={"warning"} className={"warning-dissmisable"}
                                                 onClick={() => setError(<div/>)}>{Exception.message}</Alert>)
@@ -56,6 +58,8 @@ const BrowseWorlds = (props: any) => {
                         <Button onClick={async () => {
                             try {
                                 await UnFollowWorld(id, auth)
+                                worlds = await GetWorldsSortedByPopularity(page);
+                                loadDynamicHtml();
                                 setPage(page);
                             } catch (Exception) {
                                 setError(<Alert variant={"warning"} className={"warning-dissmisable"}
