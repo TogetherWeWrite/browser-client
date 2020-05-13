@@ -7,6 +7,8 @@
     "CREATEWORLD" : "https://localhost:5003/world",
     "DELETEWORLD" : "https://localhost:5003/world",
     "GETACCOUNTIDFROMUSERNAME" : "https://localhost:5001/Account/id",
-    "ADDWRITERTOWORLD": "https://localhost:5003/world/writer"
+    "ADDWRITERTOWORLD": "https://localhost:5003/world/writer",
+    "POPULARLIST" : "https://localhost:5003/world/popularlist",
+    "FOLLOW" : "https://localhost:5003/follow"
   }
 }
