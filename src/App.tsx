@@ -6,8 +6,9 @@ import Navigation from "./Navigation/Navigation";
 import Home from "./Home/Home";
 import {Provider} from "react-redux";
 import store from "./store";
-import Overview from "./World/Home";
-import WorldDetails from "./World/DetailPage"
+import Overview from "./WorldOverview/Home";
+import WorldDetails from "./WorldOverview/DetailPage"
+import BrowseWorlds from "./WorldOverview/BrowseWorlds";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                             <Route exact path='/login' component={Login}/>
                             <Route exact path='/' component={Overview}/>
                             <Route path='/world/details/:worldid' component={WorldDetails}/>
+                            <Route exact path='/browseworlds' component={BrowseWorlds}/>
                         </Switch>
                     </div>
                 </Router>

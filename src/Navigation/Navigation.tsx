@@ -11,7 +11,7 @@ const Navigation = (props: any) => {
 
     useEffect( () => {
         UpdateNavigation()
-    }, [])
+    }, []);
     /*
     Navigation part of register and when logged in it will show logout
      */
@@ -26,7 +26,7 @@ const Navigation = (props: any) => {
     Navigation function that will push to "/world".
      */
     const worldNav = () => {
-        props.history.push("/world");
+        props.history.push("/browseworlds");
     };
 
     /*
@@ -66,8 +66,11 @@ const Navigation = (props: any) => {
     /*
      *  authObject that has the info of the player <TYPE: authentiticationState>
      */
-    let authobject: authenticationState = checkAuthentication();
-
+    const [authobject,setAuthObject] = React.useState(checkAuthentication());
+    useEffect( () => {
+        setAuthObject( checkAuthentication());
+        UpdateNavigation()
+    }, []);
 
     /**
      * updatenav will check the authentication status and update the navigation accordingly.
@@ -75,7 +78,6 @@ const Navigation = (props: any) => {
      */
     const UpdateNavigation = async () => {
         console.log("update nav")
-        authobject = checkAuthentication();
         if (authobject.isAuthenticated) {
             setRegister(<Nav.Link onClick={logout}>Logout</Nav.Link>);
             setLogin( <Navbar.Text>

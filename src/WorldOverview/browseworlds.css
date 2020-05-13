@@ -1,0 +1,29 @@
+.overview-row {
+    border: 0px solid lightgray;
+    color: #333333;
+    border-radius: 0px;
+    margin: 7px 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 5px 10px 10px #999999;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(190, 190, 190, 0));
+}
+
+.overview-row:hover{
+    box-shadow: 5px 10px 12px #888888;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(185, 185, 185, 0));
+}
+.warning-dissmisable{
+    margin: 0 -15px;
+}
+
+.warning-dissmisable:hover{
+    box-shadow: 5px 10px 12px #c7ba91;
+}
+.navigation-row{
+
+}
+
+.navigation-button{
+    margin: 7px 15px 7px 15px;
+}
