@@ -241,14 +241,14 @@ const GetWorldsFrom = async (authObject: authenticationState): Promise<WorldWith
 };
 
 export interface CreateWorldRequest {
-    UserId: number,
+    UserId: string,
     Title: string
 }
 
 export interface DeleteWorldRequest {
     WorldId: string,
     Title: string,
-    UserId: number
+    UserId: string
 }
 
 //Method used for creating a world.

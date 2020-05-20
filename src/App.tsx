@@ -9,6 +9,7 @@ import store from "./store";
 import Overview from "./WorldOverview/Home";
 import WorldDetails from "./WorldOverview/DetailPage"
 import BrowseWorlds from "./WorldOverview/BrowseWorlds";
+import World from "./WorldView/World";
 
 
 function App() {
@@ -23,7 +24,9 @@ function App() {
                             <Route exact path='/login' component={Login}/>
                             <Route exact path='/' component={Overview}/>
                             <Route path='/world/details/:worldid' component={WorldDetails}/>
+                            <Route path='/world/:id' component={World}/>
                             <Route exact path='/browseworlds' component={BrowseWorlds}/>
+
                         </Switch>
                     </div>
                 </Router>

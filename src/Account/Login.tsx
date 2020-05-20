@@ -9,7 +9,7 @@ import {ResponseUser} from "../Types/ResponseUser";
 import {authenticationState} from "../reducers/authenticationReducer";
 
 interface RegisterUser {
-    Id: number,
+    Id: string,
     Password: string,
     Token: string,
     Username: string
@@ -33,6 +33,7 @@ const Login = (props: any) => {
     };
 
     const successfulLogin = async (body: any) => {
+        console.log(body);
         let user: ResponseUser = body;
         let newAuthenticationState: authenticationState = {
             isAuthenticated: true,
@@ -58,7 +59,7 @@ const Login = (props: any) => {
             let user: RegisterUser = {
                 Username: username,
                 Password: password,
-                Id: 0,
+                Id: "",
                 Token: ""
             };
 
@@ -73,10 +74,8 @@ const Login = (props: any) => {
             };
 
             try {
-                console.log(options.body);
                 let response: Response = await fetch(config.SERVICES.LOGIN, options);
                 let body = await response.text();
-                console.log(body);
                 if (response.status === 200) {//OK
                     successfulLogin(JSON.parse(body));
                     return;

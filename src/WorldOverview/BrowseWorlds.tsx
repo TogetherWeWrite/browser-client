@@ -8,7 +8,7 @@ import {checkAuthentication} from "../Components/CheckAuthentication";
 import {authenticationState} from "../reducers/authenticationReducer";
 import {Writer} from "../Types/World";
 import {FollowWorldModel} from "./FollowWorldModel";
-
+import NavigateToWorld from "./NavigateToWorld";
 
 const BrowseWorlds = (props: any) => {
     const [page, setPage] = React.useState(1); //Page number, page contains 25 worlds

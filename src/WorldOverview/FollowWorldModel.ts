@@ -1,5 +1,5 @@
 export interface FollowWorldModel{
-    UserId : number,
+    UserId : string,
     WorldId : string,
     follow : boolean
 }

@@ -1,5 +1,5 @@
 export interface ResponseUser {
-    id : number,
+    id : string,
     username : string,
     password: any,
     token : string

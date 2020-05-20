@@ -4,7 +4,7 @@ export function checkAuthentication() : authenticationState {
     let authstring: string = localStorage.getItem("auth") ?? "";
     if (authstring === "") {
         authobject = {
-            id: 0, isAuthenticated: false, token: "", username: ""
+            id: "", isAuthenticated: false, token: "", username: ""
         }
     } else {
         try{
@@ -12,7 +12,7 @@ export function checkAuthentication() : authenticationState {
         }
         catch(exception){
             authobject = {
-                id: 0, isAuthenticated: false, token: "", username: ""
+                id: "", isAuthenticated: false, token: "", username: ""
             }
         }
     }

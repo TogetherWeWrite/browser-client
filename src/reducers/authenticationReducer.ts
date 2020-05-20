@@ -6,12 +6,12 @@ import storageSession  from "redux-persist/lib/storage/session";
 export interface authenticationState {
     isAuthenticated: boolean,
     username: string,
-    id : number,
+    id : string,
     token : string
 }
 
 const initialState: authenticationState = {
-    id : 0,
+    id : "",
     username : "",
     isAuthenticated : false,
     token: ""

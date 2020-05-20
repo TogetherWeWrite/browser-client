@@ -30,7 +30,7 @@ const AddWriterDialogue = (props: any) => {
     const addWriter = async () => {
         try {
             setDisabled(true);
-            let userId: number = await GetUserIdFromUsername(writerName);
+            let userId: string = await GetUserIdFromUsername(writerName);
             console.log(userId);
             let success = await props.addWriter(userId);
             if (success) {
@@ -134,7 +134,7 @@ const DetailPage = (props: any) => {
             }
         };
 
-        const clickAddWriter = async (writerId: number): Promise<boolean> => {
+        const clickAddWriter = async (writerId: string): Promise<boolean> => {
             console.log("adding writer" + writerId)
             if (worldid) {
                 var result: boolean = await AddWriterToWorld(worldid, writerId);
@@ -150,7 +150,7 @@ const DetailPage = (props: any) => {
 
         };
 
-        const deleteWriter = async (writerid: number) => {
+        const deleteWriter = async (writerid: string) => {
             if (worldid) {
                 var result: boolean = await deleteWriterFromWorld(worldid, writerid);
                 if(result){
@@ -222,7 +222,7 @@ export const GetDetailsOfWorld = async (worldId: string): Promise<WorldWithDetai
     return JSON.parse(body);
 };
 
-export const GetUserIdFromUsername = async (username: string): Promise<number> => {
+export const GetUserIdFromUsername = async (username: string): Promise<string> => {
     var request: string = "?username=" + username;
     let options: RequestInit = {
         method: "GET",
@@ -234,7 +234,10 @@ export const GetUserIdFromUsername = async (username: string): Promise<number> =
     };
     let response: Response = await fetch(config.SERVICES.GETACCOUNTIDFROMUSERNAME + request, options);
     if (response.status === 200) {
-        let body = parseInt(await response.text());
+        let body = await response.text();
+        body = body.replace('"', '');
+        body = body.replace('"', '');
+        console.log(body);
         return body;
     } else if (response.status === 500) {
         throw await response.text();
@@ -245,15 +248,18 @@ export const GetUserIdFromUsername = async (username: string): Promise<number> =
 };
 
 export interface AddWriterRequest {
-    WriterId: number
+    WriterId: string
     WorldId: string
 }
 
-export const AddWriterToWorld = async (worldId: string, writerId: number) => {
+export const AddWriterToWorld = async (worldId: string, writerId: string) => {
+    console.log(writerId)
+    console.log(worldId)
     var requestobj: AddWriterRequest = {
         WorldId: worldId,
         WriterId: writerId
     };
+    console.log(JSON.stringify(requestobj));
     let options: RequestInit = {
         method: "POST",
         headers: {
@@ -273,7 +279,7 @@ export const AddWriterToWorld = async (worldId: string, writerId: number) => {
     }
 };
 
-export const deleteWriterFromWorld = async (worldId: string, writerId: number): Promise<boolean> => {
+export const deleteWriterFromWorld = async (worldId: string, writerId: string): Promise<boolean> => {
     var requestobj: AddWriterRequest = {
         WorldId: worldId,
         WriterId: writerId
