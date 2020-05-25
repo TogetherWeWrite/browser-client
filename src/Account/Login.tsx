@@ -42,7 +42,7 @@ const Login = (props: any) => {
             username: user.username
         };
         console.log(newAuthenticationState);
-        // props.login(newAuthenticationState);
+        props.login(newAuthenticationState);
         localStorage.setItem("auth", JSON.stringify(newAuthenticationState));
         props.history.push("/world");
     };
@@ -129,6 +129,7 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         login: (authstate: authenticationState) => {
+            authstate.token = "Bearer " +authstate.token;
             dispatch(login(authstate));
         }
     }

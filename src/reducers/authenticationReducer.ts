@@ -1,4 +1,4 @@
-import {AuthenticationActionTypes, LOGIN} from "../Actions/AuthenticationActions"
+import {AuthenticationActionTypes, LOGIN, LOGOUT} from "../Actions/AuthenticationActions"
 import {persistReducer} from "redux-persist";
 import storageSession  from "redux-persist/lib/storage/session";
 
@@ -10,7 +10,7 @@ export interface authenticationState {
     token : string
 }
 
-const initialState: authenticationState = {
+export const initialState: authenticationState = {
     id : "",
     username : "",
     isAuthenticated : false,
@@ -27,6 +27,11 @@ export function authenticationReducer(
                 ...state, ...action.payload
             }
         }
+        case LOGOUT: {
+            return {
+                ...state, ...action.payload
+            }
+        }
         default:
             return state;
     }
@@ -39,4 +44,4 @@ const authPersistConfig = {
 };
 
 
-export default persistReducer(authPersistConfig, authenticationReducer);
+export default authenticationReducer;
