@@ -3,7 +3,7 @@ import {authenticationState} from "../reducers/authenticationReducer";
 import {checkAuthentication} from "../Components/CheckAuthentication";
 import {WorldWithDetails} from "../Types/World"
 import config from "../config.json";
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap"
+import {Button, Col, Container, Form, Modal, Row, Alert} from "react-bootstrap"
 import "./world.css";
 import {WorldRow} from "./WorldRow";
 import {Link} from "react-router-dom";
@@ -82,6 +82,9 @@ const Overview = (props: any) => {
     const [worldOverviewHeader, setWorldOverviewHeader] = useState(<Row>
         <div className={"lds-dual-ring"}/>
     </Row>);
+    const [error,setError] = React.useState(
+        <div/>
+    );
 
     useEffect(() => {
         initialize()
@@ -135,6 +138,7 @@ const Overview = (props: any) => {
 
     //Method used for showing errors with msg.
     const showError = async (msg: string) => {
+        setError(<Alert variant={"warning"} onClick={() => setError(<div/>)}>{msg}</Alert>)
         console.log(msg);//TODO implement correct error function.
     };
 
@@ -175,7 +179,6 @@ const Overview = (props: any) => {
      */
     const loadWorlds = async () => {
         if (authObject.isAuthenticated) {
-            await delay(2000);
             worlds = await GetWorldsFrom(authObject);
             const listItems = worlds.map((world) =>//TODO if world.writer does not contain you and you are not the writer make it different because then you are a follower.
                 <Row className={"world-info-row"}>
@@ -208,6 +211,7 @@ const Overview = (props: any) => {
                                  onHide={() => setShow(false)}
                                  createworld={clickCreateWorld}
             />
+            {error}
             {worldOverviewHeader}
             <Row>
                 <Col lg={12} className={"world-list"}>
