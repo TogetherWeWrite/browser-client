@@ -4,11 +4,12 @@ import {WorldWithFollowers} from "./WorldWithFollowers";
 import {Row, Col, Button, Alert} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import "./browseworlds.css";
-import {checkAuthentication} from "../Components/CheckAuthentication";
 import {authenticationState} from "../reducers/authenticationReducer";
 import {Writer} from "../Types/World";
 import {FollowWorldModel} from "./FollowWorldModel";
 import NavigateToWorld from "./NavigateToWorld";
+import {withRouter} from "react-router";
+import {connect} from "react-redux";
 
 const BrowseWorlds = (props: any) => {
     const [page, setPage] = React.useState(1); //Page number, page contains 25 worlds
@@ -16,7 +17,7 @@ const BrowseWorlds = (props: any) => {
     const [topOfOverviewBock, setTop] = React.useState(<div/>);
     const [worldBlock, setWorldBlock] = React.useState(<div/>); //html block that contains the worlds, title, owner, amount of followers
     const [error, setError] = React.useState(<div/>); //error block that contains an error when it occurs
-    const [authObject, setAuthObject] = React.useState(checkAuthentication);
+    const [authObject, setAuthObject] = React.useState(props.authentication);
     const [pageSelector, SetPageSelector] = React.useState(<div/>)
 
     //Get Worlds when page number changes
@@ -165,7 +166,13 @@ const BrowseWorlds = (props: any) => {
         </Container>
     )
 };
-export default BrowseWorlds;
+const mapStateToProps = (state: any) => {
+    return {
+        authentication: state.authentication
+    };
+};
+
+export default withRouter(connect(mapStateToProps)(BrowseWorlds));
 
 
 export async function GetWorldsSortedByPopularity(page: number): Promise<WorldWithFollowers[]> {
@@ -197,7 +204,8 @@ export async function FollowWorld(id: string, auth: authenticationState) {
     let options : RequestInit ={
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization" : auth.token
         },
         body : JSON.stringify(body),
         mode: "cors",
@@ -222,7 +230,8 @@ export async function UnFollowWorld(id: string, auth: authenticationState) {
     let options : RequestInit ={
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization" : auth.token
         },
         body : JSON.stringify(body),
         mode: "cors",

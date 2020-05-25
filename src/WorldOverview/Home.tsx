@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {authenticationState} from "../reducers/authenticationReducer";
-import {checkAuthentication} from "../Components/CheckAuthentication";
 import {WorldWithDetails} from "../Types/World"
 import config from "../config.json";
 import {Button, Col, Container, Form, Modal, Row, Alert} from "react-bootstrap"
 import "./world.css";
 import {WorldRow} from "./WorldRow";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
+import {connect} from "react-redux";
 /*
 Overview page
  */
@@ -152,7 +152,7 @@ const Overview = (props: any) => {
     /*
         authObject that contains the variables from authentication state.
      */
-    const authObject: authenticationState = checkAuthentication();
+    const authObject: authenticationState = props.authentication;
 
     /*
     Overview that will show you the world of which you are a writer if you are logged in.
@@ -224,8 +224,12 @@ const Overview = (props: any) => {
     );
 
 };
-
-export default Overview;
+const mapStateToProps = (state: any) => {
+    return {
+        authentication: state.authentication
+    };
+};
+export default withRouter(connect(mapStateToProps)(Overview));
 
 //Method used for getting the worlds from a user of which he is the owner or a writer.
 const GetWorldsFrom = async (authObject: authenticationState): Promise<WorldWithDetails[]> => {
@@ -266,7 +270,8 @@ const RequestCreateWorld = async (authObject: authenticationState, worldtitle: s
         method: "POST",
         body: JSON.stringify(request),
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization" : authObject.token
         },
         mode: "cors",
         cache: "default"
@@ -278,7 +283,11 @@ const RequestCreateWorld = async (authObject: authenticationState, worldtitle: s
     } else if (response.status === 400) {
         await functionerror(await response.text());
         return false;
-    } else {
+    } else if( response.status === 401){
+        await functionerror("Not authorised")
+        return false;
+    }
+    else {
         await functionerror("Something went wrong");
         return false;
     }
@@ -296,7 +305,8 @@ const RequestDeleteWorld = async (authObject: authenticationState, worldTitle: s
         method: "DELETE",
         body: JSON.stringify(request),
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization" : authObject.token
         },
         mode: "cors",
         cache: "default"
@@ -309,7 +319,11 @@ const RequestDeleteWorld = async (authObject: authenticationState, worldTitle: s
     } else if (response.status === 400) {
         await functionerror(await response.text());
         return false;
-    } else {
+    }else if( response.status === 401){
+        await functionerror("Not authorised")
+        return false;
+    }
+    else {
         await functionerror("Something went wrong");
         return false;
     }

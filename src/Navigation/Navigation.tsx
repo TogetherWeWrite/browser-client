@@ -3,15 +3,15 @@ import {withRouter} from 'react-router-dom';
 import {Nav, Navbar} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {connect} from "react-redux";
-import {checkAuthentication} from "../Components/CheckAuthentication"
 
 import {authenticationState} from "../reducers/authenticationReducer";
+import {login, logout} from "../Actions/AuthenticationActions";
 
 const Navigation = (props: any) => {
 
     useEffect( () => {
         UpdateNavigation()
-    }, []);
+    }, [props.authentication]);
     /*
     Navigation part of register and when logged in it will show logout
      */
@@ -56,6 +56,7 @@ const Navigation = (props: any) => {
     const logout = () => {
         localStorage.removeItem("auth");
         props.history.push("/login");
+        props.logout();
     };
 
     /*
@@ -66,22 +67,20 @@ const Navigation = (props: any) => {
     /*
      *  authObject that has the info of the player <TYPE: authentiticationState>
      */
-    const [authobject,setAuthObject] = React.useState(checkAuthentication());
     useEffect( () => {
-        setAuthObject( checkAuthentication());
         UpdateNavigation()
-    }, []);
+    }, [props.authentication]);
 
     /**
      * updatenav will check the authentication status and update the navigation accordingly.
      * @function
      */
     const UpdateNavigation = async () => {
-        console.log("update nav")
-        if (authobject.isAuthenticated) {
+        if (props.authentication.isAuthenticated) {
+            var username = props.authentication.username;
             setRegister(<Nav.Link onClick={logout}>Logout</Nav.Link>);
             setLogin( <Navbar.Text>
-                Signed in as: {authobject.username}
+                Signed in as: {username}
             </Navbar.Text>);
 
         } else {
@@ -110,4 +109,12 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export default withRouter(connect(mapStateToProps)(Navigation));
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        logout: () => {
+            dispatch(logout());
+        }
+    }
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation));

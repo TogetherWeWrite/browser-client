@@ -1,8 +1,9 @@
 import React from "react";
-import {checkAuthentication} from "../Components/CheckAuthentication";
+import {withRouter} from "react-router";
+import {connect} from "react-redux";
 
-const Home = () => {
-    let account = checkAuthentication();
+const Home = (props : any) => {
+    let account = props.authentication;
     if(account.isAuthenticated){
         return(<div>
             <h1>Hello : {account.username}</h1>
@@ -13,4 +14,11 @@ const Home = () => {
     }
 };
 
-export default Home;
+
+const mapStateToProps = (state: any) => {
+    return {
+        authentication: state.authentication
+    };
+};
+
+export default withRouter(connect(mapStateToProps)(Home));

@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, withRouter} from 'react-router-dom';
 import {WorldWithDetails} from "../Types/World";
 import config from "../config.json";
 import {Alert, Button, Col, Container, Form, Modal, Row} from "react-bootstrap"
 import {authenticationState} from "../reducers/authenticationReducer";
-import {checkAuthentication} from "../Components/CheckAuthentication";
 import "./world.css";
+import {connect} from "react-redux";
 
 /**
  * Dialogue of Adding A writer by name.
@@ -84,7 +84,7 @@ const DetailPage = (props: any) => {
         const [writersBlock, setWritersBlock] = React.useState(<div>loading.......</div>);
         const [addWriterBlock, setAddWriterBlock] = React.useState(<div className={"lds-dual-ring"}/>);
         let isOwner: boolean = false;
-        let authObject: authenticationState;
+        let authObject : authenticationState=props.authentication;
 
         const [show, setShow] = React.useState(false);
 
@@ -124,7 +124,7 @@ const DetailPage = (props: any) => {
                             </Form>
                         </div>
                     );
-                    authObject = checkAuthentication();
+                    authObject = props.authentication;
                     checkOwner();
                     setAddWriterButtonBlock();
                     loadWriters();
@@ -137,7 +137,7 @@ const DetailPage = (props: any) => {
         const clickAddWriter = async (writerId: string): Promise<boolean> => {
             console.log("adding writer" + writerId)
             if (worldid) {
-                var result: boolean = await AddWriterToWorld(worldid, writerId);
+                var result: boolean = await AddWriterToWorld(authObject,worldid, writerId);
                 if (result) {
                     refresh();
                     return true;
@@ -152,8 +152,8 @@ const DetailPage = (props: any) => {
 
         const deleteWriter = async (writerid: string) => {
             if (worldid) {
-                var result: boolean = await deleteWriterFromWorld(worldid, writerid);
-                if(result){
+                var result: boolean = await deleteWriterFromWorld(authObject,worldid, writerid);
+                if (result) {
                     refresh();
                 }
             }
@@ -203,8 +203,13 @@ const DetailPage = (props: any) => {
         </Container>)
     }
 ;
+const mapStateToProps = (state: any) => {
+    return {
+        authentication: state.authentication
+    };
+};
 
-export default DetailPage;
+export default withRouter(connect(mapStateToProps)(DetailPage));
 
 export const GetDetailsOfWorld = async (worldId: string): Promise<WorldWithDetails> => {
     var request: string = "?id=" + worldId;
@@ -252,7 +257,7 @@ export interface AddWriterRequest {
     WorldId: string
 }
 
-export const AddWriterToWorld = async (worldId: string, writerId: string) => {
+export const AddWriterToWorld = async (authObject : authenticationState, worldId: string, writerId: string) => {
     console.log(writerId)
     console.log(worldId)
     var requestobj: AddWriterRequest = {
@@ -263,7 +268,8 @@ export const AddWriterToWorld = async (worldId: string, writerId: string) => {
     let options: RequestInit = {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization" : authObject.token
         },
         body: JSON.stringify(requestobj),
         mode: "cors",
@@ -279,7 +285,7 @@ export const AddWriterToWorld = async (worldId: string, writerId: string) => {
     }
 };
 
-export const deleteWriterFromWorld = async (worldId: string, writerId: string): Promise<boolean> => {
+export const deleteWriterFromWorld = async (authObject : authenticationState, worldId: string, writerId: string): Promise<boolean> => {
     var requestobj: AddWriterRequest = {
         WorldId: worldId,
         WriterId: writerId
@@ -288,7 +294,8 @@ export const deleteWriterFromWorld = async (worldId: string, writerId: string): 
     let options: RequestInit = {
         method: "DELETE",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization" : authObject.token
         },
         body: JSON.stringify(requestobj),
         mode: "cors",
