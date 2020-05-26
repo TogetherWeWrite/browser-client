@@ -128,6 +128,23 @@ const BrowseWorlds = (props: any) => {
                         </Col>
                     </Row>
                 )
+            } else if(worlds.length < 25){
+                SetPageSelector(
+                    <Row className={"navigation-row"}>
+                        <Col className={"text-left navigation-button"}>
+                            <Button disabled>Prev</Button>
+                        </Col>
+                        <Col className={"text-center"}>
+                            <strong>
+                                Current page:{page}
+                            </strong>
+                        </Col>
+                        <Col className={"text-right navigation-button"}>
+                            <Button disabled onClick={() => {
+                                setPage(page + 1)
+                            }}>Next</Button>
+                        </Col>
+                    </Row>)
             } else {
                 SetPageSelector(
                     <Row className={"navigation-row"}>
