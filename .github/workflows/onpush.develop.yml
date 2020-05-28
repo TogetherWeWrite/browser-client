@@ -34,8 +34,8 @@ jobs:
       - name: Upload release artifact
         uses: actions/upload-artifact@v1
         with:
-            name: release-artifact
-            path: ./build
+          name: release-artifact
+          path: ./build
 
       - name: Upload Dockerfile artifact
         uses: actions/upload-artifact@v1
@@ -58,7 +58,6 @@ jobs:
         with:
           name: release-artifact
           path: ./build
-
       - name: Download Dockerfile artifact
         uses: actions/download-artifact@v1
         with:
