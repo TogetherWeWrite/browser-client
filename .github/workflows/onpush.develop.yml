@@ -19,6 +19,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Decrypt the GPG encrypted config files
+          run: gpg --quiet --batch --yes --passphrase="${{ secrets.GPG_SECRET }}" --output ./src/appsettings.json --decrypt ./src/config.production.json.gpg
+
       - run: npm ci
       - run: npm run build
       - run: npm test
