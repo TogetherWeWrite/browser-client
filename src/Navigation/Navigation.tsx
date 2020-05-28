@@ -4,9 +4,14 @@ import {Nav, Navbar} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {connect} from "react-redux";
 
-import {logout} from "../Actions/AuthenticationActions";
+import {authenticationState} from "../reducers/authenticationReducer";
+import {login, logout} from "../Actions/AuthenticationActions";
 
 const Navigation = (props: any) => {
+
+    useEffect( () => {
+        UpdateNavigation()
+    }, [props.authentication]);
     /*
     Navigation part of register and when logged in it will show logout
      */
@@ -48,7 +53,11 @@ const Navigation = (props: any) => {
     /**
      * Navigation function that will push to "/login". and clean localstorage so you will be logged out.
      */
-
+    const logout = () => {
+        localStorage.removeItem("auth");
+        props.history.push("/login");
+        props.logout();
+    };
 
     /*
     Constant world Navigation part. will go to the /world tab
@@ -59,33 +68,26 @@ const Navigation = (props: any) => {
      *  authObject that has the info of the player <TYPE: authentiticationState>
      */
     useEffect( () => {
-        const logout = () => {
-            localStorage.removeItem("auth");
-            props.history.push("/login");
-            props.logout();
-        };
-        const UpdateNavigation = async () => {
-            if (props.authentication.isAuthenticated) {
-                var username = props.authentication.username;
-                setRegister(<Nav.Link onClick={logout}>Logout</Nav.Link>);
-                setLogin( <Navbar.Text>
-                    Signed in as: {username}
-                </Navbar.Text>);
-
-            } else {
-                setLogin(<Nav.Link onClick={loginpage}>Login</Nav.Link>);
-                setRegister(<Nav.Link onClick={registerpage}>Register</Nav.Link>);
-            }
-        };
         UpdateNavigation()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.authentication.isAuthenticated,loginpage,registerpage]);
+    }, [props.authentication]);
 
     /**
      * updatenav will check the authentication status and update the navigation accordingly.
      * @function
      */
+    const UpdateNavigation = async () => {
+        if (props.authentication.isAuthenticated) {
+            var username = props.authentication.username;
+            setRegister(<Nav.Link onClick={logout}>Logout</Nav.Link>);
+            setLogin( <Navbar.Text>
+                Signed in as: {username}
+            </Navbar.Text>);
 
+        } else {
+            setLogin(<Nav.Link onClick={loginpage}>Login</Nav.Link>);
+            setRegister(<Nav.Link onClick={registerpage}>Register</Nav.Link>);
+        }
+    };
 
 
     return (

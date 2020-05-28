@@ -1,4 +1,6 @@
 import {AuthenticationActionTypes, LOGIN, LOGOUT} from "../Actions/AuthenticationActions"
+import {persistReducer} from "redux-persist";
+import storageSession  from "redux-persist/lib/storage/session";
 
 
 export interface authenticationState {
@@ -35,7 +37,11 @@ export function authenticationReducer(
     }
 }
 
-
+const authPersistConfig = {
+    key: 'root',
+    storage: storageSession,
+    whitelist: ['id', 'username', "isAuthenticated", "token"]
+};
 
 
 export default authenticationReducer;

@@ -55,7 +55,7 @@ const Register = (props: any) => {
     };
 
     const showError = (error: string) => {
-        setError(<Alert onClick={()=>{hideError()}} className="alert alert-danger">
+        setError(<Alert className="alert alert-danger">
             {error}
         </Alert>);
     };

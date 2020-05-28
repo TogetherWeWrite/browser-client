@@ -7,16 +7,17 @@ import "./browseworlds.css";
 import {authenticationState} from "../reducers/authenticationReducer";
 import {Writer} from "../Types/World";
 import {FollowWorldModel} from "./FollowWorldModel";
+import NavigateToWorld from "./NavigateToWorld";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 
 const BrowseWorlds = (props: any) => {
     const [page, setPage] = React.useState(1); //Page number, page contains 25 worlds
-    //let worlds: WorldWithFollowers[] = []; //worlds list used for rendering the worldblock.
+    let worlds: WorldWithFollowers[] = []; //worlds list used for rendering the worldblock.
     const [topOfOverviewBock, setTop] = React.useState(<div/>);
     const [worldBlock, setWorldBlock] = React.useState(<div/>); //html block that contains the worlds, title, owner, amount of followers
     const [error, setError] = React.useState(<div/>); //error block that contains an error when it occurs
-    const authObject = props.authentication;
+    const [authObject, setAuthObject] = React.useState(props.authentication);
     const [pageSelector, SetPageSelector] = React.useState(<div/>)
 
     //Get Worlds when page number changes
@@ -24,8 +25,7 @@ const BrowseWorlds = (props: any) => {
         const initialize = async () => {
             try {
 
-                let worlds = await GetWorldsSortedByPopularity(page);
-                loadDynamicHtml(worlds);
+                worlds = await GetWorldsSortedByPopularity(page);
             } catch (Error) {
                 setError(<Alert variant={"warning"} className={"warning-dissmisable"}
                                 onClick={() => setError(<div/>)}>{Error.message}</Alert>)
@@ -46,8 +46,8 @@ const BrowseWorlds = (props: any) => {
                         <Button onClick={async () => {
                             try {
                                 await FollowWorld(id, auth);
-                                let worlds = await GetWorldsSortedByPopularity(page);
-                                loadDynamicHtml(worlds);
+                                worlds = await GetWorldsSortedByPopularity(page);
+                                loadDynamicHtml();
                             } catch (Exception) {
                                 setError(<Alert variant={"warning"} className={"warning-dissmisable"}
                                                 onClick={() => setError(<div/>)}>{Exception.message}</Alert>)
@@ -59,8 +59,8 @@ const BrowseWorlds = (props: any) => {
                         <Button onClick={async () => {
                             try {
                                 await UnFollowWorld(id, auth)
-                                let worlds = await GetWorldsSortedByPopularity(page);
-                                loadDynamicHtml(worlds);
+                                worlds = await GetWorldsSortedByPopularity(page);
+                                loadDynamicHtml();
                                 setPage(page);
                             } catch (Exception) {
                                 setError(<Alert variant={"warning"} className={"warning-dissmisable"}
@@ -90,7 +90,7 @@ const BrowseWorlds = (props: any) => {
             );
         };
 
-        const loadDynamicHtml = (worlds:WorldWithFollowers[]) => {
+        const loadDynamicHtml = () => {
             const worldsHtml = worlds.map((world: WorldWithFollowers) =>
                 <Row className={"overview-row"}>
                     <Col lg={2}>
@@ -128,23 +128,6 @@ const BrowseWorlds = (props: any) => {
                         </Col>
                     </Row>
                 )
-            } else if(worlds.length < 25){
-                SetPageSelector(
-                    <Row className={"navigation-row"}>
-                        <Col className={"text-left navigation-button"}>
-                            <Button disabled>Prev</Button>
-                        </Col>
-                        <Col className={"text-center"}>
-                            <strong>
-                                Current page:{page}
-                            </strong>
-                        </Col>
-                        <Col className={"text-right navigation-button"}>
-                            <Button disabled onClick={() => {
-                                setPage(page + 1)
-                            }}>Next</Button>
-                        </Col>
-                    </Row>)
             } else {
                 SetPageSelector(
                     <Row className={"navigation-row"}>
@@ -166,8 +149,11 @@ const BrowseWorlds = (props: any) => {
             }
         };
         loadNonDynamicHtml();
-        initialize();
-    }, [page,authObject]);
+
+        initialize().then(() => {
+            loadDynamicHtml()
+        })
+    }, [page]);
 
 
     return (

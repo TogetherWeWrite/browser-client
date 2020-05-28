@@ -3,6 +3,7 @@ import Register from "./Account/Register";
 import Login from "./Account/Login";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navigation from "./Navigation/Navigation";
+import Home from "./Home/Home";
 import {Provider} from "react-redux";
 import store from "./store";
 import Overview from "./WorldOverview/Home";
