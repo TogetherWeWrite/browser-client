@@ -4,6 +4,10 @@ on:
   push:
     branches: [develop]
 
+env:
+  DOCKER_IMAGE: ${{ secrets.DOCKER_USER }}/${{ secrets.REPOSITORY_NAME }}:${{ github.sha }}
+  DOCKER_IMAGE_LATEST: ${{ secrets.DOCKER_USER }}/${{ secrets.REPOSITORY_NAME }}:develop
+
 jobs:
   build:
 
