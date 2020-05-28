@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b3806e9-4aa4-414e-aea4-6b827317d967" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/onpush.master.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/onpush.master.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WorldOverview/world.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/world.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -35,18 +35,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Account/Register.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-629">
-              <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
@@ -58,11 +46,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.master.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="177">
               <caret line="66" column="10" lean-forward="true" selection-start-line="66" selection-start-column="10" selection-end-line="66" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/WorldOverview/browseworlds.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="38" lean-forward="true" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/WorldOverview/world.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="534">
+              <caret line="120" column="1" selection-start-line="120" selection-start-column="1" selection-end-line="120" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -80,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.develop.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="493">
-              <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+              <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -89,7 +95,7 @@
         <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.feature.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="544">
-              <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+              <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -101,18 +107,6 @@
               <caret line="22" column="56" selection-start-line="22" selection-start-column="56" selection-end-line="22" selection-end-column="56" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Account/Login.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="130" column="17" selection-start-line="130" selection-start-column="17" selection-end-line="130" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -165,7 +159,6 @@
         <option value="$PROJECT_DIR$/src/store.tsx" />
         <option value="$PROJECT_DIR$/src/Home/Home.tsx" />
         <option value="$PROJECT_DIR$/src/Account/Login.tsx" />
-        <option value="$PROJECT_DIR$/src/WorldOverview/world.css" />
         <option value="$PROJECT_DIR$/.github/workflows/reactts.yml" />
         <option value="$PROJECT_DIR$/kube/deployment.yaml" />
         <option value="$PROJECT_DIR$/kube/service.yaml.ts" />
@@ -187,6 +180,8 @@
         <option value="$PROJECT_DIR$/nginx.conf" />
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/.github/workflows/onpush.master.yml" />
+        <option value="$PROJECT_DIR$/src/WorldOverview/browseworlds.css" />
+        <option value="$PROJECT_DIR$/src/WorldOverview/world.css" />
       </list>
     </option>
   </component>
@@ -223,6 +218,17 @@
               <item name="browser-client" type="462c0819:PsiDirectoryNode" />
               <item name=".github" type="462c0819:PsiDirectoryNode" />
               <item name="workflows" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="browser-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="browser-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="browser-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="browser-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="WorldOverview" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -324,11 +330,11 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Jest.renders learn react link" />
       <item itemvalue="JavaScript Debug.Debug Application" />
       <item itemvalue="JavaScript Debug.index.html" />
-      <item itemvalue="Jest.renders learn react link" />
-      <item itemvalue="npm.npm start" />
       <item itemvalue="npm.build" />
+      <item itemvalue="npm.npm start" />
     </list>
     <recent_temporary>
       <list>
@@ -386,7 +392,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45220000" />
+    <option name="totallyTimeSpent" value="45755000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -568,13 +574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/WorldOverview/browseworlds.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/store.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="415">
@@ -642,13 +641,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/WorldOverview/world.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -743,7 +735,7 @@
     <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.feature.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+          <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -757,7 +749,7 @@
     <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.develop.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
-          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -789,6 +781,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="66" column="10" lean-forward="true" selection-start-line="66" selection-start-column="10" selection-end-line="66" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorldOverview/browseworlds.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="38" lean-forward="true" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorldOverview/world.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="120" column="1" selection-start-line="120" selection-start-column="1" selection-end-line="120" selection-end-column="1" />
         </state>
       </provider>
     </entry>
