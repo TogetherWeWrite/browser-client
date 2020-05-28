@@ -59,11 +59,11 @@ jobs:
           name: release-artifact
           path: ./build
 
-    - name: Download Dockerfile artifact
-      uses: actions/download-artifact@v1
-      with:
-        name: dockerfile-artifact
-        path: .
+      - name: Download Dockerfile artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: dockerfile-artifact
+          path: .
 
     - name: Deliver Docker image
       run: |
