@@ -50,10 +50,10 @@ jobs:
           path: ./Dockerfile
 
       - name: Upload nginx config artifact
-          uses: actions/upload-artifact@v1
-          with:
-            name: nginx-artifact
-            path: ./nginx.conf
+        uses: actions/upload-artifact@v1
+        with:
+          name: nginx-artifact
+          path: ./nginx.conf
 
       - name: Upload Kubernetes artifact
         uses: actions/upload-artifact@v1
