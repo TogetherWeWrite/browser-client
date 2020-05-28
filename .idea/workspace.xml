@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b3806e9-4aa4-414e-aea4-6b827317d967" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/onpush.master.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/onpush.master.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -45,11 +45,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.master.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="416">
               <caret line="31" column="8" lean-forward="true" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/config.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="60" lean-forward="true" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -148,13 +157,13 @@
         <option value="$PROJECT_DIR$/src/Navigation/Navigation.tsx" />
         <option value="$PROJECT_DIR$/src/WorldOverview/DetailPage.tsx" />
         <option value="$PROJECT_DIR$/kube/ingress.yaml" />
-        <option value="$PROJECT_DIR$/src/config.json" />
         <option value="$PROJECT_DIR$/commands" />
         <option value="$PROJECT_DIR$/gpg/dev-decrypt.sh" />
         <option value="$PROJECT_DIR$/.github/workflows/onpush.feature.yml" />
         <option value="$PROJECT_DIR$/.github/workflows/onpush.develop.yml" />
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/.github/workflows/onpush.master.yml" />
+        <option value="$PROJECT_DIR$/src/config.json" />
       </list>
     </option>
   </component>
@@ -359,7 +368,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43196000" />
+    <option name="totallyTimeSpent" value="43604000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -723,7 +732,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/commands" />
     <entry file="file://$PROJECT_DIR$/gpg/dev-decrypt.sh" />
-    <entry file="file://$PROJECT_DIR$/src/config.json" />
     <entry file="file://$PROJECT_DIR$/Dockerfile">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -745,6 +753,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
           <caret line="31" column="8" lean-forward="true" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="60" lean-forward="true" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
         </state>
       </provider>
     </entry>
