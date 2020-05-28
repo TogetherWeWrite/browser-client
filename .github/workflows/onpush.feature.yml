@@ -10,38 +10,24 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-18.04
-
-    strategy:
-      matrix:
-        node-version: [11.4]
-
+    container:
+      image: node:12.16.2
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
+      #Decryption
+      - name: Decrypt the GPG encrypted config files
+        run: gpg --quiet --batch --yes --passphrase="${{ secrets.GPG_SECRET }}" --output ./src/config.json --decrypt ./src/config.production.json.gpg
 
-  delivery:
-    needs: build
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Git checkout
-        uses: actions/checkout@v2
-      - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }}
-      - name: Build Docker image
-        run: docker build -t ${{ secrets.REPOSITORY_NAME }} .
-      - name: Tag Docker image
-        run: |
-          docker tag ${{ secrets.REPOSITORY_NAME }} bstijnb/${{ secrets.REPOSITORY_NAME }}:${{ github.sha }}
-          docker tag ${{ secrets.REPOSITORY_NAME }} bstijnb/${{ secrets.REPOSITORY_NAME }}:latest
-      - name: Push Docker image
-        run: |
-          docker push bstijnb/${{ secrets.REPOSITORY_NAME }}:${{ github.sha }}
-          docker push bstijnb/${{ secrets.REPOSITORY_NAME }}:latest
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build --if-present
+        env:
+          CI: true
+
+      - name: Test
+        run: npm test
+        env:
+          CI: true
