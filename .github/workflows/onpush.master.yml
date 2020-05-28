@@ -9,33 +9,40 @@ jobs:
 
     runs-on: ubuntu-18.04
 
-    strategy:
-      matrix:
-        node-version: [11.4]
+    # Run the steps in a Docker container on the virtual machine
+    container:
+      image: node:12.16.2
 
     steps:
+      # Checkout Git repository
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
 
+        #Decryption
       - name: Decrypt the GPG encrypted config files
         run: gpg --quiet --batch --yes --passphrase="${{ secrets.GPG_SECRET }}" --output ./src/config.json --decrypt ./src/config.production.json.gpg
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Test
+        run: npm test
+        env:
+          CI: true
+
       - name: Upload release artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: release-artifact
-          path: ./build
+          uses: actions/upload-artifact@v1
+          with:
+            name: release-artifact
+            path: ./build
+
       - name: Upload Dockerfile artifact
         uses: actions/upload-artifact@v1
         with:
           name: dockerfile-artifact
           path: ./Dockerfile
+
       - name: Upload Kubernetes artifact
         uses: actions/upload-artifact@v1
         with:
@@ -46,45 +53,40 @@ jobs:
     needs: build
     runs-on: ubuntu-18.04
     steps:
-      # Download artifacts from GitHub workflow to use in this job
       - name: Download release artifact
         uses: actions/download-artifact@v1
         with:
           name: release-artifact
           path: ./build
-      - name: Download Dockerfile artifact
-        uses: actions/download-artifact@v1
-        with:
-          name: dockerfile-artifact
-          path: .
-      - name: Git checkout
-        uses: actions/checkout@v2
-      - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }}
-      - name: Build Docker image
-        run: docker build -t ${{ secrets.REPOSITORY_NAME }} .
-      - name: Tag Docker image
-        run: |
-          docker tag ${{ secrets.REPOSITORY_NAME }} bstijnb/${{ secrets.REPOSITORY_NAME }}:${{ github.sha }}
-          docker tag ${{ secrets.REPOSITORY_NAME }} bstijnb/${{ secrets.REPOSITORY_NAME }}:latest
-      - name: Push Docker image
-        run: |
-          docker push bstijnb/${{ secrets.REPOSITORY_NAME }}:${{ github.sha }}
-          docker push bstijnb/${{ secrets.REPOSITORY_NAME }}:latest
+
+    - name: Download Dockerfile artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: dockerfile-artifact
+        path: .
+
+    - name: Deliver Docker image
+      run: |
+        docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }}
+        docker build -t $DOCKER_IMAGE -t $DOCKER_IMAGE_LATEST .
+        docker push $DOCKER_IMAGE
+        docker push $DOCKER_IMAGE_LATEST
 
   deploy:
     needs: delivery
     runs-on: ubuntu-18.04
     steps:
-      - name: Download kubernetes artifact
+      - name: Download Kubernetes artifact
         uses: actions/download-artifact@v1
         with:
           name: kubernetes-artifact
           path: ./kube
 
-      - uses: Azure/setup-kubectl@v1
+      - name: Setup Kubectl
+        uses: azure/setup-kubectl@v1
 
-      - uses: Azure/k8s-set-context@v1
+      - name: Set context via kubeconfig
+        uses: azure/k8s-set-context@v1
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG }}

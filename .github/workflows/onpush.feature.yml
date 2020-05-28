@@ -10,19 +10,24 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-18.04
-
-    strategy:
-      matrix:
-        node-version: [11.4]
-
+    container:
+      image: node:12.16.2
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
+      #Decryption
+      - name: Decrypt the GPG encrypted config files
+        run: gpg --quiet --batch --yes --passphrase="${{ secrets.GPG_SECRET }}" --output ./src/config.json --decrypt ./src/config.production.json.gpg
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build --if-present
+        env:
+          CI: true
+
+      - name: Test
+        run: npm test
+        env:
+          CI: true
