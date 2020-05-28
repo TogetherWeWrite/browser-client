@@ -78,23 +78,50 @@ const AddWriterDialogue = (props: any) => {
 };
 
 const DetailPage = (props: any) => {
-        let world: WorldWithDetails;
+
         const [page, setPage] = React.useState(<div>loading...</div>)
         let {worldid} = useParams();
         const [writersBlock, setWritersBlock] = React.useState(<div>loading.......</div>);
         const [addWriterBlock, setAddWriterBlock] = React.useState(<div className={"lds-dual-ring"}/>);
         let isOwner: boolean = false;
-        let authObject : authenticationState=props.authentication;
+        let authObject : authenticationState= props.authentication;
 
         const [show, setShow] = React.useState(false);
 
 
         useEffect(() => {
+            const loadDetailsOfWorld = async () => {
+                if (worldid) {
+                    try {
+                        let world = await GetDetailsOfWorld(worldid);
+                        setPage(
+                            <div>
+                                <Form>
+                                    <Form.Group>
+                                        <Form.Label>Title: {world.title}</Form.Label>
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label>Made by: {world.owner.name}</Form.Label>
+                                    </Form.Group>
+                                </Form>
+                            </div>
+                        );
+                        checkOwner(world);
+                        // eslint-disable-next-line react-hooks/exhaustive-deps
+                        setAddWriterButtonBlock();
+                        // eslint-disable-next-line react-hooks/exhaustive-deps
+                        loadWriters(world);
+                    } catch (exception) {
+                        console.log(exception);
+                    }
+                }
+            };
             loadDetailsOfWorld();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []);
 
 
-        const checkOwner = () => {
+        const checkOwner = (world : WorldWithDetails) => {
             if (authObject.id === world.owner.id) {
                 isOwner = true;
             }
@@ -108,31 +135,7 @@ const DetailPage = (props: any) => {
             }
         };
 
-        const loadDetailsOfWorld = async () => {
-            if (worldid) {
-                try {
-                    world = await GetDetailsOfWorld(worldid);
-                    setPage(
-                        <div>
-                            <Form>
-                                <Form.Group>
-                                    <Form.Label>Title: {world.title}</Form.Label>
-                                </Form.Group>
-                                <Form.Group>
-                                    <Form.Label>Made by: {world.owner.name}</Form.Label>
-                                </Form.Group>
-                            </Form>
-                        </div>
-                    );
-                    authObject = props.authentication;
-                    checkOwner();
-                    setAddWriterButtonBlock();
-                    loadWriters();
-                } catch (exception) {
-                    console.log(exception);
-                }
-            }
-        };
+
 
         const clickAddWriter = async (writerId: string): Promise<boolean> => {
             console.log("adding writer" + writerId)
@@ -162,12 +165,13 @@ const DetailPage = (props: any) => {
         const refresh = async () => {
             if (worldid) {
                 console.log("refreshing");
-                await loadDetailsOfWorld();
+                let world = await GetDetailsOfWorld(worldid);
+                await loadWriters(world);
             }
 
         };
 
-        const loadWriters = async () => {
+        const loadWriters = async (world: WorldWithDetails) => {
             if (world) {
                 const writers = world.writers.map((writer) =>
                     <Row>
@@ -247,7 +251,7 @@ export const GetUserIdFromUsername = async (username: string): Promise<string> =
     } else if (response.status === 500) {
         throw await response.text();
     } else {
-        throw 'User with username: ' + username + ', does not exist.';
+        throw new Error('User with username: ' + username + ', does not exist.');
     }
 
 };

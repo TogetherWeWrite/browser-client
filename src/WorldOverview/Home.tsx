@@ -4,7 +4,6 @@ import {WorldWithDetails} from "../Types/World"
 import config from "../config.json";
 import {Button, Col, Container, Form, Modal, Row, Alert} from "react-bootstrap"
 import "./world.css";
-import {WorldRow} from "./WorldRow";
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 /*
@@ -85,17 +84,19 @@ const Overview = (props: any) => {
     const [error,setError] = React.useState(
         <div/>
     );
-
+    //eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
+        //eslint-disable-next-line react-hooks/exhaustive-deps
         initialize()
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const initialize = async () => {
         await loadWorlds();
         initializeWorldOverviewHeader();
         initiliazeCreateWorldBlock();
     };
-
     const initiliazeCreateWorldBlock = () => {
         if (authObject.isAuthenticated) {
             setCreateWorld(<Container fluid={true}>
@@ -138,8 +139,7 @@ const Overview = (props: any) => {
 
     //Method used for showing errors with msg.
     const showError = async (msg: string) => {
-        setError(<Alert variant={"warning"} onClick={() => setError(<div/>)}>{msg}</Alert>)
-        console.log(msg);//TODO implement correct error function.
+        setError(<Alert variant={"warning"} onClick={() => setError(<div/>)}>{msg}</Alert>);
     };
 
     //Method used when submitting a new world, will load the overview again.
@@ -156,7 +156,7 @@ const Overview = (props: any) => {
 
     /*
     Overview that will show you the world of which you are a writer if you are logged in.
-    If not logged in will show you list of most popular world.... NOT IMPLEMENTED FEATURE IN BACKEND so just random worlds for now. //TODO: make a feature where you can check which world is more popular with visitors.
+    If not logged in will show you list of most popular world.... NOT IMPLEMENTED FEATURE IN BACKEND so just random worlds for now. //
      */
 
     /**
@@ -168,9 +168,6 @@ const Overview = (props: any) => {
         await initialize();
     };
 
-    function delay(ms: number) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
 
     let worlds: WorldWithDetails[] = [];
 

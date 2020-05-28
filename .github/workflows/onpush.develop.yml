@@ -1,0 +1,53 @@
+name: develop push
+
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node-version: [11.4]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - name: Upload Dockerfile artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: dockerfile-artifact
+          path: ./Dockerfile
+      - name: Upload Kubernetes artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: kubernetes-artifact
+          path: ./kube
+
+  delivery:
+    needs: build
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }}
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.REPOSITORY_NAME }} .
+      - name: Tag Docker image
+        run: |
+          docker tag ${{ secrets.REPOSITORY_NAME }} bstijnb/${{ secrets.REPOSITORY_NAME }}:${{ github.sha }}
+          docker tag ${{ secrets.REPOSITORY_NAME }} bstijnb/${{ secrets.REPOSITORY_NAME }}:latest
+      - name: Push Docker image
+        run: |
+          docker push bstijnb/${{ secrets.REPOSITORY_NAME }}:${{ github.sha }}
+          docker push bstijnb/${{ secrets.REPOSITORY_NAME }}:latest

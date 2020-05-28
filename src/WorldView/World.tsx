@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import {useParams, withRouter} from "react-router";
+import React, {} from "react";
+import { withRouter} from "react-router";
 import {connect} from "react-redux";
 
 const World = (props: any) => {

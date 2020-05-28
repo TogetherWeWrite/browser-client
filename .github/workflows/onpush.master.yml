@@ -1,0 +1,61 @@
+name: master push
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node-version: [11.4]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - name: Upload Dockerfile artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: dockerfile-artifact
+          path: ./Dockerfile
+      - name: Upload Kubernetes artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: kubernetes-artifact
+          path: ./kube
+
+deploy:
+  needs: delivery
+  runs-on: ubuntu-18.04
+  steps:
+    - name: Download kubernetes artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: kubernetes-artifact
+        path: ./kube
+
+    - uses: Azure/setup-kubectl@v1
+
+    - uses: Azure/k8s-set-context@v1
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
+    - uses: Azure/k8s-deploy@v1
+      with:
+        namespace: production
+        manifests: |
+          ./kube/deployment.yaml
+          ./kube/ingress.yaml
+          ./kube/service.yaml
+        images: |
+          ${{ secrets.DOCKER_USER }}/${{ secrets.REPOSITORY_NAME }}:${{ github.sha }}
