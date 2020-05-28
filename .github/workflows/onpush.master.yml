@@ -26,6 +26,11 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: release-artifact
+          path: ./build
       - name: Upload Dockerfile artifact
         uses: actions/upload-artifact@v1
         with:
@@ -41,6 +46,17 @@ jobs:
     needs: build
     runs-on: ubuntu-18.04
     steps:
+      # Download artifacts from GitHub workflow to use in this job
+      - name: Download release artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: release-artifact
+          path: ./build
+      - name: Download Dockerfile artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: dockerfile-artifact
+          path: .
       - name: Git checkout
         uses: actions/checkout@v2
       - name: Docker login
