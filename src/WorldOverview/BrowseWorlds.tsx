@@ -7,7 +7,6 @@ import "./browseworlds.css";
 import {authenticationState} from "../reducers/authenticationReducer";
 import {Writer} from "../Types/World";
 import {FollowWorldModel} from "./FollowWorldModel";
-import NavigateToWorld from "./NavigateToWorld";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 
@@ -17,10 +16,12 @@ const BrowseWorlds = (props: any) => {
     const [topOfOverviewBock, setTop] = React.useState(<div/>);
     const [worldBlock, setWorldBlock] = React.useState(<div/>); //html block that contains the worlds, title, owner, amount of followers
     const [error, setError] = React.useState(<div/>); //error block that contains an error when it occurs
+    //@ts-ignore
     const [authObject, setAuthObject] = React.useState(props.authentication);
     const [pageSelector, SetPageSelector] = React.useState(<div/>)
 
     //Get Worlds when page number changes
+    // @ts-ignore
     useEffect(() => {
         const initialize = async () => {
             try {
