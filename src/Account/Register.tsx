@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Alert, Button, Col, Container, Form, Row} from 'react-bootstrap'
 import "./Account.css";
 import config from "../config.json";
+import {withRouter} from "react-router";
+import {connect} from "react-redux";
 
 interface RegisterUser {
     Username: string,
@@ -53,7 +55,7 @@ const Register = (props: any) => {
     };
 
     const showError = (error: string) => {
-        setError(<Alert className="alert alert-danger">
+        setError(<Alert onClick={()=>{hideError()}} className="alert alert-danger">
             {error}
         </Alert>);
     };
@@ -129,4 +131,10 @@ const Register = (props: any) => {
     )
 };
 
-export default Register;
+const mapStateToProps = (state: any) => {
+    return {
+        authentication: state.authentication
+    };
+};
+
+export default withRouter(connect(mapStateToProps)(Register));

@@ -2,7 +2,7 @@ export interface World{
     WorldId : string,
     Titel: string,
     OwnerName : string,
-    OwnerId : number
+    OwnerId : string
 }
 
 export interface WorldWithDetails{
@@ -13,10 +13,10 @@ export interface WorldWithDetails{
 }
 
 export interface Owner{
-    id: number,
+    id: string,
     name: string
 }
 export interface Writer{
-    id: number,
+    id: string,
     name: string
 }

@@ -9,7 +9,7 @@ import {ResponseUser} from "../Types/ResponseUser";
 import {authenticationState} from "../reducers/authenticationReducer";
 
 interface RegisterUser {
-    Id: number,
+    Id: string,
     Password: string,
     Token: string,
     Username: string
@@ -29,10 +29,11 @@ const Login = (props: any) => {
     };
 
     const validate = (): boolean => {
-        return true; //TODO.
+        return true;
     };
 
     const successfulLogin = async (body: any) => {
+        console.log(body);
         let user: ResponseUser = body;
         let newAuthenticationState: authenticationState = {
             isAuthenticated: true,
@@ -41,16 +42,16 @@ const Login = (props: any) => {
             username: user.username
         };
         console.log(newAuthenticationState);
-        // props.login(newAuthenticationState);
+        props.login(newAuthenticationState);
         localStorage.setItem("auth", JSON.stringify(newAuthenticationState));
-        props.history.push("/");
+        props.history.push("/world");
     };
 
     const showError = (msg: string) => {
         setError(<Alert className="alert alert-danger">
             {msg}
         </Alert>);
-        return;//TODO
+        return;
     };
 
     const submitLogin = async (event: any) => {
@@ -58,7 +59,7 @@ const Login = (props: any) => {
             let user: RegisterUser = {
                 Username: username,
                 Password: password,
-                Id: 0,
+                Id: "",
                 Token: ""
             };
 
@@ -73,11 +74,8 @@ const Login = (props: any) => {
             };
 
             try {
-                console.log(options.body);
                 let response: Response = await fetch(config.SERVICES.LOGIN, options);
-                // let body = await response.json();
                 let body = await response.text();
-                console.log(body);
                 if (response.status === 200) {//OK
                     successfulLogin(JSON.parse(body));
                     return;
@@ -131,6 +129,7 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         login: (authstate: authenticationState) => {
+            authstate.token = "Bearer " +authstate.token;
             dispatch(login(authstate));
         }
     }

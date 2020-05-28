@@ -2,17 +2,60 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b3806e9-4aa4-414e-aea4-6b827317d967" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/World/world.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/workflows/onpush.develop.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/workflows/onpush.master.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kube/deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kube/ingress.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kube/service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/reactts.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/onpush.feature.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CheckAuthentication.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CheckAuthentication.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Account/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Account/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Navigation/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Navigation/Navigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/World/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/World/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WorldOverview/DetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/DetailPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WorldOverview/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WorldOverview/world.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/world.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WorldView/World.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldView/World.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/authenticationReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/authenticationReducer.ts" afterDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/build/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Navigation/Navigation.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="80" column="63" selection-start-line="80" selection-start-column="63" selection-end-line="80" selection-end-column="63" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/WorldOverview/DetailPage.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="253" column="23" selection-start-line="253" selection-start-column="23" selection-end-line="253" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -20,18 +63,142 @@
         <option value="HTML File" />
         <option value="JavaScript File" />
         <option value="tsconfig.json" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
         <option value="CSS File" />
+        <option value="TypeScript File" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>number</find>
+      <find>addWriter</find>
+      <find>authObject</find>
+      <find>map</find>
+      <find>hide</find>
+      <find>delay</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/World/BrowseWorld.ts" />
+        <option value="$PROJECT_DIR$/src/World/BrowseWorld.tsx" />
+        <option value="$PROJECT_DIR$/src/World/WorldWithFollowers.ts" />
+        <option value="$PROJECT_DIR$/src/World/browseworlds.css" />
+        <option value="$PROJECT_DIR$/src/World/FollowWorld.ts" />
+        <option value="$PROJECT_DIR$/src/config.json" />
+        <option value="$PROJECT_DIR$/src/World/BrowseWorlds.tsx" />
+        <option value="$PROJECT_DIR$/src/WorldOverview/NavigateToWorld.ts" />
+        <option value="$PROJECT_DIR$/src/Types/ResponseUser.ts" />
+        <option value="$PROJECT_DIR$/src/Components/CheckAuthentication.ts" />
+        <option value="$PROJECT_DIR$/src/Types/World.ts" />
+        <option value="$PROJECT_DIR$/src/WorldOverview/FollowWorldModel.ts" />
+        <option value="$PROJECT_DIR$/src/Actions/AuthenticationActions.ts" />
+        <option value="$PROJECT_DIR$/src/store.tsx" />
+        <option value="$PROJECT_DIR$/src/Home/Home.tsx" />
+        <option value="$PROJECT_DIR$/src/Account/Login.tsx" />
+        <option value="$PROJECT_DIR$/src/WorldOverview/world.css" />
+        <option value="$PROJECT_DIR$/.github/workflows/reactts.yml" />
+        <option value="$PROJECT_DIR$/.github/workflows/onpush.master.yml" />
+        <option value="$PROJECT_DIR$/.github/workflows/onpush.develop.yml" />
+        <option value="$PROJECT_DIR$/kube/deployment.yaml" />
+        <option value="$PROJECT_DIR$/kube/ingress.yaml" />
+        <option value="$PROJECT_DIR$/kube/service.yaml.ts" />
+        <option value="$PROJECT_DIR$/kube/service.yaml" />
+        <option value="$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx" />
+        <option value="$PROJECT_DIR$/src/WorldView/World.tsx" />
+        <option value="$PROJECT_DIR$/src/reducers/authenticationReducer.ts" />
+        <option value="$PROJECT_DIR$/src/Account/Register.tsx" />
+        <option value="$PROJECT_DIR$/src/App.tsx" />
+        <option value="$PROJECT_DIR$/src/WorldOverview/Home.tsx" />
+        <option value="$PROJECT_DIR$/src/Navigation/Navigation.tsx" />
+        <option value="$PROJECT_DIR$/src/WorldOverview/DetailPage.tsx" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
+    <option name="width" value="2576" />
+    <option name="height" value="1056" />
+  </component>
   <component name="ProjectId" id="1aAIUEUTwQGDMhxQuqnQ29IBBVf" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="browser-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="browser-client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="browser-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="browser-client" type="462c0819:PsiDirectoryNode" />
+              <item name=".github" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="browser-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="browser-client" type="462c0819:PsiDirectoryNode" />
+              <item name=".github" type="462c0819:PsiDirectoryNode" />
+              <item name="workflows" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="browser-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="browser-client" type="462c0819:PsiDirectoryNode" />
+              <item name="kube" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="browser-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="browser-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="browser-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="browser-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Account" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="browser-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="browser-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Navigation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="browser-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="browser-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="reducers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="browser-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="browser-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="WorldOverview" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="browser-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="browser-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="WorldView" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -40,9 +207,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.last.introduce.type" value="VAR" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../webservice-develop" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -50,8 +218,8 @@
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.standard" value="" />
+    <property name="node.js.selected.package.eslint" value="E:\semester 6\browser-client\node_modules\eslint" />
+    <property name="node.js.selected.package.standard" value="E:\semester 6\browser-client\node_modules\eslint" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/react-scripts" />
     <property name="nodejs_interpreter_path" value="node" />
@@ -73,6 +241,18 @@
       <recent name="D:\Stijn\Fontys\Semester 6 app\Frontend\browser-client" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager" selected="npm.npm start">
     <configuration name="renders learn react link" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
@@ -93,6 +273,16 @@
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/browser-client/public/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="npm start" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -108,9 +298,11 @@
       <item itemvalue="JavaScript Debug.index.html" />
       <item itemvalue="Jest.renders learn react link" />
       <item itemvalue="npm.npm start" />
+      <item itemvalue="npm.build" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="Jest.renders learn react link" />
       </list>
@@ -143,9 +335,61 @@
       <workItem from="1587627151377" duration="4257000" />
       <workItem from="1587817084249" duration="3797000" />
       <workItem from="1587974515818" duration="13815000" />
-      <workItem from="1588065801119" duration="8105000" />
+      <workItem from="1588065801119" duration="10131000" />
+      <workItem from="1588092942265" duration="1172000" />
+      <workItem from="1588095332385" duration="3149000" />
+      <workItem from="1588583951898" duration="4716000" />
+      <workItem from="1588748894457" duration="13805000" />
+      <workItem from="1588768276156" duration="4251000" />
+      <workItem from="1588840480214" duration="4227000" />
+      <workItem from="1588927571541" duration="868000" />
+      <workItem from="1589292138089" duration="1226000" />
+      <workItem from="1589308630300" duration="134000" />
+      <workItem from="1589354466400" duration="12367000" />
+      <workItem from="1589966094762" duration="5066000" />
+      <workItem from="1590152748097" duration="747000" />
+      <workItem from="1590412176949" duration="4033000" />
+      <workItem from="1590476650978" duration="4180000" />
+      <workItem from="1590568041494" duration="6114000" />
     </task>
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="35482000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1912" y="-8" width="2576" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49919224" visible="true" weight="0.13120568" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" sideWeight="0.50080776" side_tool="true" weight="0.17544784" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49947312" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4964539" visible="true" weight="0.25460455" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49960598" weight="0.32936078" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="TypeScript" order="9" sideWeight="0.49527186" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5035461" side_tool="true" visible="true" weight="0.25460455" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -180,35 +424,35 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="668" y="218" key="#renders_learn_react_link/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1586172473838" />
-    <state x="598" y="118" key="CommitChangelistDialog2" timestamp="1587545694296">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2717" y="118" key="CommitChangelistDialog2" timestamp="1588770486497">
+      <screen x="1920" y="0" width="2560" height="1040" />
     </state>
-    <state x="598" y="118" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1587545694296" />
-    <state x="2717" y="118" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1586341836432" />
+    <state x="598" y="118" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588767988209" />
+    <state x="2717" y="118" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588770486497" />
     <state x="740" y="278" key="FileChooserDialogImpl" timestamp="1587540660720">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="278" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1587540660720" />
-    <state width="2539" height="158" key="GridCell.Tab.0.bottom" timestamp="1588068438294">
-      <screen x="1920" y="0" width="2560" height="1040" />
+    <state width="1899" height="239" key="GridCell.Tab.0.bottom" timestamp="1588853715020">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="158" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588065785882" />
-    <state width="2539" height="158" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588068438294" />
-    <state width="2539" height="158" key="GridCell.Tab.0.center" timestamp="1588068438294">
-      <screen x="1920" y="0" width="2560" height="1040" />
+    <state width="1899" height="239" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588853715020" />
+    <state width="1899" height="239" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588772530115" />
+    <state width="1899" height="239" key="GridCell.Tab.0.center" timestamp="1588853715020">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="158" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588065785882" />
-    <state width="2539" height="158" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588068438294" />
-    <state width="2539" height="158" key="GridCell.Tab.0.left" timestamp="1588068438293">
-      <screen x="1920" y="0" width="2560" height="1040" />
+    <state width="1899" height="239" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588853715020" />
+    <state width="1899" height="239" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588772530115" />
+    <state width="1899" height="239" key="GridCell.Tab.0.left" timestamp="1588853715019">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="158" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588065785882" />
-    <state width="2539" height="158" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588068438293" />
-    <state width="2539" height="158" key="GridCell.Tab.0.right" timestamp="1588068438294">
-      <screen x="1920" y="0" width="2560" height="1040" />
+    <state width="1899" height="239" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588853715019" />
+    <state width="1899" height="239" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588772530115" />
+    <state width="1899" height="239" key="GridCell.Tab.0.right" timestamp="1588853715020">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="158" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588065785882" />
-    <state width="2539" height="158" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588068438294" />
+    <state width="1899" height="239" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588853715020" />
+    <state width="1899" height="239" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588772530115" />
     <state width="949" height="348" key="GridCell.Tab.1.bottom" timestamp="1587568235571">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -265,23 +509,240 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="524" y="259" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1587567983532" />
-    <state x="953" y="0" width="974" height="1047" key="dock-window-1" timestamp="1587630625710">
+    <state x="631" y="106" width="1577" height="854" key="dock-window-1" timestamp="1588766780336">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="953" y="0" width="974" height="1047" key="dock-window-1/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1587630625710" />
+    <state x="631" y="106" width="1577" height="854" key="dock-window-1/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588766780336" />
     <state x="128" y="219" width="1575" height="734" key="dock-window-1/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1586192642156" />
     <state x="-7" y="0" width="1063" height="1047" key="dock-window-2" timestamp="1587651445778">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-7" y="0" width="1063" height="1047" key="dock-window-2/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1587651445778" />
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1587997203442">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1587997203442" />
-    <state x="2751" y="225" width="896" height="678" key="search.everywhere.popup" timestamp="1588067780077">
+    <state x="2741" y="240" width="896" height="677" key="run.anything.popup" timestamp="1588771228852">
       <screen x="1920" y="0" width="2560" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588065648261" />
-    <state x="2751" y="225" width="896" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588067780077" />
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1587997203442" />
+    <state x="2741" y="240" width="896" height="677" key="run.anything.popup/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588771228852" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1588750813779">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.2560.1040@0.0.1920.1040" timestamp="1588750813779" />
+    <state x="2751" y="225" width="896" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.2560.1040@1920.0.2560.1040" timestamp="1588075411747" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Types/World.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorldOverview/browseworlds.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="60" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Types/ResponseUser.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/CheckAuthentication.ts" />
+    <entry file="file://$PROJECT_DIR$/src/Actions/AuthenticationActions.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Account/Login.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2091">
+          <caret line="131" column="56" selection-start-line="131" selection-start-column="56" selection-end-line="131" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorldOverview/FollowWorldModel.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorldOverview/NavigateToWorld.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorldOverview/WorldRow.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorldOverview/WorldWithFollowers.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Home/Home.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorldOverview/world.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.feature.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.develop.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-353">
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kube/service.yaml.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorldOverview/Home.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="169" column="4" selection-start-line="169" selection-start-column="4" selection-end-line="169" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorldView/World.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/authenticationReducer.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-128">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Account/Register.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="57" column="49" selection-start-line="57" selection-start-column="49" selection-end-line="57" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="169" column="23" selection-start-line="169" selection-start-column="23" selection-end-line="169" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.master.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-472">
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kube/deployment.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kube/ingress.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="35" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kube/service.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="25" lean-forward="true" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Navigation/Navigation.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="80" column="63" selection-start-line="80" selection-start-column="63" selection-end-line="80" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WorldOverview/DetailPage.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="253" column="23" selection-start-line="253" selection-start-column="23" selection-end-line="253" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

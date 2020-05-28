@@ -3,15 +3,10 @@ import {withRouter} from 'react-router-dom';
 import {Nav, Navbar} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {connect} from "react-redux";
-import {checkAuthentication} from "../Components/CheckAuthentication"
 
-import {authenticationState} from "../reducers/authenticationReducer";
+import {logout} from "../Actions/AuthenticationActions";
 
 const Navigation = (props: any) => {
-
-    useEffect( () => {
-        UpdateNavigation()
-    }, [])
     /*
     Navigation part of register and when logged in it will show logout
      */
@@ -26,7 +21,7 @@ const Navigation = (props: any) => {
     Navigation function that will push to "/world".
      */
     const worldNav = () => {
-        props.history.push("/world");
+        props.history.push("/browseworlds");
     };
 
     /*
@@ -53,45 +48,49 @@ const Navigation = (props: any) => {
     /**
      * Navigation function that will push to "/login". and clean localstorage so you will be logged out.
      */
-    const logout = () => {
-        localStorage.removeItem("auth");
-        props.history.push("/login");
-    };
+
 
     /*
     Constant world Navigation part. will go to the /world tab
      */
-    const world = <Nav.Link onClick={worldNav}>Worlds</Nav.Link>;
+    const world = <Nav.Link onClick={worldNav}>Browse Worlds</Nav.Link>;
 
     /*
      *  authObject that has the info of the player <TYPE: authentiticationState>
      */
-    let authobject: authenticationState = checkAuthentication();
+    useEffect( () => {
+        const logout = () => {
+            localStorage.removeItem("auth");
+            props.history.push("/login");
+            props.logout();
+        };
+        const UpdateNavigation = async () => {
+            if (props.authentication.isAuthenticated) {
+                var username = props.authentication.username;
+                setRegister(<Nav.Link onClick={logout}>Logout</Nav.Link>);
+                setLogin( <Navbar.Text>
+                    Signed in as: {username}
+                </Navbar.Text>);
 
+            } else {
+                setLogin(<Nav.Link onClick={loginpage}>Login</Nav.Link>);
+                setRegister(<Nav.Link onClick={registerpage}>Register</Nav.Link>);
+            }
+        };
+        UpdateNavigation()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.authentication.isAuthenticated,loginpage,registerpage]);
 
     /**
      * updatenav will check the authentication status and update the navigation accordingly.
      * @function
      */
-    const UpdateNavigation = async () => {
-        console.log("update nav")
-        authobject = checkAuthentication();
-        if (authobject.isAuthenticated) {
-            setRegister(<Nav.Link onClick={logout}>Logout</Nav.Link>);
-            setLogin( <Navbar.Text>
-                Signed in as: {authobject.username}
-            </Navbar.Text>);
 
-        } else {
-            setLogin(<Nav.Link onClick={loginpage}>Login</Nav.Link>);
-            setRegister(<Nav.Link onClick={registerpage}>Register</Nav.Link>);
-        }
-    };
 
 
     return (
         <Navbar bg="light">
-            <Nav.Link onClick={homepage}>Home</Nav.Link>
+            <Nav.Link onClick={homepage}>My Worlds</Nav.Link>
             {world}
             <Navbar.Collapse className="justify-content-end">
                 {register}
@@ -108,4 +107,12 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export default withRouter(connect(mapStateToProps)(Navigation));
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        logout: () => {
+            dispatch(logout());
+        }
+    }
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation));

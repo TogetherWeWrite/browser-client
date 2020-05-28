@@ -1,16 +1,26 @@
-import {authenticationState} from "../reducers/authenticationReducer";
+import {authenticationState, initialState} from "../reducers/authenticationReducer";
 export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
 
-interface LoginAction {
-    type: typeof LOGIN
+export interface action{
+    type: string,
     payload: authenticationState
 }
 
-export function login (newlogin : authenticationState) : LoginAction{
+
+export function login (newlogin : authenticationState) : action{
     return {
         type : LOGIN,
         payload : newlogin
     }
 }
 
-export type AuthenticationActionTypes = LoginAction
+export function logout() : action{
+    return {
+        type : LOGOUT,
+        payload : initialState
+    }
+}
+
+export type AuthenticationActionTypes = action
+
