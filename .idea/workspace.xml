@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b3806e9-4aa4-414e-aea4-6b827317d967" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/onpush.develop.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.github/workflows/onpush.master.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kube/deployment.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kube/ingress.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kube/service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/reactts.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/onpush.feature.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Account/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Account/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Navigation/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Navigation/Navigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/BrowseWorlds.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WorldOverview/DetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/DetailPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WorldOverview/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WorldOverview/world.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldOverview/world.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WorldView/World.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldView/World.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/authenticationReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/authenticationReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/onpush.master.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/onpush.master.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -43,14 +28,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/WorldOverview/DetailPage.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="253" column="23" selection-start-line="253" selection-start-column="23" selection-end-line="253" selection-end-column="23" />
+            <state relative-caret-position="510">
+              <caret line="253" column="55" selection-start-line="253" selection-start-column="55" selection-end-line="253" selection-end-column="55" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.master.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="535">
+              <caret line="55" column="19" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.develop.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="416">
+              <caret line="46" column="14" lean-forward="true" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -77,6 +80,7 @@
       <find>map</find>
       <find>hide</find>
       <find>delay</find>
+      <find>loadWriters</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -103,7 +107,6 @@
         <option value="$PROJECT_DIR$/src/Account/Login.tsx" />
         <option value="$PROJECT_DIR$/src/WorldOverview/world.css" />
         <option value="$PROJECT_DIR$/.github/workflows/reactts.yml" />
-        <option value="$PROJECT_DIR$/.github/workflows/onpush.master.yml" />
         <option value="$PROJECT_DIR$/.github/workflows/onpush.develop.yml" />
         <option value="$PROJECT_DIR$/kube/deployment.yaml" />
         <option value="$PROJECT_DIR$/kube/ingress.yaml" />
@@ -117,6 +120,7 @@
         <option value="$PROJECT_DIR$/src/WorldOverview/Home.tsx" />
         <option value="$PROJECT_DIR$/src/Navigation/Navigation.tsx" />
         <option value="$PROJECT_DIR$/src/WorldOverview/DetailPage.tsx" />
+        <option value="$PROJECT_DIR$/.github/workflows/onpush.master.yml" />
       </list>
     </option>
   </component>
@@ -350,12 +354,12 @@
       <workItem from="1590152748097" duration="747000" />
       <workItem from="1590412176949" duration="4033000" />
       <workItem from="1590476650978" duration="4180000" />
-      <workItem from="1590568041494" duration="6114000" />
+      <workItem from="1590568041494" duration="6447000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35482000" />
+    <option name="totallyTimeSpent" value="35815000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -370,13 +374,13 @@
     <frame x="1912" y="-8" width="2576" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49919224" visible="true" weight="0.13120568" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919224" visible="true" weight="0.13120568" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" sideWeight="0.50080776" side_tool="true" weight="0.17544784" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49947312" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4964539" visible="true" weight="0.25460455" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4964539" visible="true" weight="0.25460455" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -635,13 +639,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.develop.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-353">
-          <caret column="18" selection-start-column="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kube/service.yaml.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -696,13 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.master.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-472">
-          <caret column="17" selection-start-column="17" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kube/deployment.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -736,11 +726,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/WorldOverview/DetailPage.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="253" column="23" selection-start-line="253" selection-start-column="23" selection-end-line="253" selection-end-column="23" />
+        <state relative-caret-position="510">
+          <caret line="253" column="55" selection-start-line="253" selection-start-column="55" selection-end-line="253" selection-end-column="55" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.master.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="535">
+          <caret line="55" column="19" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.github/workflows/onpush.develop.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="46" column="14" lean-forward="true" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
         </state>
       </provider>
     </entry>
