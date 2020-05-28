@@ -6,6 +6,8 @@ WORKDIR /usr/share/nginx/html/
 
 # Copy the /build folder into the current work directory
 COPY /build ./
+# Copy the nginx config
+COPY /nginx.conf /etc/nginx/conf.d
 
 # Execute nginx command
 # '-g daemon off;' will ensure NGINX stays at the foreground for Docker to track properly
