@@ -1,0 +1,23 @@
+.center >.chunk{
+    height: 300px;
+    width: 300px;
+}
+
+.cell-row{
+    height:100px;
+}
+
+.cell{
+    float:left;
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    border: 1px dotted  gray;
+}
+.center{
+    
+    background-color: rgba(100,100,100,0.4);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
