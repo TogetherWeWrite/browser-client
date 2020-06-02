@@ -1,23 +1,67 @@
-.center >.chunk{
-    height: 300px;
+.grid-container >.chunk{
+    background-color: rgba(255, 255, 255, 0);
+    height:300px;
     width: 300px;
+    grid-area: 1 / 1 / span 1 / span 1;
+    display: grid;
+    grid-template-columns: 100px 100px;
+
 }
 
-.cell-row{
-    height:100px;
+/*.cell-row{*/
+    /*grid-area: span 1 / span 3;*/
+    /*grid-template-columns: 100px 100px;*/
+    /*display: grid;*/
+/*}*/
+
+.cell {
+    grid-area: span 1 / span 1;
+    border: 1px dashed lightgray;
+    animation-timing-function: ease-out;
+    /*width: 100px;*/
+    /*height: 100px;*/
+}
+.cell:hover{
+    z-index:90000;
+    border: 1px solid green;
+    box-shadow: 0 0 12px rgba(54, 105, 29,1);
+    cursor:pointer;
+    animation: pulse 3s infinite;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-out;
+    animation-play-state: running;
 }
 
-.cell{
-    float:left;
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    border: 1px dotted  gray;
+@keyframes pulse {
+    0%{
+        transform:scale(1.01);
+    }
+    50%{
+        transform:scale(1.03);
+        transform:translate(0,-3px);
+    }
+    100% {
+        transform:scale(1.01);
+
+    }
+}
+.grid-container{
+    display: grid;
+    grid-template-columns: 300px 300px;
+    height:100%;
+    width:100%;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    background-color: rgba(0,0,0,0);
 }
 .center{
-    
-    background-color: rgba(100,100,100,0.4);
     display: flex;
-    flex-wrap: nowrap;
+    align-items: center;
     justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+    height: 1000px;
+    background-color: rgba(0,0,255,0);
 }
