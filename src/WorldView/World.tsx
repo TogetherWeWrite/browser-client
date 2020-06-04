@@ -59,9 +59,13 @@ const World = (props: any) => {
         </div>;
 
     };
+    const CreateNewChunk= async (y :number, x :number) =>{
+        console.log("y",y);
+        console.log("x",x);
+    };
 
     const loadPossibleNewChunk = async (y: number, x: number) => {
-        return <div className={"possible-new-chunk"} style={
+        return <div className={"possible-new-chunk"} onClick={()=> CreateNewChunk(y-1,x-1)} style={
             chunkStyle(x + 1, y + 1)}>
             [{y-1},{x-1}]
         </div>
@@ -82,7 +86,7 @@ const World = (props: any) => {
         }
         return highest-lowest+1;
     };
-    
+
     const HighestY = (grid: Chunk[]): number => {
         let highest: number = 0;
         let lowest : number = 0;
@@ -106,6 +110,7 @@ const World = (props: any) => {
     const initiliaze = async () => {
         try {
             let grid = await GetWorldGrid(id);
+            console.log("remaining", grid.remainingChunks );
             setGrid(grid);
             let highestX: number = HighestX(grid.grid);
             console.log("hx", highestX);
