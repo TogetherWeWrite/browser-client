@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b3806e9-4aa4-414e-aea4-6b827317d967" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ApiFunctions/LoadChunksOfWorld.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ApiFunctions/PostNewChunk.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Types/CreateNewChunkModel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Types/LoadPartOfWorld.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WorldView/World.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WorldView/World.tsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -24,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/WorldView/World.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
-              <caret line="167" column="34" selection-start-line="167" selection-start-column="34" selection-end-line="167" selection-end-column="34" />
+            <state relative-caret-position="548">
+              <caret line="182" column="171" selection-start-line="182" selection-start-column="171" selection-end-line="182" selection-end-column="171" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
               </folding>
@@ -459,12 +454,12 @@
       <workItem from="1590835118507" duration="3455000" />
       <workItem from="1590853112292" duration="4891000" />
       <workItem from="1591119972413" duration="7760000" />
-      <workItem from="1591169727834" duration="33607000" />
+      <workItem from="1591169727834" duration="35447000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95514000" />
+    <option name="totallyTimeSpent" value="97354000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -485,7 +480,7 @@
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49947312" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49420443" visible="true" weight="0.25460455" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49420443" visible="true" weight="0.18526544" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -493,7 +488,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="TypeScript" order="9" sideWeight="0.49527186" weight="0.32936078" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5057956" side_tool="true" visible="true" weight="0.25460455" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5057956" side_tool="true" visible="true" weight="0.18526544" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49921197" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -954,8 +949,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/WorldView/World.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="167" column="34" selection-start-line="167" selection-start-column="34" selection-end-line="167" selection-end-column="34" />
+        <state relative-caret-position="548">
+          <caret line="182" column="171" selection-start-line="182" selection-start-column="171" selection-end-line="182" selection-end-column="171" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
           </folding>

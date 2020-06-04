@@ -11,6 +11,7 @@ import {doesNotThrow} from "assert";
 import {timeout} from "q";
 import {PostNewChunk} from "../ApiFunctions/PostNewChunk";
 import {LoadChunksOfWorld} from "../ApiFunctions/LoadChunksOfWorld";
+import {Simulate} from "react-dom/test-utils";
 
 const World = (props: any) => {
     const {id} = useParams();
@@ -119,7 +120,7 @@ const World = (props: any) => {
             }
             chunks.shift();//first remove
             setRemainingChunkHtmlBlock(chunks);
-            loadsides()
+            setNewCellsHtmlBlock(await loadsides());
         } catch (error) {
             console.log(error);
             AddError(error);
@@ -127,7 +128,7 @@ const World = (props: any) => {
     };
 
 
-    const loadsides = async () => {
+    const loadsides = async () : Promise<any[]> => {
         //x y position.
         interface TwoDPos {
             posX: number,
@@ -146,30 +147,57 @@ const World = (props: any) => {
 
         //step 2 create a list of possible new positions of chunks
         //step 2 CONDITION: the possible new positions must neighbour the chunk horizontally vertically or diagonal
-        let possibleNewChunkPos: TwoDPos[] = [];
+        let createNewChunkPositions: TwoDPos[] = [];
         for (let i: number = 0; i < arrayOfPositionOfAlreadyExistingChunks.length; i++) {
             //step 2.1 Generate an array of possible neighbours
-            //  1[x-1, y+1]    2[x  , y+1]    3[x+1, y+1]
-            //  4[x-1, y  ]        pos         5[x+1, y  ]
-            //  6[x-1, y-1]    7[x  , y-1]    8[x+1, y-1]
+            //  0[x-1, y+1]    1[x  , y+1]    2[x+1, y+1]
+            //  3[x-1, y  ]        pos        4[x+1, y  ]
+            //  5[x-1, y-1]    6[x  , y-1]    7[x+1, y-1]
             let possibleNeighbours: TwoDPos[] = new Array(8);
             let pos: TwoDPos = arrayOfPositionOfAlreadyExistingChunks[i];
             for (let j: number = -1; j < 2; j++) {
                 //filling in 0-1-2 of array possibleNeighbours.
-                possibleNeighbours[j+1] = {posX: pos.posX + j, posY: pos.posY + 1}
+                possibleNeighbours[j+1] = {posX: pos.posX + j, posY: pos.posY + 1};
                 //filling in 6-7-8 of array possibleNeighbours.
-                possibleNeighbours[j+7] = {posX: pos.posX + j, posY: pos.posY -1}
+                possibleNeighbours[j+6] = {posX: pos.posX + j, posY: pos.posY -1}
             }
             //filling in 4 of array possibleNeighbours
-            possibleNeighbours[4] = {posX : pos.posX -1, posY: pos.posY}
+            possibleNeighbours[3] = {posX : pos.posX -1, posY: pos.posY};
             //filling in 5 of array possibleNeighbours
-            possibleNeighbours[5] = {posX : pos.posX +1, posY: pos.posY}
-            //Step 2.2 Check if the positions of empty neighbours already exist in possibleNewChunkPos
-            if(possibleNewChunkPos)
-            //Step 2.3 If these position are not in the array put them in.
+            possibleNeighbours[4] = {posX : pos.posX +1, posY: pos.posY};
 
-            //step 3 make an array of loadPossibleNewChunk of these positions
+            let possibleNew : TwoDPos[] = new Array(8);
+            for(let m : number = 0; m< possibleNeighbours.length;m++){
+                possibleNew[m]=possibleNeighbours[m];
+            }
+            for(let k:number = 0;k<createNewChunkPositions.length;k++){
+                for(let n : number=0; n<possibleNeighbours.length;n++){
+                    if(possibleNeighbours[n].posX == createNewChunkPositions[k].posX && possibleNeighbours[n].posY == createNewChunkPositions[k].posY){
+                        possibleNew[n] = {posX:0,posY:0};
+                    }
+                }
+            }
+
+            for(let k:number = 0;k<arrayOfPositionOfAlreadyExistingChunks.length;k++){
+                for(let n : number=0; n<possibleNeighbours.length;n++){
+                    if(possibleNeighbours[n].posX == arrayOfPositionOfAlreadyExistingChunks[k].posX && possibleNeighbours[n].posY == arrayOfPositionOfAlreadyExistingChunks[k].posY){
+                        possibleNew[n] = {posX:0,posY:0};
+                    }
+                }
+            }
+
+            //Step 2.3 If these position are not in the array put them in.
+            for(let l : number = 0; l<possibleNew.length;l++){
+                if(possibleNew[l].posX !== 0 && possibleNew[l].posY !==0 ){
+                    createNewChunkPositions.push(possibleNew[l]);
+                }
+            }
         }
+        let htmlofNewChunkPoss : any[] = [];
+        for(let o : number = 0;o<createNewChunkPositions.length;o++){
+            htmlofNewChunkPoss.push(await loadPossibleNewChunk(createNewChunkPositions[o].posY,createNewChunkPositions[o].posX));
+        }
+        return htmlofNewChunkPoss;
     };
 
     return (<div>
