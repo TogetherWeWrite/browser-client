@@ -8,6 +8,7 @@ import {Cell} from "../Types/Cell";
 import "./grid.css";
 import {Chunk} from "../Types/Chunk";
 import {doesNotThrow} from "assert";
+import {timeout} from "q";
 
 const World = (props: any) => {
     const {id} = useParams();
@@ -16,6 +17,7 @@ const World = (props: any) => {
     const [grid, setGrid] = React.useState(initGrid);
     const [gridhtmlBlock, setGridHtmlBlock] = React.useState(<div/>);
     const [cellHtmlBlock, setCellHtmlBlock] = React.useState();
+    const [newCellsHtmlBlock, setNewCellsHtmlBlock] = React.useState();
     const [error, setError] = React.useState(<div/>);
 
     let mouseDown = false;
@@ -60,83 +62,102 @@ const World = (props: any) => {
 
     const loadPossibleNewChunk = async (y: number, x: number) => {
         return <div className={"possible-new-chunk"} style={
-            chunkStyle(x + 1, y + 1)}>+</div>
+            chunkStyle(x + 1, y + 1)}>
+            [{y-1},{x-1}]
+        </div>
     };
 
-    const HighestX = (grid: Chunk[][]): number => {
+    const HighestX = (grid: Chunk[]): number => {
         let highest: number = 0;
-        for(let x: number = 0; x< grid.length;x++){
-            if(highest<grid[x].length){
-                highest = grid[x].length;
+        let lowest : number = 0;
+        for (let x: number = 0; x < grid.length; x++) {
+            if (highest < grid[x].posX) {
+                highest = grid[x].posX;
             }
         }
-        return highest;
+        for (let x: number = 0; x < grid.length; x++) {
+            if (lowest > grid[x].posX) {
+                lowest = grid[x].posX;
+            }
+        }
+        return highest-lowest+1;
     };
-    const HighestY = (grid: Chunk[][]): number => {
-        return grid.length;
+    
+    const HighestY = (grid: Chunk[]): number => {
+        let highest: number = 0;
+        let lowest : number = 0;
+        for (let x: number = 0; x < grid.length; x++) {
+            if (highest < grid[x].posY) {
+                highest = grid[x].posY;
+            }
+        }
+        for (let x: number = 0; x < grid.length; x++) {
+            if (lowest > grid[x].posY) {
+                lowest = grid[x].posY;
+            }
+        }
+        return highest-lowest+1;
     };
+
+    function sleep(ms:any) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     const initiliaze = async () => {
         try {
             let grid = await GetWorldGrid(id);
             setGrid(grid);
-            grid.grid = [
-                [grid.grid[0][0], grid.grid[0][0]]];
             let highestX: number = HighestX(grid.grid);
-            console.log("hx",highestX);
+            console.log("hx", highestX);
             let highestY: number = HighestY(grid.grid);
-            let bightml = new Array(highestY + 2); //+2 for above and below
-            bightml[0] = new Array(highestX + 2);
-            bightml[highestY + 1] = new Array(highestX + 2);
-            console.log("l",grid.grid.length);
+            console.log("hy", highestY);
+
+            let chunks = [];
             for (let y: number = 0; y < grid.grid.length; y++) {
-                bightml[y + 1] = new Array(highestX + 2); //+2 for left and right extra space
-                for (let x: number = 0; x < grid.grid[y].length; x++) {
-                    console.log("X: " + x, " Y: " + y + " chunk:" + grid.grid[y][x]);
-                    bightml[y +1][x+1 ] = await loadchunk(grid.grid[y][x], "chunk pos= [" + y+1 + "," + x+1 + "]", y+1 , x +1);
-                    console.log(0, bightml[0],1, bightml[1],2, bightml[2],3,bightml[3]);
-                }
+                    chunks.push(await loadchunk(grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY + 1, grid.grid[y].posX + 1));
             }
-
-
-            let something = JSON.stringify(bightml);
-            setCellHtmlBlock(bightml);
+            setCellHtmlBlock(chunks);
+            loadsides(highestX,highestY);
         } catch (error) {
             console.log(error);
             AddError(error);
         }
     };
-    let prevX: number;
-    let prevY: number;
-    let afterX, afterY: number;
-    const startDrag = async (event: any) => {
-        prevX = event.clientX;
-        prevY = event.clientY;
-        // while(mouseDown){
-        //     setTimeout(startDrag, 100);
-        // }
-        console.log("X: " + prevX + " Y: " + prevY);
-    };
 
-    const stopDrag = async (event: any) => {
-        afterX = event.clientX;
-        afterY = event.clientY;
-        let deltaY: number = prevY - afterY;
-        let deltaX: number = prevX - afterX;
-        console.log(deltaY);
-        console.log(deltaX);
-        // event.target.scroll(deltaX, deltaY);
-        mouseDown = false;
+
+
+    const loadsides = async (highestX:number ,highestY:number)=>{
+
+        let newChunks: any[] = new Array(2);
+        newChunks[1] = [];
+        newChunks[0] = [];
+        const xfillnew = async (highestX: number, highestY: number) => {
+            for (let x: number = 0; x < (highestX + 2); x++) {
+                newChunks[1].push(await loadPossibleNewChunk(0, x));
+                newChunks[1].push(await loadPossibleNewChunk(highestY + 1, x));
+            }
+            setNewCellsHtmlBlock(newChunks)
+        };
+
+        const yfillnew = async (highestX:number ,highestY:number) => {
+            for (let y: number = 0; y < (highestY + 2); y++) {
+                newChunks[0].push(await loadPossibleNewChunk(y, 0));
+                newChunks[0].push(await loadPossibleNewChunk(y, highestX + 1));
+            }
+            setNewCellsHtmlBlock(newChunks);
+        };
+        xfillnew(highestX,highestY);
+        yfillnew(highestX, highestY);
+
+
     };
 
     return (<div>
         {error}
         <div className={"center"}>
-            <div className={"grid-container"} onMouseDown={(event) => {
-                mouseDown = true;
-                startDrag(event)
-            }} onMouseUp={stopDrag}>
+            <div className={"grid-container"}>
                 {cellHtmlBlock}
+                {newCellsHtmlBlock}
             </div>
         </div>
     </div>)
