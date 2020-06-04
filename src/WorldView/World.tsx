@@ -9,14 +9,17 @@ import "./grid.css";
 import {Chunk} from "../Types/Chunk";
 import {doesNotThrow} from "assert";
 import {timeout} from "q";
+import {PostNewChunk} from "../ApiFunctions/PostNewChunk";
+import {LoadChunksOfWorld} from "../ApiFunctions/LoadChunksOfWorld";
 
 const World = (props: any) => {
     const {id} = useParams();
     const auth = props.auth;
-
-    const [grid, setGrid] = React.useState(initGrid);
+    const chunks: any[] = []
+    const [ggrid, setGrid] = React.useState(initGrid);
     const [gridhtmlBlock, setGridHtmlBlock] = React.useState(<div/>);
-    const [cellHtmlBlock, setCellHtmlBlock] = React.useState();
+    const [initChunkHtmlBlock, setInitChunkHtmlBlock] = React.useState();
+    const [remainingChunkHtmlBlock, setRemainingChunkHtmlBlock] = React.useState();
     const [newCellsHtmlBlock, setNewCellsHtmlBlock] = React.useState();
     const [error, setError] = React.useState(<div/>);
 
@@ -59,70 +62,64 @@ const World = (props: any) => {
         </div>;
 
     };
-    const CreateNewChunk= async (y :number, x :number) =>{
-        console.log("y",y);
-        console.log("x",x);
+    const CreateNewChunk = async (y: number, x: number) => {
+        console.log("y", y);
+        console.log("x", x);
+        if (id) {
+            PostNewChunk(id, y, x)
+        }
     };
 
     const loadPossibleNewChunk = async (y: number, x: number) => {
-        return <div className={"possible-new-chunk"} onClick={()=> CreateNewChunk(y-1,x-1)} style={
+        return <div className={"possible-new-chunk"} onClick={() => CreateNewChunk(y - 1, x - 1)} style={
             chunkStyle(x + 1, y + 1)}>
-            [{y-1},{x-1}]
+            [{y - 1},{x - 1}]
         </div>
     };
 
-    const HighestX = (grid: Chunk[]): number => {
-        let highest: number = 0;
-        let lowest : number = 0;
-        for (let x: number = 0; x < grid.length; x++) {
-            if (highest < grid[x].posX) {
-                highest = grid[x].posX;
-            }
-        }
-        for (let x: number = 0; x < grid.length; x++) {
-            if (lowest > grid[x].posX) {
-                lowest = grid[x].posX;
-            }
-        }
-        return highest-lowest+1;
-    };
-
-    const HighestY = (grid: Chunk[]): number => {
-        let highest: number = 0;
-        let lowest : number = 0;
-        for (let x: number = 0; x < grid.length; x++) {
-            if (highest < grid[x].posY) {
-                highest = grid[x].posY;
-            }
-        }
-        for (let x: number = 0; x < grid.length; x++) {
-            if (lowest > grid[x].posY) {
-                lowest = grid[x].posY;
-            }
-        }
-        return highest-lowest+1;
-    };
-
-    function sleep(ms:any) {
+    function sleep(ms: any) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+
+    const LoadRemainingChunks = async (ids: string[]) => {
+        var newPartWorld = await LoadChunksOfWorld(ids);
+        for (let i: number = 0; i < newPartWorld.chunks.length; i++) {
+            let chunk: Chunk = newPartWorld.chunks[i];
+            //if a pos is higher or equal to zero it will get +1 in loadchunk
+            //if a pos is loew than zero it will get -1 in loadchunk
+            if (chunk.posY < 0 && chunk.posX >= 0) {
+                chunks.push(await loadchunk(chunk, chunk.name, chunk.posY - 1, chunk.posX + 1))
+            } else if (chunk.posY >= 0 && chunk.posX >= 0) {
+                chunks.push(await loadchunk(chunk, chunk.name, chunk.posY + 1, chunk.posX + 1))
+            } else if (chunk.posY >= 0 && chunk.posX < 0) {
+                chunks.push(await loadchunk(chunk, chunk.name, chunk.posY + 1, chunk.posX - 1))
+            } else if (chunk.posY < 0 && chunk.posX < 0) {
+                chunks.push(await loadchunk(chunk, chunk.name, chunk.posY - 1, chunk.posX - 1))
+            }
+
+            ggrid.grid.push(chunk);
+        }
+        if (newPartWorld.doneLoading === false) {
+            await LoadRemainingChunks(newPartWorld.remainingChunks);
+        }
+    };
 
     const initiliaze = async () => {
         try {
             let grid = await GetWorldGrid(id);
-            console.log("remaining", grid.remainingChunks );
+            console.log("remaining", grid.remainingChunks);
             setGrid(grid);
-            let highestX: number = HighestX(grid.grid);
-            console.log("hx", highestX);
-            let highestY: number = HighestY(grid.grid);
-            console.log("hy", highestY);
 
-            let chunks = [];
             for (let y: number = 0; y < grid.grid.length; y++) {
-                    chunks.push(await loadchunk(grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY + 1, grid.grid[y].posX + 1));
+                chunks.push(await loadchunk(grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY + 1, grid.grid[y].posX + 1));
             }
-            setCellHtmlBlock(chunks);
-            loadsides(highestX,highestY);
+            setInitChunkHtmlBlock(chunks);
+            if (grid.remainingChunks.length > 0) {
+                await LoadRemainingChunks(grid.remainingChunks);
+            }
+            chunks.shift();//first remove
+            setRemainingChunkHtmlBlock(chunks);
+            loadsides()
         } catch (error) {
             console.log(error);
             AddError(error);
@@ -130,38 +127,57 @@ const World = (props: any) => {
     };
 
 
+    const loadsides = async () => {
+        //x y position.
+        interface TwoDPos {
+            posX: number,
+            posY: number
+        }
 
-    const loadsides = async (highestX:number ,highestY:number)=>{
+        //step 1 get a list of positions taken bij already existing chunks
+        let arrayOfPositionOfAlreadyExistingChunks: TwoDPos[] = [];
+        for (let i: number = 0; i < ggrid.grid.length; i++) {
+            arrayOfPositionOfAlreadyExistingChunks.push(
+                {
+                    posX: ggrid.grid[i].posX,
+                    posY: ggrid.grid[i].posY
+                });
+        }
 
-        let newChunks: any[] = new Array(2);
-        newChunks[1] = [];
-        newChunks[0] = [];
-        const xfillnew = async (highestX: number, highestY: number) => {
-            for (let x: number = 0; x < (highestX + 2); x++) {
-                newChunks[1].push(await loadPossibleNewChunk(0, x));
-                newChunks[1].push(await loadPossibleNewChunk(highestY + 1, x));
+        //step 2 create a list of possible new positions of chunks
+        //step 2 CONDITION: the possible new positions must neighbour the chunk horizontally vertically or diagonal
+        let possibleNewChunkPos: TwoDPos[] = [];
+        for (let i: number = 0; i < arrayOfPositionOfAlreadyExistingChunks.length; i++) {
+            //step 2.1 Generate an array of possible neighbours
+            //  1[x-1, y+1]    2[x  , y+1]    3[x+1, y+1]
+            //  4[x-1, y  ]        pos         5[x+1, y  ]
+            //  6[x-1, y-1]    7[x  , y-1]    8[x+1, y-1]
+            let possibleNeighbours: TwoDPos[] = new Array(8);
+            let pos: TwoDPos = arrayOfPositionOfAlreadyExistingChunks[i];
+            for (let j: number = -1; j < 2; j++) {
+                //filling in 0-1-2 of array possibleNeighbours.
+                possibleNeighbours[j+1] = {posX: pos.posX + j, posY: pos.posY + 1}
+                //filling in 6-7-8 of array possibleNeighbours.
+                possibleNeighbours[j+7] = {posX: pos.posX + j, posY: pos.posY -1}
             }
-            setNewCellsHtmlBlock(newChunks)
-        };
+            //filling in 4 of array possibleNeighbours
+            possibleNeighbours[4] = {posX : pos.posX -1, posY: pos.posY}
+            //filling in 5 of array possibleNeighbours
+            possibleNeighbours[5] = {posX : pos.posX +1, posY: pos.posY}
+            //Step 2.2 Check if the positions of empty neighbours already exist in possibleNewChunkPos
+            if(possibleNewChunkPos)
+            //Step 2.3 If these position are not in the array put them in.
 
-        const yfillnew = async (highestX:number ,highestY:number) => {
-            for (let y: number = 0; y < (highestY + 2); y++) {
-                newChunks[0].push(await loadPossibleNewChunk(y, 0));
-                newChunks[0].push(await loadPossibleNewChunk(y, highestX + 1));
-            }
-            setNewCellsHtmlBlock(newChunks);
-        };
-        xfillnew(highestX,highestY);
-        yfillnew(highestX, highestY);
-
-
+            //step 3 make an array of loadPossibleNewChunk of these positions
+        }
     };
 
     return (<div>
         {error}
         <div className={"center"}>
             <div className={"grid-container"}>
-                {cellHtmlBlock}
+                {remainingChunkHtmlBlock}
+                {initChunkHtmlBlock}
                 {newCellsHtmlBlock}
             </div>
         </div>
