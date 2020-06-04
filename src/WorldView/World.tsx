@@ -35,7 +35,7 @@ const World = (props: any) => {
     };
 
     const chunkStyle = (posx: number, posy: number): CSSProperties => {
-        let something: CSSProperties = {gridArea: "" + posy + " / " + posx + " /" + " span 1 " + "/ " + "span 1"};
+        let something: CSSProperties = {gridArea: "" + (posy+4) + " / " + (posx +4) + " /" + " span 1 " + "/ " + "span 1"};
         return something;
     };
 
@@ -58,7 +58,7 @@ const World = (props: any) => {
             }
         }
         return <div className={"chunk"} style={
-            chunkStyle(x + 1, y + 1)}>
+            chunkStyle(x , y )}>
             {arr}
         </div>;
 
@@ -72,9 +72,9 @@ const World = (props: any) => {
     };
 
     const loadPossibleNewChunk = async (y: number, x: number) => {
-        return <div className={"possible-new-chunk"} onClick={() => CreateNewChunk(y - 1, x - 1)} style={
-            chunkStyle(x + 1, y + 1)}>
-            [{y - 1},{x - 1}]
+        return <div className={"possible-new-chunk"} onClick={() => CreateNewChunk(y , x )} style={
+            chunkStyle(x , y)}>
+            [{y },{x }]
         </div>
     };
 
@@ -86,18 +86,7 @@ const World = (props: any) => {
         var newPartWorld = await LoadChunksOfWorld(ids);
         for (let i: number = 0; i < newPartWorld.chunks.length; i++) {
             let chunk: Chunk = newPartWorld.chunks[i];
-            //if a pos is higher or equal to zero it will get +1 in loadchunk
-            //if a pos is loew than zero it will get -1 in loadchunk
-            if (chunk.posY < 0 && chunk.posX >= 0) {
-                chunks.push(await loadchunk(chunk, chunk.name, chunk.posY - 1, chunk.posX + 1))
-            } else if (chunk.posY >= 0 && chunk.posX >= 0) {
-                chunks.push(await loadchunk(chunk, chunk.name, chunk.posY + 1, chunk.posX + 1))
-            } else if (chunk.posY >= 0 && chunk.posX < 0) {
-                chunks.push(await loadchunk(chunk, chunk.name, chunk.posY + 1, chunk.posX - 1))
-            } else if (chunk.posY < 0 && chunk.posX < 0) {
-                chunks.push(await loadchunk(chunk, chunk.name, chunk.posY - 1, chunk.posX - 1))
-            }
-
+                chunks.push(await loadchunk(chunk, chunk.name, chunk.posY , chunk.posX ))
             ggrid.grid.push(chunk);
         }
         if (newPartWorld.doneLoading === false) {
@@ -112,7 +101,7 @@ const World = (props: any) => {
             setGrid(grid);
 
             for (let y: number = 0; y < grid.grid.length; y++) {
-                chunks.push(await loadchunk(grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY + 1, grid.grid[y].posX + 1));
+                chunks.push(await loadchunk(grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY , grid.grid[y].posX ));
             }
             setInitChunkHtmlBlock(chunks);
             if (grid.remainingChunks.length > 0) {
