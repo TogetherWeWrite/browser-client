@@ -89,6 +89,9 @@ const World = (props: any) => {
                 chunks.push(await loadchunk(chunk, chunk.name, chunk.posY , chunk.posX ))
             ggrid.grid.push(chunk);
         }
+        await sleep(20);
+        setRemainingChunkHtmlBlock(undefined);
+        setRemainingChunkHtmlBlock(chunks);
         if (newPartWorld.doneLoading === false) {
             await LoadRemainingChunks(newPartWorld.remainingChunks);
         }
@@ -107,9 +110,9 @@ const World = (props: any) => {
             if (grid.remainingChunks.length > 0) {
                 await LoadRemainingChunks(grid.remainingChunks);
             }
+            setNewCellsHtmlBlock(await loadsides());
             chunks.shift();//first remove
             setRemainingChunkHtmlBlock(chunks);
-            setNewCellsHtmlBlock(await loadsides());
         } catch (error) {
             console.log(error);
             AddError(error);
@@ -133,6 +136,9 @@ const World = (props: any) => {
                     posY: ggrid.grid[i].posY
                 });
         }
+        arrayOfPositionOfAlreadyExistingChunks.push({posX :0,posY:0});
+        console.log(ggrid);
+        console.log("existing", arrayOfPositionOfAlreadyExistingChunks);
 
         //step 2 create a list of possible new positions of chunks
         //step 2 CONDITION: the possible new positions must neighbour the chunk horizontally vertically or diagonal
@@ -177,7 +183,9 @@ const World = (props: any) => {
 
             //Step 2.3 If these position are not in the array put them in.
             for(let l : number = 0; l<possibleNew.length;l++){
-                if(possibleNew[l].posX !== 0 && possibleNew[l].posY !==0 ){
+                if(possibleNew[l].posX === 0 && possibleNew[l].posY ===0 ){
+                }
+                else{
                     createNewChunkPositions.push(possibleNew[l]);
                 }
             }
@@ -185,6 +193,9 @@ const World = (props: any) => {
         let htmlofNewChunkPoss : any[] = [];
         for(let o : number = 0;o<createNewChunkPositions.length;o++){
             htmlofNewChunkPoss.push(await loadPossibleNewChunk(createNewChunkPositions[o].posY,createNewChunkPositions[o].posX));
+            await sleep(5);
+            setNewCellsHtmlBlock(undefined);
+            setNewCellsHtmlBlock(htmlofNewChunkPoss);
         }
         return htmlofNewChunkPoss;
     };
