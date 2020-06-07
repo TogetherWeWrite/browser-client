@@ -13,6 +13,7 @@ import {timeout} from "q";
 import {PostNewChunk} from "../ApiFunctions/PostNewChunk";
 import {LoadChunksOfWorld} from "../ApiFunctions/LoadChunksOfWorld";
 import {Simulate} from "react-dom/test-utils";
+import {initCreateNewChunkModel} from "../Types/CreateNewChunkModel";
 
 const World = (props: any) => {
     const {id} = useParams();
@@ -92,7 +93,14 @@ const World = (props: any) => {
         console.log("x", x);
         if (id) {
             let chunkmodel = await PostNewChunk(id, y, x);
-            initiliaze();
+            chunks.push(await loadchunk(chunkmodel, chunkmodel.name, chunkmodel.posY,chunkmodel.posX));
+            setRemainingChunkHtmlBlock(undefined);
+            setRemainingChunkHtmlBlock(chunks);
+            ggrid.grid.push(chunkmodel);
+            await sleep(10);
+            createNewChunkPositions.splice(0,createNewChunkPositions.length);
+            loadsides();
+            //initiliaze();
         }
     };
 
@@ -130,8 +138,7 @@ const World = (props: any) => {
             let grid = await GetWorldGrid(id);
             console.log("remaining", grid.remainingChunks);
             setGrid(grid);
-            chunks.splice(0,chunks.length);
-            createNewChunkPositions.splice(0,createNewChunkPositions.length);
+
             for (let y: number = 0; y < grid.grid.length; y++) {
                 chunks.push(await loadchunk(grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY , grid.grid[y].posX ));
             }
