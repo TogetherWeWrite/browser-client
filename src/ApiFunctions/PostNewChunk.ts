@@ -1,7 +1,8 @@
 import config from "../config.json";
+import {Chunk} from "../Types/Chunk";
 import {CreateNewChunkModel} from "../Types/CreateNewChunkModel";
 
-export const PostNewChunk = async (worldId: string, y: number, x: number) => {
+export const PostNewChunk = async (worldId: string, y: number, x: number) : Promise<Chunk>=> {
     let newChunk : CreateNewChunkModel = {
         WorldId : worldId,
         PosY : y,

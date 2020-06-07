@@ -1,4 +1,5 @@
 import React, {CSSProperties, useEffect} from "react";
+import ReactDOM from "react-dom";
 import {useParams, withRouter} from "react-router";
 import {connect} from "react-redux";
 import {initGrid} from "../Types/Grid";
@@ -24,6 +25,14 @@ const World = (props: any) => {
     const [newCellsHtmlBlock, setNewCellsHtmlBlock] = React.useState();
     const [error, setError] = React.useState(<div/>);
 
+    //x y position.
+    interface TwoDPos {
+        posX: number,
+        posY: number
+    }
+
+    let createNewChunkPositions: TwoDPos[] = [];
+
     let mouseDown = false;
 
     useEffect(() => {
@@ -35,7 +44,20 @@ const World = (props: any) => {
     };
 
     const chunkStyle = (posx: number, posy: number): CSSProperties => {
-        let something: CSSProperties = {gridArea: "" + (posy+4) + " / " + (posx +4) + " /" + " span 1 " + "/ " + "span 1"};
+        if(posy >= 0){
+            posy = posy+1
+        }
+        else{
+            posy = posy -1;
+        }
+
+        if(posx >=0 ){
+            posx = posx+1
+        }
+        else{
+            posx = posx -1;
+        }
+        let something: CSSProperties = {gridArea: "" + (posy) + " / " + (posx) + " /" + " span 1 " + "/ " + "span 1"};
         return something;
     };
 
@@ -57,8 +79,10 @@ const World = (props: any) => {
                 arr[y][x] = <div style={cellStyle(cell.color, x + 1, y + 1)} className={"cell"}></div>
             }
         }
-        return <div className={"chunk"} style={
-            chunkStyle(x , y )}>
+        return <div className={"chunk"}
+                    aria-posx={x}
+                    aria-posy={y}
+                    style={chunkStyle(x , y )}>
             {arr}
         </div>;
 
@@ -67,12 +91,16 @@ const World = (props: any) => {
         console.log("y", y);
         console.log("x", x);
         if (id) {
-            PostNewChunk(id, y, x)
+            let chunkmodel = await PostNewChunk(id, y, x);
+            initiliaze();
         }
     };
 
     const loadPossibleNewChunk = async (y: number, x: number) => {
-        return <div className={"possible-new-chunk"} onClick={() => CreateNewChunk(y , x )} style={
+        return <div className={"possible-new-chunk"} onClick={() => CreateNewChunk(y , x )}
+                    aria-posx={x}
+                    aria-posy={y}
+                    style={
             chunkStyle(x , y)}>
             [{y },{x }]
         </div>
@@ -89,7 +117,7 @@ const World = (props: any) => {
                 chunks.push(await loadchunk(chunk, chunk.name, chunk.posY , chunk.posX ))
             ggrid.grid.push(chunk);
         }
-        await sleep(20);
+        await sleep(2);
         setRemainingChunkHtmlBlock(undefined);
         setRemainingChunkHtmlBlock(chunks);
         if (newPartWorld.doneLoading === false) {
@@ -102,7 +130,8 @@ const World = (props: any) => {
             let grid = await GetWorldGrid(id);
             console.log("remaining", grid.remainingChunks);
             setGrid(grid);
-
+            chunks.splice(0,chunks.length);
+            createNewChunkPositions.splice(0,createNewChunkPositions.length);
             for (let y: number = 0; y < grid.grid.length; y++) {
                 chunks.push(await loadchunk(grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY , grid.grid[y].posX ));
             }
@@ -112,7 +141,7 @@ const World = (props: any) => {
             }
             setNewCellsHtmlBlock(await loadsides());
             chunks.shift();//first remove
-            setRemainingChunkHtmlBlock(chunks);
+            //setRemainingChunkHtmlBlock(chunks);
         } catch (error) {
             console.log(error);
             AddError(error);
@@ -121,11 +150,6 @@ const World = (props: any) => {
 
 
     const loadsides = async () : Promise<any[]> => {
-        //x y position.
-        interface TwoDPos {
-            posX: number,
-            posY: number
-        }
 
         //step 1 get a list of positions taken bij already existing chunks
         let arrayOfPositionOfAlreadyExistingChunks: TwoDPos[] = [];
@@ -142,7 +166,6 @@ const World = (props: any) => {
 
         //step 2 create a list of possible new positions of chunks
         //step 2 CONDITION: the possible new positions must neighbour the chunk horizontally vertically or diagonal
-        let createNewChunkPositions: TwoDPos[] = [];
         for (let i: number = 0; i < arrayOfPositionOfAlreadyExistingChunks.length; i++) {
             //step 2.1 Generate an array of possible neighbours
             //  0[x-1, y+1]    1[x  , y+1]    2[x+1, y+1]
@@ -193,7 +216,7 @@ const World = (props: any) => {
         let htmlofNewChunkPoss : any[] = [];
         for(let o : number = 0;o<createNewChunkPositions.length;o++){
             htmlofNewChunkPoss.push(await loadPossibleNewChunk(createNewChunkPositions[o].posY,createNewChunkPositions[o].posX));
-            await sleep(5);
+            await sleep(1);
             setNewCellsHtmlBlock(undefined);
             setNewCellsHtmlBlock(htmlofNewChunkPoss);
         }
