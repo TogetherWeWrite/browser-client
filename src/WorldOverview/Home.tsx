@@ -14,7 +14,7 @@ Overview page
 const CreateWorldDialogue = (props: any) => {
 
 
-    const [disabled,setDisabled] = React.useState(false);
+    const [disabled, setDisabled] = React.useState(false);
     const [worldName, setWorldName] = React.useState("worldName");
     const onWorldNameChange = (event: any) => {
         setWorldName(event.target.value)
@@ -51,7 +51,8 @@ const CreateWorldDialogue = (props: any) => {
                             </Col>
                             <Col>
                                 <Form.Group>
-                                    <Button variant="secondary" disabled={disabled} onClick={createWorld}>create World</Button>
+                                    <Button variant="secondary" disabled={disabled} onClick={createWorld}>create
+                                        World</Button>
                                 </Form.Group>
                             </Col>
 
@@ -82,7 +83,7 @@ const Overview = (props: any) => {
     const [worldOverviewHeader, setWorldOverviewHeader] = useState(<Row>
         <div className={"lds-dual-ring"}/>
     </Row>);
-    const [error,setError] = React.useState(
+    const [error, setError] = React.useState(
         <div/>
     );
 
@@ -121,8 +122,11 @@ const Overview = (props: any) => {
                             <Col lg={3}>
                                 <strong>Owner</strong>
                             </Col>
-                            <Col lg={5}>
+                            <Col lg={3}>
                                 <strong>Details</strong>
+                            </Col>
+                            <Col lg={2}>
+                                <strong>Grid</strong>
                             </Col>
                             <Col lg={2}>
                                 <strong></strong>
@@ -188,8 +192,11 @@ const Overview = (props: any) => {
                     <Col lg={3}>
                         {world.owner.name}
                     </Col>
-                    <Col lg={5}>
+                    <Col lg={3}>
                         <Link to={"/world/details/" + world.worldId}>See Details</Link>
+                    </Col>
+                    <Col lg={2}>
+                        <Link to={"/world/" + world.worldId}>See grid</Link>
                     </Col>
                     <Col lg={2}>
                         <Button variant={"danger"} type={"button"}
@@ -271,7 +278,7 @@ const RequestCreateWorld = async (authObject: authenticationState, worldtitle: s
         body: JSON.stringify(request),
         headers: {
             "Content-Type": "application/json",
-            "Authorization" : authObject.token
+            "Authorization": authObject.token
         },
         mode: "cors",
         cache: "default"
@@ -283,11 +290,10 @@ const RequestCreateWorld = async (authObject: authenticationState, worldtitle: s
     } else if (response.status === 400) {
         await functionerror(await response.text());
         return false;
-    } else if( response.status === 401){
+    } else if (response.status === 401) {
         await functionerror("Not authorised")
         return false;
-    }
-    else {
+    } else {
         await functionerror("Something went wrong");
         return false;
     }
@@ -306,7 +312,7 @@ const RequestDeleteWorld = async (authObject: authenticationState, worldTitle: s
         body: JSON.stringify(request),
         headers: {
             "Content-Type": "application/json",
-            "Authorization" : authObject.token
+            "Authorization": authObject.token
         },
         mode: "cors",
         cache: "default"
@@ -319,11 +325,10 @@ const RequestDeleteWorld = async (authObject: authenticationState, worldTitle: s
     } else if (response.status === 400) {
         await functionerror(await response.text());
         return false;
-    }else if( response.status === 401){
+    } else if (response.status === 401) {
         await functionerror("Not authorised")
         return false;
-    }
-    else {
+    } else {
         await functionerror("Something went wrong");
         return false;
     }
