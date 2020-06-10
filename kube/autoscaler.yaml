@@ -1,13 +1,13 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: user-microservice
-  namespace: dwetter
+  name: frontend-service
+  namespace: production
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: user-microservice
+    name: frontend-service
   minReplicas: 1
   maxReplicas: 10
   targetCPUUtilizationPercentage: 50
