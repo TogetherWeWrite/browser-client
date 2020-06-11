@@ -12,8 +12,6 @@ Overview page
  */
 
 const CreateWorldDialogue = (props: any) => {
-
-
     const [disabled, setDisabled] = React.useState(false);
     const [worldName, setWorldName] = React.useState("worldName");
     const onWorldNameChange = (event: any) => {
