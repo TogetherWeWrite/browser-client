@@ -24,3 +24,4 @@ yarn-error.log*
 src/config.json
 gpg/dev-decrypt.sh
 .idea/workspace.xml
+config.production.json

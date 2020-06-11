@@ -26,7 +26,7 @@ function App() {
                             <Route path='/world/details/:worldid' component={WorldDetails}/>
                             <Route path='/world/:id' component={World}/>
                             <Route exact path='/browseworlds' component={BrowseWorlds}/>
-
+                            <Route exact path='/home' component={Home}/>
                         </Switch>
                     </div>
                 </Router>
