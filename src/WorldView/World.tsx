@@ -50,9 +50,9 @@ const World = (props: any) => {
         setError(<Alert variant={"warning"} onClick={() => setError(<div/>)}>{error.message}</Alert>)
     };
 
-    const changeColorCell = async (cellId: string, chunkId: string, worldId: string | undefined, color: string) => {
+    const changeColorCell = async (pos: number ,cellId: string, chunkId: string, worldId: string | undefined, color: string) => {
         try {
-            openChunkInfo(await updateColorCell(cellId, chunkId, worldId, color), worldId);
+            openChunkInfo(pos,await updateColorCell(cellId, chunkId, worldId, color), worldId);
         }
         catch (e) {
             await AddError(e);
@@ -60,7 +60,7 @@ const World = (props: any) => {
     };
 
     //Change Highlight in the modal of the chunk details.
-    const changeHighlight = (chunk: Chunk, highlightx: number, highlighty: number) => {
+    const changeHighlight = (pos: number, chunk: Chunk, highlightx: number, highlighty: number) => {
         console.log("highlight");
         const arr = [[<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>,
             <div/>,
@@ -75,7 +75,7 @@ const World = (props: any) => {
                     changeCellId = cell.id;
                 } else {
                     arr[y][x] = <div style={cellStyle(cell.color, x + 1, y + 1)} onClick={() => {
-                        changeHighlight(chunk, x, y)
+                        changeHighlight(pos,chunk, x, y)
                     }} className={"cell cell-in-dialogue"}></div>
                 }
             }
@@ -113,13 +113,14 @@ const World = (props: any) => {
                         </Row>
                         <Row>
                             <Button onClick={() => {
-                                changeColorCell(changeCellId, chunk.id, id, newColorForCell)
+                                changeColorCell(pos,changeCellId, chunk.id, id, newColorForCell)
                             }}>Change color of highlighted</Button>
                         </Row>
                         <Row>
                             <Button className={"dialog-button-close"} onClick={async() => {
                                 setChunkDetailBlock(<div/>);
-                                chunks.push(await loadchunk(chunk, chunk.name, chunk.posY, chunk.posX));
+                                chunks[pos] =await loadchunk(pos,chunk, chunk.name, chunk.posY, chunk.posX);
+                                console.log(chunks[pos]);
                                 setRemainingChunkHtmlBlock(undefined);
                                 setRemainingChunkHtmlBlock(chunks);
                             }}>close</Button>
@@ -134,7 +135,7 @@ const World = (props: any) => {
     };
 
     //initialize chunk details modal
-    const openChunkInfo = async (chunk: Chunk, worldid: string | undefined) => {
+    const openChunkInfo = async (pos: number, chunk: Chunk, worldid: string | undefined) => {
         const arr = [[<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>,
             <div/>,
             <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>,
@@ -144,7 +145,7 @@ const World = (props: any) => {
             for (let x = 0; x < 5; x++) {
                 var cell = chunk.cells[y][x];
                 arr[y][x] = <div style={cellStyle(cell.color, x + 1, y + 1)} onClick={() => {
-                    changeHighlight(chunk, x, y)
+                    changeHighlight(pos,chunk, x, y)
                 }} className={"cell cell-in-dialogue"}></div>
             }
         }
@@ -172,7 +173,9 @@ const World = (props: any) => {
                         <Row>
                             <Button className={"dialog-button-close"} onClick={async () => {
                                 setChunkDetailBlock(<div/>);
-                                chunks.push(await loadchunk(chunk, chunk.name, chunk.posY, chunk.posX));
+                                chunks.splice(pos,1);
+                                chunks[pos] = await loadchunk(pos,chunk, chunk.name, chunk.posY, chunk.posX);
+                                console.log(chunks[pos]);
                                 setRemainingChunkHtmlBlock(undefined);
                                 setRemainingChunkHtmlBlock(chunks);
                             }}>close</Button>
@@ -209,7 +212,7 @@ const World = (props: any) => {
         };
         return something;
     };
-    const loadchunk = async (chunk: Chunk, name: string, y: number, x: number): Promise<any> => {
+    const loadchunk = async (pos: number,chunk: Chunk, name: string, y: number, x: number): Promise<any> => {
         let arr = [[<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>,
             <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>,
             <div/>]];
@@ -222,7 +225,7 @@ const World = (props: any) => {
         }
 
         return <div onClick={() => {
-            openChunkInfo(chunk, id)
+            openChunkInfo(pos,chunk, id)
         }} className={"chunk"}
                     aria-posx={x}
                     aria-posy={y}
@@ -236,7 +239,7 @@ const World = (props: any) => {
         console.log("x", x);
         if (id) {
             let chunkmodel = await PostNewChunk(id, y, x);
-            chunks.push(await loadchunk(chunkmodel, chunkmodel.name, chunkmodel.posY, chunkmodel.posX));
+            chunks.push(await loadchunk(chunks.length-1,chunkmodel, chunkmodel.name, chunkmodel.posY, chunkmodel.posX));
             setRemainingChunkHtmlBlock(undefined);
             setRemainingChunkHtmlBlock(chunks);
             ggrid.grid.push(chunkmodel);
@@ -264,7 +267,7 @@ const World = (props: any) => {
         var newPartWorld = await LoadChunksOfWorld(ids);
         for (let i: number = 0; i < newPartWorld.chunks.length; i++) {
             let chunk: Chunk = newPartWorld.chunks[i];
-            chunks.push(await loadchunk(chunk, chunk.name, chunk.posY, chunk.posX))
+            chunks.push(await loadchunk(chunks.length-1,chunk, chunk.name, chunk.posY, chunk.posX))
             ggrid.grid.push(chunk);
         }
         await sleep(2);
@@ -283,7 +286,7 @@ const World = (props: any) => {
             setGrid(grid);
 
             for (let y: number = 0; y < grid.grid.length; y++) {
-                chunks.push(await loadchunk(grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY, grid.grid[y].posX));
+                chunks.push(await loadchunk(chunks.length-1,grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY, grid.grid[y].posX));
             }
             setInitChunkHtmlBlock(chunks);
             if (grid.remainingChunks.length > 0) {
