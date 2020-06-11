@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {Nav, Navbar} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {connect} from "react-redux";
@@ -92,6 +92,7 @@ const Navigation = (props: any) => {
 
     return (
         <Navbar bg="light">
+            <Nav.Link><Link to={"/home"}> Home </Link></Nav.Link>
             <Nav.Link onClick={homepage}>My Worlds</Nav.Link>
             {world}
             <Navbar.Collapse className="justify-content-end">
