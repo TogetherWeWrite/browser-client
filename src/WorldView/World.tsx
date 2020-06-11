@@ -119,6 +119,7 @@ const World = (props: any) => {
                         <Row>
                             <Button className={"dialog-button-close"} onClick={async() => {
                                 setChunkDetailBlock(<div/>);
+                                chunks.splice(pos,1);
                                 chunks[pos] =await loadchunk(pos,chunk, chunk.name, chunk.posY, chunk.posX);
                                 console.log(chunks[pos]);
                                 setRemainingChunkHtmlBlock(undefined);
