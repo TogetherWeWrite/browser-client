@@ -1,8 +1,9 @@
 import config from "../config.json";
 import {UpdateCellColorModel} from "../Types/UpdateCellColorModel";
 import {Chunk} from "../Types/Chunk";
+import {authenticationState} from "../reducers/authenticationReducer";
 
-export const updateColorCell = async (cellId: string, chunkId: string, worldId: string | undefined, color: string) : Promise<Chunk>=>{
+export const updateColorCell = async (cellId: string, chunkId: string, worldId: string | undefined, color: string, authObject : authenticationState) : Promise<Chunk>=>{
     if(worldId) {
         let model: UpdateCellColorModel = {
             CellId: cellId,
@@ -13,7 +14,8 @@ export const updateColorCell = async (cellId: string, chunkId: string, worldId: 
         let options: RequestInit = {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": authObject.token
             },
             body: JSON.stringify(model),
             mode: "cors",
