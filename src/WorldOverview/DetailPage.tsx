@@ -151,6 +151,7 @@ const DetailPage = (props: any) => {
 
 
         useEffect(() => {
+            console.log(props.authentication)
             loadDetailsOfWorld();
             loadStoriesOfWorld();
         }, []);
@@ -203,8 +204,8 @@ const DetailPage = (props: any) => {
             if (worldid) {
                 try {
                     worldWithStories = await GetStoriesOfWorld(worldid);
-                    let html = worldWithStories.stories.map((story: StoryRef) => <li><Link
-                        to={"/world/story/" + story.id}>{story.title}</Link></li>)
+                    let html = worldWithStories.stories.map((story: StoryRef) =>
+                        <li><Link to={"/world/story/" + story.id}>{story.title}</Link></li>);
                     setStories(<ul>{html}</ul>);
                 } catch (exception) {
                     setError(<Alert variant={"warning"} onClick={() => setError(<></>)}>{exception.message}</Alert>)
@@ -304,7 +305,10 @@ const DetailPage = (props: any) => {
     }
 ;
 const mapStateToProps = (state: any) => {
+    console.log("dasdasdass");
+
     return {
+
         authentication: state.authentication
     };
 };
