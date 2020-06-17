@@ -124,3 +124,7 @@
 .world-info-collumn{
     justify-content: flex-end;
 }
+
+.world-owner{
+    border: 2px dashed green;
+}
