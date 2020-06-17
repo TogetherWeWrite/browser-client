@@ -52,7 +52,7 @@ const World = (props: any) => {
 
     const changeColorCell = async (pos: number ,cellId: string, chunkId: string, worldId: string | undefined, color: string) => {
         try {
-            openChunkInfo(pos,await updateColorCell(cellId, chunkId, worldId, color), worldId);
+            openChunkInfo(pos,await updateColorCell(cellId, chunkId, worldId, color, props.authentication), worldId);
         }
         catch (e) {
             await AddError(e);
@@ -239,14 +239,19 @@ const World = (props: any) => {
         console.log("y", y);
         console.log("x", x);
         if (id) {
-            let chunkmodel = await PostNewChunk(id, y, x);
-            chunks.push(await loadchunk(chunks.length-1,chunkmodel, chunkmodel.name, chunkmodel.posY, chunkmodel.posX));
-            setRemainingChunkHtmlBlock(undefined);
-            setRemainingChunkHtmlBlock(chunks);
-            ggrid.grid.push(chunkmodel);
-            await sleep(10);
-            createNewChunkPositions.splice(0, createNewChunkPositions.length);
-            loadsides();
+            try {
+                let chunkmodel = await PostNewChunk(id, y, x, props.authentication);
+                chunks.push(await loadchunk(chunks.length - 1, chunkmodel, chunkmodel.name, chunkmodel.posY, chunkmodel.posX));
+                setRemainingChunkHtmlBlock(undefined);
+                setRemainingChunkHtmlBlock(chunks);
+                ggrid.grid.push(chunkmodel);
+                await sleep(10);
+                createNewChunkPositions.splice(0, createNewChunkPositions.length);
+                loadsides();
+            }catch(exception){
+                console.log(exception);
+                setError(<Alert variant={"warning"} onClick={()=>{setError(<></>)}}>{exception.message}</Alert>)
+            }
         }
     };
 
