@@ -50,93 +50,67 @@ const World = (props: any) => {
         setError(<Alert variant={"warning"} onClick={() => setError(<div/>)}>{error.message}</Alert>)
     };
 
-    const changeColorCell = async (pos: number ,cellId: string, chunkId: string, worldId: string | undefined, color: string) => {
+    const changeColorCell = async (pos: number, cellId: string, chunkId: string, worldId: string | undefined, color: string) => {
         try {
-            openChunkInfo(pos,await updateColorCell(cellId, chunkId, worldId, color, props.authentication), worldId);
-        }
-        catch (e) {
+            openChunkInfo(pos, await updateColorCell(cellId, chunkId, worldId, color, props.authentication), worldId);
+        } catch (e) {
             await AddError(e);
         }
     };
 
-    //Change Highlight in the modal of the chunk details.
-    const changeHighlight = (pos: number, chunk: Chunk, highlightx: number, highlighty: number) => {
-        console.log("highlight");
-        const arr = [[<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>,
-            <div/>,
-            <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>,
-            <div/>]];
-        for (let y = 0; y < 5; y++) {
-            for (let x = 0; x < 5; x++) {
-                var cell = chunk.cells[y][x];
-                if (y == highlighty && x == highlightx) {
-                    arr[y][x] = <div style={cellStyle(cell.color, x + 1, y + 1)}
-                                     className={"cell cell-in-dialogue highlighted"}></div>
-                    changeCellId = cell.id;
-                } else {
-                    arr[y][x] = <div style={cellStyle(cell.color, x + 1, y + 1)} onClick={() => {
-                        changeHighlight(pos,chunk, x, y)
-                    }} className={"cell cell-in-dialogue"}></div>
-                }
-            }
+    const invertColorOfCell = async (pos: any, chunk: Chunk, x: number, y: number) => {
+        let curColor = chunk.cells[y][x].color;
+        console.log(curColor);
+        if (curColor === '#000000') {
+            chunk.cells[y][x].color = '#ffffff';
+        } else {
+            chunk.cells[y][x].color = '#000000';
         }
-        setChunkDetailBlock(<div role={"dialog"} aria-modal={"true"}
-                                 className={"overlay cursor-select fade modal show"}
-                                 tabIndex={-1} style={{display: "block"}}>
-            <div aria-labelledby={"contained-modal-title-vcenter"} role={"document"}
-                 className={"modal-dialog modal-lg modal-dialog-centered"}>
-                <div className={"strong-white modal-content"}>
-                    <div className={"modal-body"}>
-                        <Row>
-                            <div className="dialog-title">
-                                <h4>
-                                    {chunk.name}
-                                </h4>
-                            </div>
-                            <p>
-                                To change the color a cell first select one, it will get highlighted, after a cell is
-                                highlighted a color selecter will apppear which will allow you to set the color of this
-                                cell.
-                            </p>
-                            <div className={"chunk modal-detail-chunk"}>
-                                {arr}
-                            </div>
-                        </Row>
-                        <Row>
-                            <input type={"color"} defaultValue={chunk.cells[highlighty][highlightx].color}
-                                   onChange={(event) => {
-                                       newColorForCell = event.target.value.toString()
-                                   }}></input>
-                        </Row>
-                        <Row>
-                            {changeCellId}
-                        </Row>
-                        <Row>
-                            <Button onClick={() => {
-                                changeColorCell(pos,changeCellId, chunk.id, id, newColorForCell)
-                            }}>Change color of highlighted</Button>
-                        </Row>
-                        <Row>
-                            <Button className={"dialog-button-close"} onClick={async() => {
-                                setChunkDetailBlock(<div/>);
-                                chunks.splice(pos,1);
-                                chunks[pos] =await loadchunk(pos,chunk, chunk.name, chunk.posY, chunk.posX);
-                                console.log(chunks[pos]);
-                                setRemainingChunkHtmlBlock(undefined);
-                                setRemainingChunkHtmlBlock(chunks);
-                            }}>close</Button>
-                        </Row>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>);
-
+        changeCellId = chunk.cells[y][x].id;
+        changeColorCell(pos, changeCellId, chunk.id, id, chunk.cells[y][x].color)
     };
+
 
     //initialize chunk details modal
     const openChunkInfo = async (pos: number, chunk: Chunk, worldid: string | undefined) => {
+        const updateGrid = async () => {
+            let index: number = 0;
+            for (let i = 0; i < ggrid.grid.length; i++) {
+                if (ggrid.grid[i].posX == chunk.posX && ggrid.grid[i].posY == chunk.posY) {
+                    index = i;
+                    break;
+                }
+            }
+            chunks[index] = await loadchunk(pos, chunk, chunk.name, chunk.posY, chunk.posX);
+            setRemainingChunkHtmlBlock(undefined);
+            setRemainingChunkHtmlBlock(chunks);
+        };
+
+        const close = async () => {
+            setChunkDetailBlock(<div/>);
+        };
+
+        const NavigateToOther = async (posx: number, posy: number) => {
+            updateGrid();
+            close();
+            let newChunkToLoad: any;
+            for (let i: number = 0; i < ggrid.grid.length; i++) {
+                if (ggrid.grid[i].posY == posy && ggrid.grid[i].posX == posx) {
+                    newChunkToLoad = ggrid.grid[i];
+                    break;
+                }
+            }
+            if (newChunkToLoad !== undefined) {
+                openChunkInfo(0, newChunkToLoad, worldid);
+            } else {
+                console.log("Chunk not found.");
+                setError(<Alert variant={"warning"} onClick={() => {
+                    setError(<div/>)
+                }}>The chunk that you tried to navigate to does not exist</Alert>)
+            }
+        };
+
+
         const arr = [[<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>,
             <div/>,
             <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>,
@@ -146,39 +120,99 @@ const World = (props: any) => {
             for (let x = 0; x < 5; x++) {
                 var cell = chunk.cells[y][x];
                 arr[y][x] = <div style={cellStyle(cell.color, x + 1, y + 1)} onClick={() => {
-                    changeHighlight(pos,chunk, x, y)
+                    invertColorOfCell(pos, chunk, x, y);
                 }} className={"cell cell-in-dialogue"}></div>
             }
         }
+
+
         setChunkDetailBlock(<div role={"dialog"} aria-modal={"true"} className={"overlay cursor-select fade modal show"}
                                  tabIndex={-1} style={{display: "block"}}>
             <div aria-labelledby={"contained-modal-title-vcenter"} role={"document"}
                  className={"modal-dialog modal-lg modal-dialog-centered"}>
                 <div className={"strong-white modal-content"}>
                     <div className={"modal-body"}>
+                        <div className="dialog-title">
+                            <h4>
+                                {chunk.name}
+                            </h4>
+                            <p>
+                                Click on a cell to change the color when black to white, and from white to black.
+                            </p>
+                        </div>
                         <Row>
-                            <div className="dialog-title">
-                                <h4>
-                                    {chunk.name}
-                                </h4>
-                                <p>
-                                    To change the color a cell first select one, it will get highlighted, after a cell
-                                    is highlighted a color selecter will apppear which will allow you to set the color
-                                    of this cell.
-                                </p>
-                            </div>
-                            <div className={"chunk modal-detail-chunk"}>
-                                {arr}
-                            </div>
+                            <Container>
+                                <Row>
+                                    <Col lg={2}>
+                                        <Button variant={"info"} onClick={() => {
+                                            NavigateToOther(chunk.posX - 1, chunk.posY - 1);
+                                        }}>
+                                            Navigate Up Left
+                                        </Button>
+                                    </Col>
+                                    <Col lg={8} className={"modal-vertical-navigation"}>
+                                        <Button variant={"info"} onClick={() => {
+                                            NavigateToOther(chunk.posX, chunk.posY - 1);
+                                        }}>
+                                            Navigate Up
+                                        </Button>
+                                    </Col>
+                                    <Col lg={2}>
+                                        <Button variant={"info"} onClick={() => {
+                                            NavigateToOther(chunk.posX + 1, chunk.posY - 1);
+                                        }}>
+                                            Navigate Up Right
+                                        </Button>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col lg={2} className={"modal-horizontal-navigation"}>
+                                        <Button variant={"info"} onClick={() => {
+                                            NavigateToOther(chunk.posX - 1, chunk.posY);
+                                        }}>
+                                            Navigate Left
+                                        </Button>
+                                    </Col>
+                                    <Col lg={8} className={"chunk modal-detail-chunk"}>
+                                        {arr}
+                                    </Col>
+                                    <Col lg={2} className={"modal-horizontal-navigation"}>
+                                        <Button variant={"info"} onClick={() => {
+                                            NavigateToOther(chunk.posX + 1, chunk.posY);
+                                        }}>
+                                            Navigate Right
+                                        </Button>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col lg={2}>
+                                        <Button variant={"info"} onClick={() => {
+                                            NavigateToOther(chunk.posX - 1, chunk.posY + 1);
+                                        }}>
+                                            Navigate Down Left
+                                        </Button>
+                                    </Col>
+                                    <Col lg={8} className={"modal-vertical-navigation"}>
+                                        <Button variant={"info"} onClick={() => {
+                                            NavigateToOther(chunk.posX, chunk.posY + 1);
+                                        }}>
+                                            Navigate Down
+                                        </Button>
+                                    </Col>
+                                    <Col lg={2}>
+                                        <Button variant={"info"} onClick={() => {
+                                            NavigateToOther(chunk.posX + 1, chunk.posY + 1);
+                                        }}>
+                                            Navigate Down Right
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </Container>
                         </Row>
                         <Row>
                             <Button className={"dialog-button-close"} onClick={async () => {
-                                setChunkDetailBlock(<div/>);
-                                chunks.splice(pos,1);
-                                chunks[pos] = await loadchunk(pos,chunk, chunk.name, chunk.posY, chunk.posX);
-                                console.log(chunks[pos]);
-                                setRemainingChunkHtmlBlock(undefined);
-                                setRemainingChunkHtmlBlock(chunks);
+                                close();
+                                updateGrid();
                             }}>close</Button>
                         </Row>
 
@@ -213,7 +247,7 @@ const World = (props: any) => {
         };
         return something;
     };
-    const loadchunk = async (pos: number,chunk: Chunk, name: string, y: number, x: number): Promise<any> => {
+    const loadchunk = async (pos: number, chunk: Chunk, name: string, y: number, x: number): Promise<any> => {
         let arr = [[<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>,
             <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>,
             <div/>]];
@@ -225,9 +259,18 @@ const World = (props: any) => {
             }
         }
 
-        return <div onClick={() => {
-            openChunkInfo(pos,chunk, id)
-        }} className={"chunk"}
+        return <div id={chunk.id} onAnimationEnd={() => {
+            let element = document.getElementById(chunk.id)
+            if (element) {
+                element.classList.remove("animation-chunk-loading-in")
+                console.log(element.classList);
+            } else {
+                console.log("failed to get element")
+                //ignore
+            }
+        }} onClick={() => {
+            openChunkInfo(pos, chunk, id)
+        }} className={"chunk animation-chunk-loading-in"}
                     aria-posx={x}
                     aria-posy={y}
                     style={chunkStyle(x, y)}>
@@ -248,15 +291,26 @@ const World = (props: any) => {
                 await sleep(10);
                 createNewChunkPositions.splice(0, createNewChunkPositions.length);
                 loadsides();
-            }catch(exception){
+            } catch (exception) {
                 console.log(exception);
-                setError(<Alert variant={"warning"} onClick={()=>{setError(<></>)}}>{exception.message}</Alert>)
+                setError(<Alert variant={"warning"} onClick={() => {
+                    setError(<></>)
+                }}>{exception.message}</Alert>)
             }
         }
     };
 
     const loadPossibleNewChunk = async (y: number, x: number) => {
-        return <div className={"possible-new-chunk"} onClick={() => CreateNewChunk(y, x)}
+        return <div id={y+"yx"+x}
+            onAnimationEnd={() => {
+                let element = document.getElementById(y+"yx"+x);
+                if (element) {
+                    element.classList.remove("animation-new-chunk-loading-in")
+                } else {
+                    //ignore
+                }
+            }}
+            className={"possible-new-chunk animation-new-chunk-loading-in"} onClick={() => CreateNewChunk(y, x)}
                     aria-posx={x}
                     aria-posy={y}
                     style={
@@ -273,12 +327,12 @@ const World = (props: any) => {
         var newPartWorld = await LoadChunksOfWorld(ids);
         for (let i: number = 0; i < newPartWorld.chunks.length; i++) {
             let chunk: Chunk = newPartWorld.chunks[i];
-            chunks.push(await loadchunk(chunks.length-1,chunk, chunk.name, chunk.posY, chunk.posX))
+            chunks.push(await loadchunk(chunks.length - 1, chunk, chunk.name, chunk.posY, chunk.posX))
             ggrid.grid.push(chunk);
         }
         await sleep(2);
-        setRemainingChunkHtmlBlock(undefined);
-        setRemainingChunkHtmlBlock(chunks);
+        // setRemainingChunkHtmlBlock(undefined);
+        // setRemainingChunkHtmlBlock(chunks);
         if (newPartWorld.doneLoading === false) {
             await LoadRemainingChunks(newPartWorld.remainingChunks);
         }
@@ -286,17 +340,19 @@ const World = (props: any) => {
 
     const initiliaze = async () => {
         try {
-            chunks.splice(0,chunks.length);
+            chunks.splice(0, chunks.length);
             let grid = await GetWorldGrid(id);
             console.log("remaining", grid.remainingChunks);
             setGrid(grid);
 
             for (let y: number = 0; y < grid.grid.length; y++) {
-                chunks.push(await loadchunk(chunks.length-1,grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY, grid.grid[y].posX));
+                chunks.push(await loadchunk(chunks.length - 1, grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY, grid.grid[y].posX));
             }
             setInitChunkHtmlBlock(chunks);
             if (grid.remainingChunks.length > 0) {
                 await LoadRemainingChunks(grid.remainingChunks);
+                setRemainingChunkHtmlBlock(undefined);
+                setRemainingChunkHtmlBlock(chunks);
             }
             setNewCellsHtmlBlock(await loadsides());
             chunks.shift();//first remove

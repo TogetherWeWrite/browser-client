@@ -7,7 +7,7 @@ import {authenticationState} from "../reducers/authenticationReducer";
 import "./world.css";
 import {connect} from "react-redux";
 import {GetDetailsOfWorld} from "../ApiFunctions/World/GetDetailsOfWorld";
-import {GetUserIdFromUsername} from "../ApiFunctions/User/GetUserIdFromUsername";
+import {GetUserIdFromUsername}  from "../ApiFunctions/User/GetUserIdFromUsername";
 import {deleteWriterFromWorld} from "../ApiFunctions/Writer/DeleteWriterFromWorld";
 import {AddWriterToWorld} from "../ApiFunctions/Writer/AddWriterToWorld";
 import {GetStoriesOfWorld} from "../ApiFunctions/World/GetStoriesOfWorld";
