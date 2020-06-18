@@ -8,6 +8,41 @@
     -webkit-border-radius: 1px;
     -moz-border-radius: 1px;
     border-radius: 1px;
+
+}
+
+.animation-chunk-loading-in{
+    animation-name: loading-chunk-in;
+    animation-duration: 2s;
+}
+
+@keyframes loading-chunk-in {
+    0%{
+        transform: scale(0.1) ;
+    }
+    90%{
+        transform: scale(1.05);
+    }
+    100%{
+        transform: scale(1.0);
+    }
+}
+
+.animation-new-chunk-loading-in{
+    -webkit-animation-name: loading-newchunk-in;
+    -moz-animation-name: loading-newchunk-in;
+    -o-animation-name: loading-newchunk-in;
+    animation-name: loading-newchunk-in;
+    animation-duration: 1s;
+}
+
+@keyframes loading-newchunk-in {
+    0%{
+        transform: scale(0.1) ;
+    }
+    100%{
+        transform: scale(1.0);
+    }
 }
 
 .possible-new-chunk{
@@ -104,6 +139,10 @@ background-color: rgba(0,0,255,0);
     text-align: center;
 }
 
+.dialog-title>p{
+    text-align: center;
+}
+
 .dialog-button-close{
     margin-top: 50px;
 }
@@ -111,10 +150,10 @@ background-color: rgba(0,0,255,0);
 .modal-detail-chunk{
     border:3px dashed gray;
     grid-gap: 2px;
-    margin-left: 20%;
-    margin-top: 5%;
+    /*margin-left: 20%;*/
+    /*margin-top: 5%;*/
     height:500px;
-    width:500px;
+    /*width:500px;*/
 }
 
 .modal-detail-chunk:hover {
@@ -156,4 +195,13 @@ background-color: rgba(0,0,255,0);
     100% {
         transform:scale(1.01);
     }
+}
+
+.modal-horizontal-navigation{
+     padding-top: 25%;
+ }
+
+.modal-vertical-navigation{
+    padding-top:10px;
+    padding-left: 25%;
 }

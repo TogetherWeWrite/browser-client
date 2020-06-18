@@ -10,7 +10,7 @@ import Overview from "./WorldOverview/Home";
 import WorldDetails from "./WorldOverview/DetailPage"
 import BrowseWorlds from "./WorldOverview/BrowseWorlds";
 import World from "./WorldView/World";
-import StoryManage from "./Story/StoryManage";
+import StoryManage from './Story/StoryManage';
 
 
 function App() {
