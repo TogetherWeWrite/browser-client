@@ -348,13 +348,12 @@ const World = (props: any) => {
             for (let y: number = 0; y < grid.grid.length; y++) {
                 chunks.push(await loadchunk(chunks.length - 1, grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY, grid.grid[y].posX));
             }
-
+            setInitChunkHtmlBlock(chunks);
             if (grid.remainingChunks.length > 0) {
                 await LoadRemainingChunks(grid.remainingChunks);
                 setRemainingChunkHtmlBlock(undefined);
                 setRemainingChunkHtmlBlock(chunks);
             }
-            //setInitChunkHtmlBlock(chunks);
             setNewCellsHtmlBlock(await loadsides());
             chunks.shift();//first remove
             //setRemainingChunkHtmlBlock(chunks);
