@@ -261,10 +261,11 @@ const World = (props: any) => {
 
         return <div id={chunk.id} onAnimationEnd={() => {
             let element = document.getElementById(chunk.id)
-            console.log(element);
             if (element) {
                 element.classList.remove("animation-chunk-loading-in")
+                console.log(element.classList);
             } else {
+                console.log("failed to get element")
                 //ignore
             }
         }} onClick={() => {
@@ -303,7 +304,6 @@ const World = (props: any) => {
         return <div id={y+"yx"+x}
             onAnimationEnd={() => {
                 let element = document.getElementById(y+"yx"+x);
-                console.log(element);
                 if (element) {
                     element.classList.remove("animation-new-chunk-loading-in")
                 } else {
@@ -353,8 +353,8 @@ const World = (props: any) => {
                 await LoadRemainingChunks(grid.remainingChunks);
                 setRemainingChunkHtmlBlock(undefined);
                 setRemainingChunkHtmlBlock(chunks);
-                setInitChunkHtmlBlock(chunks);
             }
+            //setInitChunkHtmlBlock(chunks);
             setNewCellsHtmlBlock(await loadsides());
             chunks.shift();//first remove
             //setRemainingChunkHtmlBlock(chunks);
