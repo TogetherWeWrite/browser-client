@@ -28,6 +28,7 @@ const World = (props: any) => {
     const [newCellsHtmlBlock, setNewCellsHtmlBlock] = React.useState();
     const [error, setError] = React.useState(<div/>);
     const [chunkDetailBlock, setChunkDetailBlock] = React.useState<any>(<div></div>);
+    const [overlay,setOverlay] = React.useState<JSX.Element>(<></>);
 
     //x y position.
     interface TwoDPos {
@@ -268,7 +269,15 @@ const World = (props: any) => {
                 console.log("failed to get element")
                 //ignore
             }
-        }} onClick={() => {
+        }} onMouseEnter={() => {
+            let element = document.getElementById(chunk.id);
+            if (element) {
+                element.classList.remove("animation-chunk-loading-in")
+                console.log(element.classList);
+            } else {
+                console.log("failed to get element")
+                //ignore
+            }}} onClick={() => {
             openChunkInfo(pos, chunk, id)
         }} className={"chunk animation-chunk-loading-in"}
                     aria-posx={x}
@@ -331,8 +340,8 @@ const World = (props: any) => {
             ggrid.grid.push(chunk);
         }
         await sleep(2);
-        // setRemainingChunkHtmlBlock(undefined);
-        // setRemainingChunkHtmlBlock(chunks);
+        setRemainingChunkHtmlBlock(undefined);
+        setRemainingChunkHtmlBlock(chunks);
         if (newPartWorld.doneLoading === false) {
             await LoadRemainingChunks(newPartWorld.remainingChunks);
         }
@@ -340,6 +349,10 @@ const World = (props: any) => {
 
     const initiliaze = async () => {
         try {
+            setOverlay(<div className={"loading"}>
+                <h1>Loading....</h1>
+
+            </div>)
             chunks.splice(0, chunks.length);
             let grid = await GetWorldGrid(id);
             console.log("remaining", grid.remainingChunks);
@@ -351,12 +364,13 @@ const World = (props: any) => {
             setInitChunkHtmlBlock(chunks);
             if (grid.remainingChunks.length > 0) {
                 await LoadRemainingChunks(grid.remainingChunks);
-                setRemainingChunkHtmlBlock(undefined);
-                setRemainingChunkHtmlBlock(chunks);
+                // setRemainingChunkHtmlBlock(undefined);
+                // setRemainingChunkHtmlBlock(chunks);
             }
             setNewCellsHtmlBlock(await loadsides());
             chunks.shift();//first remove
             //setRemainingChunkHtmlBlock(chunks);
+            setOverlay(<></>)
         } catch (error) {
             console.log(error);
             AddError(error);
@@ -435,6 +449,7 @@ const World = (props: any) => {
     };
 
     return (<div>
+        {overlay}
         {chunkDetailBlock}
         {error}
         <div className={"center"}>
