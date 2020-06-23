@@ -9,6 +9,9 @@ import {Writer} from "../Types/World";
 import {FollowWorldModel} from "./FollowWorldModel";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
+import {UnFollowWorld} from "../ApiFunctions/World/PostUnFollowWorld";
+import {FollowWorld} from "../ApiFunctions/World/PostFollowWorld";
+import {GetWorldsSortedByPopularity} from "../ApiFunctions/World/GetWorldsSortedByPopularity";
 
 const BrowseWorlds = (props: any) => {
     const [page, setPage] = React.useState(1); //Page number, page contains 25 worlds
@@ -174,76 +177,3 @@ const mapStateToProps = (state: any) => {
 };
 
 export default withRouter(connect(mapStateToProps)(BrowseWorlds));
-
-
-export async function GetWorldsSortedByPopularity(page: number): Promise<WorldWithFollowers[]> {
-    let request: string = "?page=" + page.toString();
-
-    let options: RequestInit = {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        mode: "cors",
-        cache: "default"
-    };
-
-    let response = await fetch(config.SERVICES.POPULARLIST + request, options);
-    if (response.status === 200) {
-        return JSON.parse(await response.text());
-    } else {
-        throw new Error(await response.text())
-    }
-}
-
-export async function FollowWorld(id: string, auth: authenticationState) {
-    let body : FollowWorldModel ={
-        follow: true,
-        UserId : auth.id,
-        WorldId : id
-    };
-    let options : RequestInit ={
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization" : auth.token
-        },
-        body : JSON.stringify(body),
-        mode: "cors",
-        cache: "default"
-    };
-
-    let response = await fetch(config.SERVICES.FOLLOW,options);
-    if(response.status === 200){
-        return;
-    }
-    else{
-        throw new Error(await response.text());
-    }
-}
-
-export async function UnFollowWorld(id: string, auth: authenticationState) {
-    let body : FollowWorldModel ={
-        follow: false,
-        UserId : auth.id,
-        WorldId : id
-    };
-    let options : RequestInit ={
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization" : auth.token
-        },
-        body : JSON.stringify(body),
-        mode: "cors",
-        cache: "default"
-    };
-
-    let response = await fetch(config.SERVICES.FOLLOW,options);
-    if(response.status === 200){
-        return;
-    }
-    else{
-        throw new Error(await response.text());
-    }
-}
