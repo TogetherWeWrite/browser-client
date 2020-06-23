@@ -271,7 +271,6 @@ const World = (props: any) => {
             let element = document.getElementById(chunk.id);
             if (element) {
                 element.classList.remove("animation-chunk-loading-in")
-                console.log(element.classList);
             } else {
                 console.log("failed to get element")
                 //ignore
@@ -297,11 +296,66 @@ const World = (props: any) => {
                 ggrid.grid.push(chunkmodel);
                 await sleep(10);
                 createNewChunkPositions.splice(0, createNewChunkPositions.length);
-                var child = document.getElementById(y+"yx"+x);
+                let child : HTMLElement | null = document.getElementById(y+"yx"+x);
                 if(child !== null){
-                    // @ts-ignore
-                    child.parentNode.removeChild(child);
                     //TODO Load possible new chunks to the side of the just create chunk Issue:WES-209
+                    var posNeighbors : TwoDPos[] = [];
+
+                    //Step 1 create list of 2dpos of possible locations for new chunks
+                    posNeighbors.push(
+                        {posX: x+1 , posY: y}, // to the right
+                        {posX: x+1 , posY: y+1}, //to the top right
+                        {posX: x+1 , posY: y-1}, //to the Bottom right
+                        {posX: x-1 , posY: y}, //to the left
+                        {posX: x-1 , posY: y+1}, //to the top left
+                        {posX: x-1 , posY: y-1}, //to the bottom left
+                        {posX: x , posY: y-1}, //to the bottom
+                        {posX: x , posY: y+1}, //to the top
+                        );
+                    //step 2 check existing chunks if it contains these coordinates if so remove it from the list
+                    for(let i : number =0; i<ggrid.grid.length;i++){
+                        let ntaken : boolean = false;
+                        let ntoremove : TwoDPos = {posY:0, posX:0};
+                        posNeighbors.some((neighbor) => {if(neighbor.posX == ggrid.grid[i].posX && neighbor.posY == ggrid.grid[i].posY){
+                            ntaken = true;
+                            ntoremove = neighbor;
+                        }});
+                        if(ntaken){
+                            console.log("posneighbor reduce: "+ ntoremove.posY, " yx " + ntoremove.posX);
+                            console.log(posNeighbors);
+                            posNeighbors = posNeighbors.filter(function(obj){
+                                return (obj !== ntoremove);
+                            });
+                            console.log(posNeighbors);
+                        }
+                    }
+                    let newlist : TwoDPos[] = posNeighbors;
+                    for(let i: number = 0; i< posNeighbors.length; i++){
+                        if(document.getElementById(posNeighbors[i].posY+"yx"+posNeighbors[i].posX) !== null){
+                            newlist = newlist.filter(function(obj){
+                                return (obj !== posNeighbors[i]);
+                            });
+                        }
+                    }
+                    console.log(newlist);
+                    for(let i: number = 0; i< newlist.length; i++){
+                        var newchunkhtml = await loadPossibleNewChunk(newlist[i].posY, newlist[i].posX);
+                        htmlofNewChunkPoss.push(newchunkhtml);
+                    }
+
+                    //step remove old
+                    let indextoRemove =0;
+                    for(let i:number=0; i < htmlofNewChunkPoss.length;i++){
+                        if(htmlofNewChunkPoss[i].props.id == y+"yx"+x){
+                            indextoRemove = i;
+                            break;
+                        }
+                    }
+                    htmlofNewChunkPoss[indextoRemove] = <></>;
+                    setNewCellsHtmlBlock(undefined);
+                    setNewCellsHtmlBlock(htmlofNewChunkPoss);
+
+
                 }
             } catch (exception) {
                 console.log(exception);
@@ -362,7 +416,7 @@ const World = (props: any) => {
             for (let y: number = 0; y < grid.grid.length; y++) {
                 chunks.push(await loadchunk(chunks.length - 1, grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY, grid.grid[y].posX));
             }
-            //setInitChunkHtmlBlock(chunks);
+            setInitChunkHtmlBlock(chunks);
             if (grid.remainingChunks.length > 0) {
                 await LoadRemainingChunks(grid.remainingChunks);
                 // setRemainingChunkHtmlBlock(undefined);
