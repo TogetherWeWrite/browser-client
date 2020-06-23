@@ -52,9 +52,9 @@ const World = (props: any) => {
         setError(<Alert variant={"warning"} onClick={() => setError(<div/>)}>{error.message}</Alert>)
     };
 
-    const changeColorCell = async (pos: number, cellId: string, chunkId: string, worldId: string | undefined, color: string) => {
+    const changeColorCell = async (pos: number, chunkId: string, worldId: string | undefined, color: string,y:number,x:number) => {
         try {
-            openChunkInfo(pos, await updateColorCell(cellId, chunkId, worldId, color, props.authentication), worldId);
+            openChunkInfo(pos, await updateColorCell( chunkId, worldId, color, props.authentication,y,x), worldId);
         } catch (e) {
             await AddError(e);
         }
@@ -67,8 +67,7 @@ const World = (props: any) => {
         } else {
             chunk.cells[y][x].color = '#000000';
         }
-        changeCellId = chunk.cells[y][x].id;
-        changeColorCell(pos, changeCellId, chunk.id, id, chunk.cells[y][x].color)
+        changeColorCell(pos, chunk.id, id, chunk.cells[y][x].color,y,x)
     };
 
 
