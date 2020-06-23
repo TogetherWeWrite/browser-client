@@ -1,0 +1,22 @@
+.feature-list{
+    list-style: none;
+}
+
+.feature-list>h4{
+    color:#444444;
+}
+
+.feature-list>li::before{
+    content:"[+]";
+    padding-right: 30px;
+    padding-left: 10px;
+    color: blue;
+}
+.feature-list>li::after{
+    content:".";
+    color: blue;
+}
+
+.gradient-home-background {
+    background-image: repeating-linear-gradient(rgba(247, 255, 194, 0.8), rgba(230, 150, 108, 0.2) 40%,rgba(255, 255, 255, 0.8));
+}

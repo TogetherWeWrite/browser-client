@@ -10,6 +10,7 @@ import Overview from "./WorldOverview/Home";
 import WorldDetails from "./WorldOverview/DetailPage"
 import BrowseWorlds from "./WorldOverview/BrowseWorlds";
 import World from "./WorldView/World";
+import StoryManage from './Story/StoryManage';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                             <Route exact path='/login' component={Login}/>
                             <Route exact path='/' component={Overview}/>
                             <Route path='/world/details/:worldid' component={WorldDetails}/>
+                            <Route path='/world/story/:id' component={StoryManage}/>
                             <Route path='/world/:id' component={World}/>
                             <Route exact path='/browseworlds' component={BrowseWorlds}/>
                             <Route exact path='/home' component={Home}/>

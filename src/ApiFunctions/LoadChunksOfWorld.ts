@@ -14,9 +14,7 @@ export const LoadChunksOfWorld = async(id :string[]) : Promise<LoadPartOfWorldRe
         mode: "cors",
         cache: "default"
     };
-    console.log("fetching");
     let response: Response = await fetch(config.SERVICES.CHUNKLOADING, options);
-    console.log("done fetching");
     let body = await response.text();
     if (response.status === 200) {//OK
         return JSON.parse(body);

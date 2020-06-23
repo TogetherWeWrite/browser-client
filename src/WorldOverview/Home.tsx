@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {authenticationState} from "../reducers/authenticationReducer";
-import {WorldWithDetails} from "../Types/World"
+import {WorldWithDetails, Writer} from "../Types/World"
 import config from "../config.json";
 import {Button, Col, Container, Form, Modal, Row, Alert} from "react-bootstrap"
 import "./world.css";
@@ -118,7 +118,7 @@ const Overview = (props: any) => {
                                 <strong>Title</strong>
                             </Col>
                             <Col lg={3}>
-                                <strong>Owner</strong>
+                                <strong>Role</strong>
                             </Col>
                             <Col lg={3}>
                                 <strong>Details</strong>
@@ -182,13 +182,78 @@ const Overview = (props: any) => {
     const loadWorlds = async () => {
         if (authObject.isAuthenticated) {
             worlds = await GetWorldsFrom(authObject);
-            const listItems = worlds.map((world) =>//TODO if world.writer does not contain you and you are not the writer make it different because then you are a follower.
-                <Row className={"world-info-row"}>
+            //step 1 split the list in 3 lists
+            // - owner list
+            // - writer list
+            // follower list, aka remaining
+            let worldOwner : WorldWithDetails[] = [];
+            let worldWriter: WorldWithDetails[] = [];
+            let worldFollower : WorldWithDetails[] = [];
+            for(let i : number =0; i < worlds.length;i++){
+                let found = false;
+                if(worlds[i].owner.id == props.authentication.id){
+                    worldOwner.push(worlds[i]);
+                    found = true;
+                }
+                else{
+                    if(worlds[i].writers.length > 0) {
+                        for (let j: number = 0; j< worlds[i].writers.length; j++) {
+                            if (worlds[i].writers[j].id == props.authentication.id) {
+                                worldWriter.push(worlds[i]);
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(found === false){
+                    worldFollower.push(worlds[i]);
+                }
+            }
+            const listItems = worldOwner.map((world) =>//TODO if world.writer does not contain you and you are not the writer make it different because then you are a follower.
+                    <Row className={"world-info-row world-row world-owner"}>
+                        <Col lg={2}>
+                            {world.title}
+                        </Col>
+                        <Col lg={3}>
+                            Owner
+                        </Col>
+                        <Col lg={3}>
+                            <Link to={"/world/details/" + world.worldId}>See Details</Link>
+                        </Col>
+                        <Col lg={2}>
+                            <Link to={"/world/" + world.worldId}>See grid</Link>
+                        </Col>
+                        <Col lg={2}>
+                            <Button variant={"danger"} type={"button"}
+                                    onClick={() => deleteWorld(world.worldId, world.title)}> delete </Button>
+                        </Col>
+                    </Row>
+            );
+            const listWriterItems = worldWriter.map((world) =>
+            <Row className={"world-info-row world-row world-writer"}>
+                <Col lg={2}>
+                    {world.title}
+                </Col>
+                <Col lg={3}>
+                    Writer
+                </Col>
+                <Col lg={3}>
+                    <Link to={"/world/details/" + world.worldId}>See Details</Link>
+                </Col>
+                <Col lg={2}>
+                    <Link to={"/world/" + world.worldId}>See grid</Link>
+                </Col>
+                <Col lg={2}>
+                </Col>
+            </Row>
+        );
+            const listFollower = worldFollower.map((world) =>
+                <Row className={"world-info-row world-row world-follower"}>
                     <Col lg={2}>
                         {world.title}
                     </Col>
                     <Col lg={3}>
-                        {world.owner.name}
+                        Follower
                     </Col>
                     <Col lg={3}>
                         <Link to={"/world/details/" + world.worldId}>See Details</Link>
@@ -197,12 +262,16 @@ const Overview = (props: any) => {
                         <Link to={"/world/" + world.worldId}>See grid</Link>
                     </Col>
                     <Col lg={2}>
-                        <Button variant={"danger"} type={"button"}
-                                onClick={() => deleteWorld(world.worldId, world.title)}> delete </Button>
                     </Col>
                 </Row>
             );
-            setUl(<Container fluid={true}>{listItems}</Container>);
+
+
+
+            setUl(<Container fluid={true}>
+                {listItems}
+                {listWriterItems}
+                {listFollower}</Container>);
             setOverview(<div></div>);
         } else {
             setOverview(<div>not logged in no personal view</div>)

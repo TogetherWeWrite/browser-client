@@ -8,6 +8,47 @@
     -webkit-border-radius: 1px;
     -moz-border-radius: 1px;
     border-radius: 1px;
+    grid-gap:0px;
+    border:lightgray solid 1px;
+
+}
+
+.animation-chunk-loading-in{
+    animation-name: loading-chunk-in;
+    -webkit-animation-iteration-count: 1;
+    -moz-animation-iteration-count: 1;
+    -o-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    animation-duration: 2s;
+}
+
+@keyframes loading-chunk-in {
+    0%{
+        transform: scale(0.1) ;
+    }
+    90%{
+        transform: scale(1.05);
+    }
+    100%{
+        transform: scale(1.0);
+    }
+}
+
+.animation-new-chunk-loading-in{
+    -webkit-animation-name: loading-newchunk-in;
+    -moz-animation-name: loading-newchunk-in;
+    -o-animation-name: loading-newchunk-in;
+    animation-name: loading-newchunk-in;
+    animation-duration: 1s;
+}
+
+@keyframes loading-newchunk-in {
+    0%{
+        transform: scale(0.1) ;
+    }
+    100%{
+        transform: scale(1.0);
+    }
 }
 
 .possible-new-chunk{
@@ -69,7 +110,7 @@ align-items: center;
 justify-content: center;
 margin-top: 30px;
 width: 100%;
-height: 800px;
+height: calc(100vh - 101px - 20vh);
 background-color: rgba(0,0,255,0);
 }
 @keyframes pulse {
@@ -104,6 +145,10 @@ background-color: rgba(0,0,255,0);
     text-align: center;
 }
 
+.dialog-title>p{
+    text-align: center;
+}
+
 .dialog-button-close{
     margin-top: 50px;
 }
@@ -111,15 +156,14 @@ background-color: rgba(0,0,255,0);
 .modal-detail-chunk{
     border:3px dashed gray;
     grid-gap: 2px;
-    margin-left: 20%;
-    margin-top: 5%;
+    /*margin-left: 20%;*/
+    /*margin-top: 5%;*/
     height:500px;
-    width:500px;
+    /*width:500px;*/
 }
 
 .modal-detail-chunk:hover {
     animation-play-state: paused !important;
-
 }
 
 .cell-in-dialogue{
@@ -134,7 +178,7 @@ background-color: rgba(0,0,255,0);
     animation-direction: alternate;
     animation-timing-function: ease-out;
     animation-play-state: running;
-    border:solid 1px blue;
+    border:solid 2px blue;
 
 }
 
@@ -142,7 +186,7 @@ background-color: rgba(0,0,255,0);
     border: 4px solid blue;
 }
 .highlighted:hover{
-    border: 4px solid blue !important;
+    border: 6px solid blue !important;
 }
 
 
@@ -151,9 +195,53 @@ background-color: rgba(0,0,255,0);
         transform:scale(1.00);
     }
     50%{
-        transform:scale(1.03);
+        transform:scale(1.00);
     }
     100% {
-        transform:scale(1.01);
+        transform:scale(1.00);
     }
+}
+
+.modal-horizontal-navigation{
+     padding-top: 25%;
+ }
+
+.modal-vertical-navigation{
+    padding-top:10px;
+    padding-left: 25%;
+}
+
+.loading{
+    position: fixed; /* Sit on top of the page content */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    align-items: center;
+    padding-left: 35%;
+    padding-top: 20%;
+    --webkit-animation: loading-overlay-animation 4s ease infinite;
+    -moz-animation: loading-overlay-animation 4s ease infinite;
+    animation: loading-overlay-animation 4s ease infinite;
+    background-size: 600% 600%;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255,0.2), rgba(180,180,180,0.2), rgba(255,255,255,0.2));
+}
+
+@-webkit-keyframes loading-overlay-animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes loading-overlay-animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes loading-overlay-animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }

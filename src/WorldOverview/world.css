@@ -119,3 +119,18 @@
     margin-bottom: 5px;
     padding: 3px 3px;
 }
+
+
+.world-info-collumn{
+    justify-content: flex-end;
+}
+
+.world-owner{
+    border: 2px dashed green;
+}
+
+.detail-page{
+    height:20vh;
+    overflow-y: scroll;
+    margin-top: 10px;
+}
