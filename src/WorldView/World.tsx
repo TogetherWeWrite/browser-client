@@ -16,6 +16,7 @@ import {Simulate} from "react-dom/test-utils";
 import {initCreateNewChunkModel} from "../Types/CreateNewChunkModel";
 import {Modal} from "react-bootstrap";
 import {updateColorCell} from "../ApiFunctions/updateColorCell";
+import {DetailPage} from "../WorldOverview/DetailPage";
 
 const World = (props: any) => {
     const {id} = useParams();
@@ -29,7 +30,7 @@ const World = (props: any) => {
     const [error, setError] = React.useState(<div/>);
     const [chunkDetailBlock, setChunkDetailBlock] = React.useState<any>(<div></div>);
     const [overlay,setOverlay] = React.useState<JSX.Element>(<></>);
-
+    let htmlofNewChunkPoss: any[];
     //x y position.
     interface TwoDPos {
         posX: number,
@@ -61,7 +62,6 @@ const World = (props: any) => {
 
     const invertColorOfCell = async (pos: any, chunk: Chunk, x: number, y: number) => {
         let curColor = chunk.cells[y][x].color;
-        console.log(curColor);
         if (curColor === '#000000') {
             chunk.cells[y][x].color = '#ffffff';
         } else {
@@ -83,6 +83,7 @@ const World = (props: any) => {
                 }
             }
             chunks[index] = await loadchunk(pos, chunk, chunk.name, chunk.posY, chunk.posX);
+            ggrid.grid[index] = chunk;
             setRemainingChunkHtmlBlock(undefined);
             setRemainingChunkHtmlBlock(chunks);
         };
@@ -112,17 +113,15 @@ const World = (props: any) => {
         };
 
 
-        const arr = [[<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>,
-            <div/>,
-            <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>,
-            <div/>]];
+        const arr : any[]= [];
 
-        for (let y = 0; y < 5; y++) {
-            for (let x = 0; x < 5; x++) {
+        for (let y = 0; y < 16; y++) {
+            arr.push([]);
+            for (let x = 0; x < 16; x++) {
                 var cell = chunk.cells[y][x];
-                arr[y][x] = <div style={cellStyle(cell.color, x + 1, y + 1)} onClick={() => {
+                arr[y].push(<div style={cellStyle(cell.color, x + 1, y + 1)} onClick={() => {
                     invertColorOfCell(pos, chunk, x, y);
-                }} className={"cell cell-in-dialogue"}></div>
+                }} className={"cell cell-in-dialogue"}></div>);
             }
         }
 
@@ -249,14 +248,13 @@ const World = (props: any) => {
         return something;
     };
     const loadchunk = async (pos: number, chunk: Chunk, name: string, y: number, x: number): Promise<any> => {
-        let arr = [[<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>,
-            <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>, <div/>], [<div/>, <div/>, <div/>, <div/>,
-            <div/>]];
+        let arr : any[]= [];
 
-        for (let y = 0; y < 5; y++) {
-            for (let x = 0; x < 5; x++) {
+        for (let y = 0; y < 16; y++) {
+            arr.push([]);
+            for (let x = 0; x < 16; x++) {
                 var cell = chunk.cells[y][x];
-                arr[y][x] = <div style={cellStyle(cell.color, x + 1, y + 1)} className={"cell"}></div>
+                arr[y].push(<div style={cellStyle(cell.color, x + 1, y + 1)} className={"cell"}></div>);
             }
         }
 
@@ -279,7 +277,7 @@ const World = (props: any) => {
                 //ignore
             }}} onClick={() => {
             openChunkInfo(pos, chunk, id)
-        }} className={"chunk animation-chunk-loading-in"}
+        }} className={"chunk"}
                     aria-posx={x}
                     aria-posy={y}
                     style={chunkStyle(x, y)}>
@@ -299,7 +297,12 @@ const World = (props: any) => {
                 ggrid.grid.push(chunkmodel);
                 await sleep(10);
                 createNewChunkPositions.splice(0, createNewChunkPositions.length);
-                loadsides();
+                var child = document.getElementById(y+"yx"+x);
+                if(child !== null){
+                    // @ts-ignore
+                    child.parentNode.removeChild(child);
+                    //TODO Load possible new chunks to the side of the just create chunk Issue:WES-209
+                }
             } catch (exception) {
                 console.log(exception);
                 setError(<Alert variant={"warning"} onClick={() => {
@@ -319,7 +322,7 @@ const World = (props: any) => {
                     //ignore
                 }
             }}
-            className={"possible-new-chunk animation-new-chunk-loading-in"} onClick={() => CreateNewChunk(y, x)}
+            className={"possible-new-chunk "} onClick={() => CreateNewChunk(y, x)}
                     aria-posx={x}
                     aria-posy={y}
                     style={
@@ -351,24 +354,22 @@ const World = (props: any) => {
         try {
             setOverlay(<div className={"loading"}>
                 <h1>Loading....</h1>
-
-            </div>)
+            </div>);
             chunks.splice(0, chunks.length);
             let grid = await GetWorldGrid(id);
             console.log("remaining", grid.remainingChunks);
             setGrid(grid);
-
             for (let y: number = 0; y < grid.grid.length; y++) {
                 chunks.push(await loadchunk(chunks.length - 1, grid.grid[y], "chunk pos= [" + grid.grid[y].posY + 1 + "," + grid.grid[y].posX + 1 + "]", grid.grid[y].posY, grid.grid[y].posX));
             }
-            setInitChunkHtmlBlock(chunks);
+            //setInitChunkHtmlBlock(chunks);
             if (grid.remainingChunks.length > 0) {
                 await LoadRemainingChunks(grid.remainingChunks);
                 // setRemainingChunkHtmlBlock(undefined);
                 // setRemainingChunkHtmlBlock(chunks);
             }
             setNewCellsHtmlBlock(await loadsides());
-            chunks.shift();//first remove
+            //chunks.shift();//first remove
             //setRemainingChunkHtmlBlock(chunks);
             setOverlay(<></>)
         } catch (error) {
@@ -439,7 +440,7 @@ const World = (props: any) => {
                 }
             }
         }
-        let htmlofNewChunkPoss: any[] = [];
+        htmlofNewChunkPoss = [];
         for (let o: number = 0; o < createNewChunkPositions.length; o++) {
             htmlofNewChunkPoss.push(await loadPossibleNewChunk(createNewChunkPositions[o].posY, createNewChunkPositions[o].posX));
         }
@@ -449,11 +450,12 @@ const World = (props: any) => {
     };
 
     return (<div>
-        {overlay}
         {chunkDetailBlock}
         {error}
+        {DetailPage(props,id)}
         <div className={"center"}>
-            <div className={"grid-container"}>
+            <div id={"grid"} className={"grid-container"}>
+                {overlay}
                 {remainingChunkHtmlBlock}
                 {initChunkHtmlBlock}
                 {newCellsHtmlBlock}
