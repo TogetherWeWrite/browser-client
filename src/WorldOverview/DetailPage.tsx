@@ -130,13 +130,12 @@ const AddStoryDialogue = (props: any) => {
 
 };
 
-const DetailPage = (props: any) => {
+export const DetailPage = (props: any, worldid: string | undefined) => {
         const [error, setError] = React.useState(<div/>);
         const [stories, setStories] = React.useState<JSX.Element>(<></>);
 
         let world: WorldWithDetails;
         const [page, setPage] = React.useState(<div>loading...</div>)
-        let {worldid} = useParams();
         const [writersBlock, setWritersBlock] = React.useState(<div>loading.......</div>);
         const [addWriterBlock, setAddWriterBlock] = React.useState(<div className={"lds-dual-ring"}/>);
         let isOwner: boolean = false;
@@ -151,7 +150,6 @@ const DetailPage = (props: any) => {
 
 
         useEffect(() => {
-            console.log(props.authentication)
             loadDetailsOfWorld();
             loadStoriesOfWorld();
         }, []);
@@ -231,7 +229,6 @@ const DetailPage = (props: any) => {
         const clickAddStory = async (title: string): Promise<boolean> => {
             if (worldid) {
 
-                console.log(title);
                 let newStory = await PostCreateStory(worldid, title, props.authentication);
                 await loadStoriesOfWorld();
                 setShowStoryDialogue(false);
@@ -279,7 +276,7 @@ const DetailPage = (props: any) => {
             }
         };
 
-        return (<Container fluid={true}>
+        return (<Container fluid={true} className={"detail-page"}>
             {error}
             <AddWriterDialogue show={show}
                                onHide={() => setShow(false)}
@@ -305,10 +302,7 @@ const DetailPage = (props: any) => {
     }
 ;
 const mapStateToProps = (state: any) => {
-    console.log("dasdasdass");
-
     return {
-
         authentication: state.authentication
     };
 };
