@@ -297,7 +297,6 @@ const World = (props: any) => {
                 createNewChunkPositions.splice(0, createNewChunkPositions.length);
                 let child : HTMLElement | null = document.getElementById(y+"yx"+x);
                 if(child !== null){
-                    //TODO Load possible new chunks to the side of the just create chunk Issue:WES-209
                     var posNeighbors : TwoDPos[] = [];
 
                     //Step 1 create list of 2dpos of possible locations for new chunks
@@ -336,6 +335,9 @@ const World = (props: any) => {
                             });
                         }
                     }
+                    newlist = newlist.filter(function(obj: TwoDPos) {
+                        return (obj.posY !== 0 && obj.posX !== 0);
+                    });
                     console.log(newlist);
                     for(let i: number = 0; i< newlist.length; i++){
                         var newchunkhtml = await loadPossibleNewChunk(newlist[i].posY, newlist[i].posX);
@@ -506,8 +508,8 @@ const World = (props: any) => {
         {chunkDetailBlock}
         {error}
         {DetailPage(props,id)}
-        <div className={"center"}>
-            <div id={"grid"} className={"grid-container"}>
+        <div id={"grid"} className={"center"}>
+            <div  className={"grid-container"}>
                 {overlay}
                 {remainingChunkHtmlBlock}
                 {initChunkHtmlBlock}

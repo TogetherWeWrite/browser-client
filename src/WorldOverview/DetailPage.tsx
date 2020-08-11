@@ -145,7 +145,7 @@ export const DetailPage = (props: any, worldid: string | undefined) => {
         }}>Add Story</Button>
         const [show, setShow] = React.useState(false);
         const [showStoryDialogue, setShowStoryDialogue] = React.useState(false);
-
+        const [foldstring,setFoldString] = React.useState<string>("^");
         let worldWithStories: WorldWithStories;
 
 
@@ -180,18 +180,15 @@ export const DetailPage = (props: any, worldid: string | undefined) => {
                                     <h2><Form.Label>{world.title}</Form.Label></h2>
                                 </Form.Group>
                                 <Form.Group>
-                                    <Form.Label>Made by: {world.owner.name}</Form.Label>
-                                </Form.Group>
-                                <Form.Group>
-                                    <Form.Label>See <Link to={"/world/" + worldid}>grid</Link></Form.Label>
+                                    <Form.Label>Owned by: {world.owner.name}</Form.Label>
                                 </Form.Group>
                             </Form>
                         </div>
                     );
                     authObject = props.authentication;
                     checkOwner();
-                    setAddWriterButtonBlock();
-                    loadWriters();
+                    await setAddWriterButtonBlock();
+                    await loadWriters();
                 } catch (exception) {
                     setError(<Alert variant={"warning"} onClick={() => setError(<></>)}>{exception.message}</Alert>)
                 }
@@ -276,7 +273,35 @@ export const DetailPage = (props: any, worldid: string | undefined) => {
             }
         };
 
-        return (<Container fluid={true} className={"detail-page"}>
+        const fold = async () =>{
+            let page =document.getElementById("detail-page");
+            if(page !== null){
+                if(page.classList.contains("folded")){
+                    page.classList.remove("folded");
+                }
+                else{
+                    page.classList.add("folded");
+                }
+            }
+
+            let grid = document.getElementById("grid");
+                if(grid !==null){
+                    if(grid.classList.contains("take-more-height")){
+                        grid.classList.remove("take-more-height")
+                    }
+                    else{
+                        grid.classList.add("take-more-height");
+                    }
+                }
+                if(foldstring == "^"){
+                    setFoldString("ˇ");
+                }
+                else{
+                    setFoldString("^");
+                }
+        };
+
+        return (<Container id="detail-page" fluid={true} className={"detail-page"}>
             {error}
             <AddWriterDialogue show={show}
                                onHide={() => setShow(false)}
@@ -298,7 +323,9 @@ export const DetailPage = (props: any, worldid: string | undefined) => {
                     {addStoryButton}
                 </Col>
             </Row>
-        </Container>)
+                <div className={"fold-row"} onClick={fold}><strong>{foldstring}</strong></div>
+        </Container>
+        )
     }
 ;
 const mapStateToProps = (state: any) => {
