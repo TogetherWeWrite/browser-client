@@ -7,6 +7,7 @@ import "./world.css";
 import {WorldRow} from "./WorldRow";
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
+import {UnFollowWorld} from "../ApiFunctions/World/PostUnFollowWorld";
 /*
 Overview page
  */
@@ -262,6 +263,7 @@ const Overview = (props: any) => {
                         <Link to={"/world/" + world.worldId}>See grid</Link>
                     </Col>
                     <Col lg={2}>
+                        <Button onClick={async ()=>{await UnFollowWorld(world.worldId,props.authentication); initialize()}}> Unfollow </Button>
                     </Col>
                 </Row>
             );

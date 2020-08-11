@@ -134,3 +134,20 @@
     overflow-y: scroll;
     margin-top: 10px;
 }
+
+.fold-row {
+    height: 3vh;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    background-image: linear-gradient(to top, rgba(255,255,255,0.1),rgba(255,255,255,0.6));
+}
+
+.fold-row:hover{
+    background-image: linear-gradient(to top, rgba(255,255,255,0.3),rgba(235,235,235,0.7));
+    box-shadow:0px 0px 3px #bbb;
+}
+
+.folded{
+    height: 3vh;
+}

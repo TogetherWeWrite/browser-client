@@ -3,13 +3,14 @@ import {UpdateCellColorModel} from "../Types/UpdateCellColorModel";
 import {Chunk} from "../Types/Chunk";
 import {authenticationState} from "../reducers/authenticationReducer";
 
-export const updateColorCell = async (cellId: string, chunkId: string, worldId: string | undefined, color: string, authObject : authenticationState) : Promise<Chunk>=>{
+export const updateColorCell = async ( chunkId: string, worldId: string | undefined, color: string, authObject : authenticationState, y:number,x:number) : Promise<Chunk>=>{
     if(worldId) {
         let model: UpdateCellColorModel = {
-            CellId: cellId,
             ChunkId: chunkId,
             WorldId: worldId,
-            Color: color
+            Color: color,
+            PosX :x,
+            PosY: y
         };
         let options: RequestInit = {
             method: "PUT",

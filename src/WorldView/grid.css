@@ -108,7 +108,7 @@ border: 4px dashed darkgray;
 display: flex;
 align-items: center;
 justify-content: center;
-margin-top: 30px;
+margin-top: 10px;
 width: 100%;
 height: calc(100vh - 101px - 20vh);
 background-color: rgba(0,0,255,0);
@@ -244,4 +244,9 @@ background-color: rgba(0,0,255,0);
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
+}
+
+.take-more-height{
+    /*margin-top: 3vh;*/
+    height: calc(100vh - 101px - 3vh);
 }
